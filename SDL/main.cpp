@@ -69,10 +69,7 @@ int main(int argc, char *argv[]){
 
         SDL_Event ovent;
 
-        //screenSurface= SDL_GetWindowSurface(window);
-        //SDL_FillRect(screenSurface,NULL,SDL_MapRGB(screenSurface->format,0xFF,0XFF,0XFF));
-        //SDL_Surface *sprite01= SDL_LoadBMP("sprite01.bmp");
-        //SDL_BlitSurface (sprite01,NULL,screenSurface,NULL);
+
 
         const unsigned char *keys;
         keys= SDL_GetKeyboardState(NULL);

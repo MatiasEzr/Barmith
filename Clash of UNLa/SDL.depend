@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1558944260 source:c:\users\matias\documents\c++\sdl\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+
+1558664480 c:\users\matias\documents\c++\sdl\csprite.h
+
+1558944390 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+
