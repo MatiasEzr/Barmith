@@ -7,7 +7,7 @@ using namespace std;
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearBandido(Bandido &bandido,Sprite &sprite,Item &item, int cantidad, int intervaloVida){
+bool crearBandido(Bandido &bandido,Sprite &sprite,Item &item, int cantidad, int intervaloVida){
 bandido.sprite=sprite;
 bandido.item=item;
 bandido.cantidad=cantidad;
@@ -19,7 +19,7 @@ Sprite getSprite(Bandido bandido){
 
 }
 /*----------------------------------------------------------------------------*/
-void setSprite(Bandido &bandido, Sprite &sprite){
+bool setSprite(Bandido &bandido, Sprite &sprite){
 bandido.sprite=sprite;
 }
 /*----------------------------------------------------------------------------*/
@@ -41,6 +41,16 @@ return bandido.cantidad;
 void setCantidad(Bandido &bandido,int cantidad){
 bandido.cantidad=cantidad;
 }
+
+/*----------------------------------------------------------------------------*/
+int getIntervaloVida(Bandido &bandido){
+    return bandido.intervaloVida;
+}
+/*----------------------------------------------------------------------------*/
+bool setIntervaloVida(Bandido &bandido, int intervaloVida){
+ bandido.intervaloVida=intervaloVida;
+}
+/*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
 /*void destructor(Bandido &bandido){

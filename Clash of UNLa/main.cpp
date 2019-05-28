@@ -23,7 +23,7 @@
         void correrHaciaAbajo(Persona &persona, int subIntervalo);
 */
         int main(int argc, char** argv) {
-                /*Datrs que leo desde un archivo************/
+                /*Datos que leo desde un archivo************/
                 int filas = 20;int columnas = 15; int anchoCasillero = 40;  int altoCasillero = 40;
                 /********************************************/
                 int anchoVentana = columnas*anchoCasillero;
@@ -34,7 +34,7 @@
                 SDL_Renderer *renderer;
                 SDL_Event event; int typeEvent;
 
-                window = SDL_CreateWindow("Ejemplo Juego Persona", SDL_WINDOWPOS_CENTERED,
+                window = SDL_CreateWindow("Juego", SDL_WINDOWPOS_CENTERED,
                 SDL_WINDOWPOS_CENTERED, altoVentana, anchoVentana,
                 SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC);
                 renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);

@@ -29,7 +29,7 @@ typedef struct{
 
   sprite : estructura de datos a ser creado.
 */
-void crearSprite(Sprite &sprite);
+void crearSprite(Sprite &sprite, int f, int c, int anchoCasillero, int altoCasillero, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el sprite debe haber sido creado.

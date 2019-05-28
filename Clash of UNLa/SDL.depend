@@ -15,7 +15,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1558422365 source:c:\users\matias\documents\github\ayed\clash of unla\item.cpp
+1559019540 source:c:\users\matias\documents\github\ayed\clash of unla\item.cpp
 
 1559002490 source:c:\users\matias\documents\github\ayed\clash of unla\sprite.cpp
 	"Sprite.h"
@@ -25,8 +25,57 @@
 	<string>
 	<iostream>
 
-1559003284 c:\users\matias\documents\github\ayed\clash of unla\sprite.h
+1559021006 c:\users\matias\documents\github\ayed\clash of unla\sprite.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
+
+1559027170 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
+	"Bandido.h"
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559025970 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Sprite.h"
+	"Item.h"
+
+1559020924 c:\users\matias\documents\github\ayed\clash of unla\item.h
+	<string>
+
+1559026995 source:c:\users\matias\documents\github\ayed\clash of unla\moneda.cpp
+	"Moneda.h"
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559026484 c:\users\matias\documents\github\ayed\clash of unla\moneda.h
+	"Sprite.h"
+	<SDL.h>
+
+1559025337 source:c:\users\matias\documents\github\ayed\clash of unla\celda.cpp
+	"Celda.h"
+	<SDL.h>
+	<SDL_image.h>
+	<string.h>
+
+1559024451 c:\users\matias\documents\github\ayed\clash of unla\celda.h
+	<SDL.h>
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Sprite.h"
+
+1559026485 c:\users\matias\documents\github\ayed\clash of unla\mina.h
+	"Sprite.h"
+	"Item.h"
+	<SDL.h>
+
+1559027086 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
+	"Mina.h"
+	<SDL.h>
+	<SDL_image.h>
 

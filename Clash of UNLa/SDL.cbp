@@ -34,8 +34,16 @@
 		</Compiler>
 		<Unit filename="Bandido.cpp" />
 		<Unit filename="Bandido.h" />
+		<Unit filename="Celda.cpp" />
+		<Unit filename="Celda.h" />
 		<Unit filename="Item.cpp" />
 		<Unit filename="Item.h" />
+		<Unit filename="Mina.cpp" />
+		<Unit filename="Mina.h" />
+		<Unit filename="Moneda.cpp" />
+		<Unit filename="Moneda.h" />
+		<Unit filename="Partida.cpp" />
+		<Unit filename="Partida.h" />
 		<Unit filename="Sprite.cpp" />
 		<Unit filename="Sprite.h" />
 		<Unit filename="main.cpp" />

@@ -49,7 +49,7 @@ Sprite getSprite(Bandido bandido);
   celda: valor a cargar en el bandido.
 */
 
-void setSprite(Bandido &bandido, Sprite &sprite);
+bool setSprite(Bandido &bandido, Sprite &sprite);
 /*----------------------------------------------------------------------------*/
 
 /*

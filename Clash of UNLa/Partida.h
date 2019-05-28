@@ -2,8 +2,7 @@
 #define __PARTIDA_H__
 
 #include <SDL.h>
-#include "Celda.h"
-#include "Terreno.h"
+#include "Bandido.h"
 
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
@@ -21,9 +20,9 @@ typedef struct{
     int columnas;
     int filasTerreno;
 
-    Celda** tablero;
+   // Celda** tablero;
 
-    Terreno** terreno;
+   // Terreno** terreno;
 
     char direccion[4];
 
@@ -72,7 +71,7 @@ void setTablero(Partida &partida,SDL_Renderer *renderer);
   pre : la partida debio ser creada
   post : se obtiene una celda del tablero
 */
-Celda** getTablero(Partida &partida);
+//Celda** getTablero(Partida &partida);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la partida y el terreno debieron ser creadas
@@ -84,7 +83,7 @@ void setTerreno(Partida &partida);
   pre : la partida y el terreno debieron ser creados
   post : se obtiene el terreno pasado por parametro
 */
-Terreno** getTerreno(Partida &partida);
+//Terreno** getTerreno(Partida &partida);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la partida debio ser creada
@@ -120,13 +119,13 @@ void ubicarBandido(Partida &partida,Bandido *bandido);
   pre : la partida y las minas debieron ser creados
   post : otorga una posicion en el tablero a las minas
 */
-void ubicarMinas(Partida &partida,Minas *minas);
+//void ubicarMinas(Partida &partida,Minas *minas);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la partida y el item debieron ser creados
   post : ubica al item en una direccion del tablero
 */
-void ubicarItem(Partida &partida,Item *item);
+//void ubicarItem(Partida &partida,Item *item);
 /*----------------------------------------------------------------------------*/
 /*
   pre : partida debio ser creada

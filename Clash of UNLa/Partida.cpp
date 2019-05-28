@@ -1,11 +1,14 @@
 #include <string.h>
 #include <SDL.h>
 #include "Partida.h"
-#include "Celda.h"
-#include "Terreno.h"
 #include "Bandido.h"
+#include "Celda.h"
 #include <ctime> //time.h agrega funciones en base al reloj del procesador.
 #include <stdlib.h>
+
+/*----------------------------------------------------------------------------*/
+//                           IMPLEMENTACION DE PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 
 void crearPartida(Partida &partida,int filas,int columnas,int anchoCelda,int altoCelda,int altoSprite){
     partida.fin=false;
@@ -18,7 +21,7 @@ void crearPartida(Partida &partida,int filas,int columnas,int anchoCelda,int alt
     partida.filas=filas;
     partida.columnas=columnas;
 
-    partida.tablero= new Celda*[partida.filas];
+   partida.tablero= new Celda*[partida.filas];
     for (int f = 0; f < partida.filas; f++){
         partida.tablero[f] = new Celda[partida.columnas];
     }
@@ -28,6 +31,7 @@ void crearPartida(Partida &partida,int filas,int columnas,int anchoCelda,int alt
         partida.Terreno[f] = new Terreno[partida.columnas];
     }
     strcpy(partida.direccion,"aba");
+
 }
 int getAnchoCelda(Partida &partida){
     return partida.anchoCelda;
@@ -100,10 +104,10 @@ bool getfin(Partida &partida){
 void setfin(Partida &partida, bool flag){
     partida.fin=flag;
 }
-void ubicarCarro(Partida &partida,PtrNodoCarro ptrNodo){
+/*void ubicarVagon(Partida &partida,PtrNodoCarro ptrNodo){
     partida.tablero[getFila(ptrNodo->carro)][getColumna(ptrNodo->carro)].ptrNodoCarro=ptrNodo;//Celda.ptrNosoCarro=ptrNodo
     partida.terreno[getFila(ptrNodo->carro)*2][getColumna(ptrNodo->carro)].ptrNodoCarro=ptrNodo;//Terreno.ptrNosoCarro=ptrNodo
-}
+}*/
 void ubicarBandido(Partida &partida,Bandido *bandido){
     partida.tablero[getFila(bandido)][getColumna(bandido)].ptrBandido=bandido;
     partida.terreno[(getFila(bandido)*2)-1][getColumna(bandido)].ptrBandido=bandido;
