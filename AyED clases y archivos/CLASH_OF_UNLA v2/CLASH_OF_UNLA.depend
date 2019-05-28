@@ -343,3 +343,56 @@
 
 1558990500 c:\users\mauro\documents\github\ayed\ayed clases y archivos\clash_of_unla\tiempodejuego.h
 
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\celda.cpp
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1558990500 c:\users\mauro\desktop\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\item.cpp
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+
+1558990500 c:\users\mauro\desktop\clash_of_unla\parametros.h
+	<string>
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1558990500 c:\users\mauro\desktop\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\terreno.cpp
+	"Terreno.h"
+
+1558990500 c:\users\mauro\desktop\clash_of_unla\terreno.h
+
+1558990500 source:c:\users\mauro\desktop\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1558990500 c:\users\mauro\desktop\clash_of_unla\tiempodejuego.h
+
