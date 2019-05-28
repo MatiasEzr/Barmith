@@ -3,21 +3,13 @@
         #include <stdlib.h>
         #include <SDL.h>
         #include <SDL_image.h>
+        #include "Sprite.h"
+        #include "Bandido.h"
 
 
 
 
-
-        typedef struct{
-            int f;
-            int c;
-            int anchoCasillero;
-            int altoCasillero;
-            SDL_Texture *imagen;
-            SDL_Rect rectImag;
-        }Persona;
-
-        void crearPersona(Persona &persona, int f, int c, int anchoCasillero, int altoCasillero, SDL_Renderer* renderer);
+/*
         void dibujarPersona(Persona &persona, SDL_Renderer* renderer);
         void destruirPersona(Persona &persona);
         void dibujarSuperficie(SDL_Renderer *renderer);
@@ -29,7 +21,7 @@
         void correrHaciaLaDerecha(Persona &persona, int subIntervalo);
         void correrHaciaArriba(Persona &persona, int subIntervalo);
         void correrHaciaAbajo(Persona &persona, int subIntervalo);
-
+*/
         int main(int argc, char** argv) {
                 /*Datrs que leo desde un archivo************/
                 int filas = 20;int columnas = 15; int anchoCasillero = 40;  int altoCasillero = 40;
@@ -51,8 +43,12 @@
 
                 IMG_Init(IMG_INIT_PNG);
 
-                Persona persona;
-                crearPersona(persona,2,3,anchoCasillero,altoCasillero,renderer); //aparece en el cuadrante 2,3
+
+                Sprite sprite;//aparece en el cuadrante 5,5
+                crearSprite(sprite,5,5,40,40,renderer);
+                Bandido bandido;
+                //Atributos de bandido(Bandido &bandido,Sprite sprite,Item item, int cantidad, int intervaloVida)
+                crearBandido(bandido,sprite,NULL,5,5);
 
                 ///ELEMENTOS Y FLAGS DEL JUEGO
                 const unsigned char *keys;
@@ -69,6 +65,7 @@
                         SDL_RenderClear(renderer);//borro el renderer
                         dibujarSuperficie(renderer);
                         dibujarPersona(persona,renderer);
+                        dibujarPersona(sprite2,renderer);
                         SDL_RenderPresent(renderer);// dibuja el renderer, aplica todos los cambios que se hicieron en dibujarPersona()
 
 
@@ -131,7 +128,7 @@
             return 0;
         }
 
-
+/*
 
         void crearPersona(Persona &persona, int f, int c, int anchoCasillero, int altoCasillero, SDL_Renderer* renderer){
             persona.f=f;//coordenada logica y
@@ -189,3 +186,5 @@
         void reubicamosPersonaArriba (Persona &persona){
             persona.f=persona.f-1; //o persona.f--;
         }
+
+        */

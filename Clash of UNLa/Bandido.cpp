@@ -1,35 +1,34 @@
 #include "Bandido.h"
-#include <cstring>
-#include <string>
-#include <iostream>
+#include "Sprite.h"
+#include <SDL.h>
+#include <SDL_image.h>
 //Lista
 using namespace std;
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearBandido(Bandido &bandido){
-bandido.celda=NULL;
-bandido.item=NULL;
-bandido.cantidad=0;
-bandido.intervaloVida=0;
-//crearListabandido.);
+void crearBandido(Bandido &bandido,Sprite &sprite,Item &item, int cantidad, int intervaloVida){
+bandido.sprite=sprite;
+bandido.item=item;
+bandido.cantidad=cantidad;
+bandido.intervaloVida=intervaloVida;
 }
 /*----------------------------------------------------------------------------*/
-Celda getCelda(Bandido bandido){
-    return bandido.celda;
-    bandi
+Sprite getSprite(Bandido bandido){
+    return bandido.sprite;
+
 }
 /*----------------------------------------------------------------------------*/
-void setCelda(Bandido &bandido, Celda celda){
-bandido.celda=celda;
+void setSprite(Bandido &bandido, Sprite &sprite){
+bandido.sprite=sprite;
 }
 /*----------------------------------------------------------------------------*/
 
-int getItem(Bandido bandido){
+Item getItem(Bandido bandido){
 return bandido.item;
 }
 /*----------------------------------------------------------------------------*/
-void setItem(Bandido &bandido,Item item){
+void setItem(Bandido &bandido,Item &item){
 bandido.item=item;
 }
 
@@ -44,12 +43,12 @@ bandido.cantidad=cantidad;
 }
 
 /*----------------------------------------------------------------------------*/
-void destructor(Bandido &bandido){
+/*void destructor(Bandido &bandido){
 bandido.celda=NULL;
 bandido.item=NULL;
 bandido.cantidad=0;
 bandido.intervaloVida=0;
-}
+}*/
 /*----------------------------------------------------------------------------*/
 /******************************************************************************/
 

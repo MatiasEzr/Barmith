@@ -15,3 +15,18 @@
 	<SDL.h>
 	<SDL_image.h>
 
+1558422365 source:c:\users\matias\documents\github\ayed\clash of unla\item.cpp
+
+1559002490 source:c:\users\matias\documents\github\ayed\clash of unla\sprite.cpp
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+	<cstring>
+	<string>
+	<iostream>
+
+1559003284 c:\users\matias\documents\github\ayed\clash of unla\sprite.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
