@@ -1,24 +1,26 @@
-#ifndef __CELDA_H__
-#define __CELDA_H__
+#ifndef __SUELO_H__
+#define __SUELO_H__
 
 #include <SDL.h>
-//#include "Locomotora.h"
+#include "Locomotora.h"
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
-#include "Sprite.h"
 
 typedef struct{
-    Sprite sprite;
+    int f;
+    int c;
+	SDL_Texture *imagen;
+    SDL_Rect rectImag;
 
-    //PtrNodoCarro ptrNodoCarro;
+    PtrNodoVagon ptrNodoVagon;
     Bandido *ptrBandido;
     Mina *ptrMina;
     Moneda *ptrMoneda;
 
 }Celda;
 
-void crearCelda(Celda &celda,Sprite *sprite,char rand[]);
+void crearCelda(Celda &celda,int f,int c,int ancho, int alto, SDL_Renderer* renderer,char rand[]);
 void dibujarCelda(SDL_Renderer* renderer,Celda &celda);
 void destruirCelda(Celda &celda);
 #endif

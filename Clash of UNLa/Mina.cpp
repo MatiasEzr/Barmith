@@ -2,57 +2,28 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int altoSprite){
+    mina.f=f;//coordenada logica y
+    mina.c=c;//coordenada logica x
 
-/*----------------------------------------------------------------------------*/
-//                           IMPLEMENTACION DE PRIMITIVAS
-/*----------------------------------------------------------------------------*/
+    mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
+    //SDL_QueryTexture(mina.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
 
-void crearMina(Mina &mina,Sprite &sprite, Item &item, int intervaloProduccion /*,int secuencia[]*/){
-   mina.sprite=sprite;
-   mina.item=item;
-   mina.intervaloProduccion=intervaloProduccion;
-   //mina.secuencia=secuencia;
-
+    mina.rectImag.y=(mina.f*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
+    mina.rectImag.x=(mina.c*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    mina.rectImag.w=anchoCelda;//ancho
+    mina.rectImag.h=altoSprite;//alto
 }
-/*----------------------------------------------------------------------------*/
-
-Sprite getSprite(Mina *mina){
-    return mina->sprite;
+int getFila(Mina *mina){
+    return mina->f;
 }
-/*----------------------------------------------------------------------------*/
-
-bool setSprite(Mina &mina, Sprite &sprite){
-    mina.sprite=sprite;
+int getColumna(Mina *mina){
+    return mina->c;
 }
-/*----------------------------------------------------------------------------*/
-
-int getItem(Mina *mina){
-    return mina->item;
-}
-
-/*----------------------------------------------------------------------------*/
-
-bool setItem(Mina& mina, Item &item){
-    mina.item=item;
-}
-/*----------------------------------------------------------------------------*/
-int getIntervaloProduccion(Mina &mina){
-    return mina.intervaloProduccion;
-}
-/*----------------------------------------------------------------------------*/
-bool setIntervaloProduccion(Mina &mina, int intervaloProduccion){
- mina.intervaloProduccion=intervaloProduccion;
-}
-/*----------------------------------------------------------------------------*/
-
 void dibujarMina(Mina *mina,SDL_Renderer* renderer){
-    SDL_RenderCopy(renderer,mina->sprite.imagen,NULL,&(mina->sprite.rectImag));
+    SDL_RenderCopy(renderer,mina->imagen,NULL,&(mina->rectImag));
 }
-
-/*----------------------------------------------------------------------------*/
 void destruirMina(Mina *mina){
-    SDL_DestroyTexture(mina->sprite.imagen);
+    SDL_DestroyTexture(mina->imagen);
 }
-
-/*----------------------------------------------------------------------------*/
 

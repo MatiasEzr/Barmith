@@ -1,64 +1,28 @@
-#include "Bandido.h"
-#include "Sprite.h"
+#include "Bandido.h";
 #include <SDL.h>
 #include <SDL_image.h>
-//Lista
-using namespace std;
-/*----------------------------------------------------------------------------*/
-//                           IMPLEMENTACION DE PRIMITIVAS
-/*----------------------------------------------------------------------------*/
-bool crearBandido(Bandido &bandido,Sprite &sprite,Item &item, int cantidad, int intervaloVida){
-bandido.sprite=sprite;
-bandido.item=item;
-bandido.cantidad=cantidad;
-bandido.intervaloVida=intervaloVida;
-}
-/*----------------------------------------------------------------------------*/
-Sprite getSprite(Bandido bandido){
-    return bandido.sprite;
 
-}
-/*----------------------------------------------------------------------------*/
-bool setSprite(Bandido &bandido, Sprite &sprite){
-bandido.sprite=sprite;
-}
-/*----------------------------------------------------------------------------*/
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int altoSprite){
+    bandido.f=f;//coordenada logica y
+    bandido.c=c;//coordenada logica x
 
-Item getItem(Bandido bandido){
-return bandido.item;
-}
-/*----------------------------------------------------------------------------*/
-void setItem(Bandido &bandido,Item &item){
-bandido.item=item;
-}
+    bandido.imagen=IMG_LoadTexture(renderer,"img/bandido.png");
+    //SDL_QueryTexture(bandido.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
 
-/*----------------------------------------------------------------------------*/
-
-int getCantidad(Bandido bandido){
-return bandido.cantidad;
+    bandido.rectImag.y=(bandido.f*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
+    bandido.rectImag.x=(bandido.c*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    bandido.rectImag.w=anchoCelda;//ancho
+    bandido.rectImag.h=altoSprite;//alto
 }
-/*----------------------------------------------------------------------------*/
-void setCantidad(Bandido &bandido,int cantidad){
-bandido.cantidad=cantidad;
+int getFila(Bandido *bandido){
+    return bandido->f;
 }
-
-/*----------------------------------------------------------------------------*/
-int getIntervaloVida(Bandido &bandido){
-    return bandido.intervaloVida;
+int getColumna(Bandido *bandido){
+    return bandido->c;
 }
-/*----------------------------------------------------------------------------*/
-bool setIntervaloVida(Bandido &bandido, int intervaloVida){
- bandido.intervaloVida=intervaloVida;
+void dibujarBandido(Bandido *bandido,SDL_Renderer* renderer){
+    SDL_RenderCopy(renderer,bandido->imagen,NULL,&(bandido->rectImag));
 }
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
-/*void destructor(Bandido &bandido){
-bandido.celda=NULL;
-bandido.item=NULL;
-bandido.cantidad=0;
-bandido.intervaloVida=0;
-}*/
-/*----------------------------------------------------------------------------*/
-/******************************************************************************/
-
+void destruirBandido(Bandido *bandido){
+    SDL_DestroyTexture(bandido->imagen);
+}

@@ -1,190 +1,284 @@
-        #include <iostream>
-        #include <stdio.h>
-        #include <stdlib.h>
-        #include <SDL.h>
-        #include <SDL_image.h>
-        #include "Sprite.h"
-        #include "Bandido.h"
+#include <iostream>//iostream: es una libreria que nos permite la entrada (cin) y salida (cout) de datos
+#include <string.h>//permite utilizar strcat(char,char) strcpy(char,char);
+#include <conio.h>// agrega la funcuion getch(); que es trabante de procesos
+#include <stdlib.h>//permite utilizar new y delete
+
+#include <Windows.h>//sonido
+#include <MMsystem.h>//sonido
+
+#include <SDL.h>
+#include <SDL_image.h>
+
+#include "Partida.h"
+#include "Locomotora.h"
+#include "Vagon.h"
+#include "Bandido.h"
+#include "Mina.h"
+#include "Moneda.h"
+
+using namespace std;
+
+#define milisegundos 30
+
+void evaluarEventosTeclado(Partida &partida,SDL_Event &event,const unsigned char *keys);
+void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]);
+
+void cambiarCapaInicio(Partida &partida,PtrNodoVagon ptrNodo);
+void cambiarCapaFinal(Partida &partida,PtrNodoVagon ptrNodo);
+void cambiarColumna(Partida &partida,PtrNodoVagon ptrNodo);
+bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo);
+int main(int argc, char** argv) {
+        //PlaySound(TEXT("media/musica.wav"),NULL, SND_ASYNC);
+        //Si no se escucha la música es porque hay que agregar un linck al codeblocks:
+        //settings->complier...->linker settings-> link libraries-> add-> escribimos winmm ->aceptamos todo.
+        /*datros que leo desde un archivo************/
+        int filas = 20;
+        int columnas = 15;
+        int anchoCelda =70;
+        int altoCelda = 40;
+        int altoSprite = 70;
+        /********************************************/
+
+        int anchoVentana = (columnas+2)*anchoCelda;
+        int altoVentana = (filas+2)*altoCelda;;
 
 
+    if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
+
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+
+        window = SDL_CreateWindow(
+            "Clash of UNLa",
+            SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
+            anchoVentana,altoVentana,
+            SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC
+            );
+
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+        IMG_Init(IMG_INIT_PNG);
+
+        SDL_Event event;
+        const unsigned char *keys;
+        keys = SDL_GetKeyboardState(NULL);
+
+        Partida partida;
+        crearPartida(partida,filas,columnas,anchoCelda,altoCelda,altoSprite);
+        setTablero(partida,renderer);
+        setTerreno(partida);
+
+        Locomotora locomotora;
+        crearLocomotora(locomotora);
+        Vagon vagon;
+        crearVagon(vagon,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite);//el primero es c1
+        ubicarVagon(partida,adicionarPrincipio(locomotora,vagon));
+        setDireccion(partida,getDireccion(primero(locomotora)->vagon));//la direccion de la partida es = a la del primer vagon
+
+        crearVagon(vagon,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite);//los demás son c2
+        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite);
+        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite);
+        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite);
+        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
+
+        Bandido bandido;
+        Bandido *ptrBandido = &bandido;
+        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite);
+        ubicarBandido(partida,ptrBandido);
+
+        Mina mina;
+        Mina *ptrMina = &mina;
+        crearMina(mina,renderer,4,2,anchoCelda, altoCelda, altoSprite);
+        ubicarMina(partida,ptrMina);
+
+        Moneda moneda;
+        Moneda *ptrMoneda = &moneda;
+        crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite);
+        ubicarMoneda(partida,ptrMoneda);
 
 
-/*
-        void dibujarPersona(Persona &persona, SDL_Renderer* renderer);
-        void destruirPersona(Persona &persona);
-        void dibujarSuperficie(SDL_Renderer *renderer);
-        void reubicamosPersonaALaDerecha (Persona &persona);
-        void reubicamosPersonaALaIzquierda (Persona &persona);
-        void reubicamosPersonaAbajo (Persona &persona);
-        void reubicamosPersonaArriba(Persona &persona);
-        void correrHaciaLaIzquierda(Persona &persona, int subIntervalo);
-        void correrHaciaLaDerecha(Persona &persona, int subIntervalo);
-        void correrHaciaArriba(Persona &persona, int subIntervalo);
-        void correrHaciaAbajo(Persona &persona, int subIntervalo);
-*/
-        int main(int argc, char** argv) {
-                /*Datos que leo desde un archivo************/
-                int filas = 20;int columnas = 15; int anchoCasillero = 40;  int altoCasillero = 40;
-                /********************************************/
-                int anchoVentana = columnas*anchoCasillero;
-                int altoVentana = filas*altoCasillero;
+        dibujarTablero(partida,renderer);
+        SDL_RenderPresent(renderer);//APLICA EL CAMBIO
+        SDL_Delay(500);
+        while(!getGameOver(partida)){
 
-            if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
-                SDL_Window *window;
-                SDL_Renderer *renderer;
-                SDL_Event event; int typeEvent;
+            evaluarEventosTeclado(partida,event,keys);//setea la direccion siguiente en partida.direccion
 
-                window = SDL_CreateWindow("Juego", SDL_WINDOWPOS_CENTERED,
-                SDL_WINDOWPOS_CENTERED, altoVentana, anchoVentana,
-                SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC);
-                renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+            if(getIntervalo(partida)==10){
+                setIntervalo(partida,0);
 
+                cambiarColumna(partida,primero(locomotora));//fila del tablero
+                cambiarCapaFinal(partida,primero(locomotora));//capa del mapa
+                //hasta aca todos los carritos se encuentran en su punto casilla de tablero
+                //podemos evaluar la adquisición de monedas, de minas o ataques de bandidos
 
+                //luego redireccionamos a todos los vagons desde el primero
+                cambiarDireccion(primero(locomotora),getDireccion(partida));
 
-                IMG_Init(IMG_INIT_PNG);
+                setGameOver(partida,evaluarColisiones(partida,primero(locomotora)));
 
-
-                Sprite sprite;//aparece en el cuadrante 5,5
-                crearSprite(sprite,5,5,40,40,renderer);
-                Bandido bandido;
-                //Atributos de bandido(Bandido &bandido,Sprite sprite,Item item, int cantidad, int intervaloVida)
-                crearBandido(bandido,sprite,NULL,5,5);
-
-                ///ELEMENTOS Y FLAGS DEL JUEGO
-                const unsigned char *keys;
-                keys= SDL_GetKeyboardState(NULL);
-
-
-
-                int subIntervalo = 0; //valor de 0 a 10;
-                int gameOver=0;
-
-
-                while(gameOver==0){
-                        //aquí según los eventos de teclado podríamos cambiar las coordenadas de persona… tarea para la casa ;)
-                        SDL_RenderClear(renderer);//borro el renderer
-                        dibujarSuperficie(renderer);
-                        dibujarPersona(persona,renderer);
-                        dibujarPersona(sprite2,renderer);
-                        SDL_RenderPresent(renderer);// dibuja el renderer, aplica todos los cambios que se hicieron en dibujarPersona()
-
-
-
-                        ///Control de eventos mouse/teclado
-
-                        if(SDL_PollEvent(&event)){
-                        typeEvent= event.type;
-                        if(typeEvent==SDL_QUIT){
-                            gameOver=1;
-                        }
-
-                        else if(typeEvent== SDL_MOUSEBUTTONDOWN){
-                            if(SDL_GetMouseState(NULL,NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)){
-                               //Pendiente
-                            }
-                                                                }
-                        else if(typeEvent == SDL_KEYDOWN){
-                            if(keys[SDL_SCANCODE_ESCAPE]){
-                                gameOver=1;
-                            }
-                            else if(keys[SDL_SCANCODE_LEFT]){
-                             reubicamosPersonaALaIzquierda(persona);
-                            correrHaciaLaIzquierda(persona,subIntervalo);
-
-
-
-                            }
-                            else if(keys[SDL_SCANCODE_RIGHT]){
-                                        reubicamosPersonaALaDerecha(persona);
-                                        correrHaciaLaDerecha(persona,subIntervalo);
-
-
-                            }
-                            else if(keys[SDL_SCANCODE_UP]){
-                                        reubicamosPersonaArriba(persona);
-                                        correrHaciaArriba(persona,subIntervalo);
-
-
-                            }
-                            else if(keys[SDL_SCANCODE_DOWN]){
-                                        reubicamosPersonaAbajo(persona);
-                                        correrHaciaAbajo(persona,subIntervalo);
-
-
-                            }
-                            }
-                 }
-                SDL_Delay(100);
-
+            }
+            if(!getGameOver(partida)){
+                if(getIntervalo(partida)==1){
+                    //desde el princpio de la lista, si se mira hacia abajo o hacia arribaen el intervalo 1
+                    //entonces lo desplazo a la siquietne capa
+                    cambiarCapaInicio(partida,primero(locomotora));//capa del mapa
                 }
 
-                destruirPersona(persona);
+                //Render
+                SDL_RenderClear(renderer);//borro todo
+                dibujarTablero(partida,renderer);
+                SDL_RenderPresent(renderer);//APLICA EL CAMBIO
+                SDL_Delay(milisegundos);
 
-                SDL_DestroyRenderer(renderer);
-                SDL_DestroyWindow(window);
-                IMG_Quit();
-                SDL_Quit();
+                setIntervalo(partida,getIntervalo(partida)+1);//partida.intervalo++;
             }
-            return 0;
+        }//FIN DEL BUCLE
+        cout<<"Destruimos locomotora"<<endl;
+        destruirLocomotora(locomotora);
+        cout<<"Destruimos partida"<<endl;
+        destruirPartida(partida);
+        cout<<"Destruimos renderer"<<endl;
+        SDL_DestroyRenderer(renderer);
+        cout<<"Destruimos window"<<endl;
+        SDL_DestroyWindow(window);
+        IMG_Quit();
+        SDL_Quit();
+        cout<<"GAME OVER!"<<endl;
+    }//find el if
+    cout<<"presione una tecla para salir..."<<endl;
+    getch();
+    return 0;
+}
+bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo){
+    bool colision=true;
+    int desplazamientoHorizontal=0;
+    int desplazamientoVertical=0;
+    if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamientoVertical=1;
+    if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamientoVertical=-1;
+    if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamientoHorizontal=1;
+    if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamientoHorizontal=-1;
+
+    int c=getColumna(ptrNodo->vagon)+desplazamientoHorizontal;
+    int f=getFila(ptrNodo->vagon)+desplazamientoVertical;
+
+    if((c>=0 && c<getColumnaLimite(partida)) && (f>=0 && f<getFilaLimite(partida))){
+        //el tren aun se encuentra en el tablero!
+        Celda celdaAux =getTablero(partida)[f][c];
+        if(celdaAux.ptrNodoVagon==NULL){
+            //y el tren no se chocoará con otro vagón
+            colision=false;
+        }else{
+            cout<<"Chocamos con otro vagon en "<<f<<"/"<<c<<endl;
         }
-
-/*
-
-        void crearPersona(Persona &persona, int f, int c, int anchoCasillero, int altoCasillero, SDL_Renderer* renderer){
-            persona.f=f;//coordenada logica y
-            persona.c=c;//coordenada logica x
-            persona.imagen= IMG_LoadTexture(renderer,"persona.png");
-
-            persona.rectImag.y=f* altoCasillero;//coordenada de dibujo y
-            persona.rectImag.x= c* anchoCasillero;//coordenada de dibujo x
-            persona.rectImag.w= anchoCasillero;//ancho
-            persona.rectImag.h= altoCasillero;//alto
+    }else{
+        cout<<"Nos salimos del cuadrante en "<<f<<"/"<<c<<endl;
+    }
+    return colision;
+}
+void cambiarColumna(Partida &partida,PtrNodoVagon ptrNodo){
+    if(ptrNodo!=NULL){
+        int desplazamiento=0;
+        if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamiento=-1;//bajo una capa
+        if(desplazamiento!=0){
+            Terreno **mapaAux=getTerreno(partida);// partida.mapa
+            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            Celda **tableroAux=getTablero(partida);// partida.tablero
+            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            setColumna(ptrNodo->vagon,desplazamiento);
         }
-
-        void dibujarPersona(Persona &persona, SDL_Renderer* renderer){
-            SDL_RenderCopy(renderer, persona.imagen,NULL,&(persona.rectImag));
+        cambiarColumna(partida,ptrNodo->siguiente);
+    }
+}
+void cambiarCapaInicio(Partida &partida, PtrNodoVagon ptrNodo){
+    if(ptrNodo!=NULL){
+        int desplazamiento=0;
+        if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
+        if(desplazamiento!=0){
+            Terreno **mapaAux=getTerreno(partida);// partida.mapa
+            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            Celda **tableroAux=getTablero(partida);// partida.mapa
+            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
         }
-
-        void destruirPersona(Persona &persona){
-            SDL_DestroyTexture(persona.imagen);
+        cambiarCapaInicio(partida,ptrNodo->siguiente);
+    }
+}
+void cambiarCapaFinal(Partida &partida, PtrNodoVagon ptrNodo){
+    if(ptrNodo!=NULL){
+        int desplazamiento=0;
+        if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
+        if(desplazamiento!=0){
+            Terreno **mapaAux=getTerreno(partida);// partida.mapa
+            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            Celda **tableroAux=getTablero(partida);// partida.mapa
+            tableroAux[getFila(ptrNodo->vagon)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            setFila(ptrNodo->vagon,desplazamiento);//actualizo la fila en la que se encuentra
         }
-
-        void dibujarSuperficie(SDL_Renderer *renderer){
-                 SDL_Surface* Loading_Surf;
-                 SDL_Texture: SDL_Texture *mapa;
-                 Loading_Surf=SDL_LoadBMP("mapa.bmp");
-                 mapa= SDL_CreateTextureFromSurface(renderer,Loading_Surf);
-                 SDL_FreeSurface(Loading_Surf);
-                 SDL_RenderCopy(renderer,mapa,NULL,NULL);
+        cambiarCapaFinal(partida,ptrNodo->siguiente);
+    }
+}
+void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]){
+    if(ptrNodo!=NULL){
+        //validar la direccion;
+        char dirAnterior[4];
+        strcpy(dirAnterior,getDireccion(ptrNodo->vagon));//guardo la direccion anterior
+        //si dirAnterior es izq entonces direccion no puede ser der
+        //si dirAnterior es der entonces direccion no puede ser izq
+        //si dirAnterior es arr entonces direccion no puede ser aba
+        //si dirAnterior es aba entonces direccion no puede ser arr
+        if(
+            (strcmp(dirAnterior,"izq")==0 && strcmp(direccion,"der")!=0) ||
+            (strcmp(dirAnterior,"der")==0 && strcmp(direccion,"izq")!=0) ||
+            (strcmp(dirAnterior,"arr")==0 && strcmp(direccion,"aba")!=0) ||
+            (strcmp(dirAnterior,"aba")==0 && strcmp(direccion,"arr")!=0)
+        ){
+            setDireccion(ptrNodo->vagon,direccion);//cargo la nueva dirección
         }
-
-        void correrHaciaLaDerecha(Persona &persona, int subIntervalo){
-            persona.rectImag.x= (persona.c* 40) + ((40/10)*subIntervalo) ;
-        }//40 es el ancho del casillero, y 10 es la cantidad de imágenes del intervalo.
-
-        void correrHaciaLaIzquierda(Persona &persona, int subIntervalo){
-            persona.rectImag.x= (persona.c* 40) - ((40/10)*subIntervalo) ;
-        }//40 es el ancho del casillero, y 10 es la cantidad de imágenes del intervalo.
-
-        void correrHaciaAbajo(Persona &persona, int subIntervalo){
-            persona.rectImag.y= (persona.f* 40) + ((40/10)*subIntervalo) ;
-        }//40 es el ancho del casillero, y 10 es la cantidad de imágenes del intervalo.
-
-        void correrHaciaArriba(Persona &persona, int subIntervalo){
-            persona.rectImag.y= (persona.f* 40) - ((40/10)*subIntervalo) ;
-        }//40 es el ancho del casillero, y 10 es la cantidad de imágenes del intervalo.
-
-        void reubicamosPersonaALaDerecha (Persona &persona){
-            persona.c=persona.c+1; //o persona.c++;
+        cambiarDireccion(ptrNodo->siguiente,dirAnterior);
+    }
+}
+void evaluarEventosTeclado(Partida &partida,SDL_Event &event,const unsigned char *keys){
+    if(SDL_PollEvent(&event)){//indica que hay eventos pendientes
+        switch(event.type){
+            case SDL_QUIT:
+                setGameOver(partida, true);
+            break;
+            case SDL_KEYDOWN:
+                if(keys[SDL_SCANCODE_ESCAPE]){
+                    setGameOver(partida, true);
+                }
+                if(keys[SDL_SCANCODE_LEFT]){
+                    setDireccion(partida,"izq");
+                }
+                if(keys[SDL_SCANCODE_RIGHT]){
+                    setDireccion(partida,"der");
+                }
+                if(keys[SDL_SCANCODE_UP]){
+                    setDireccion(partida,"arr");
+                }
+                if(keys[SDL_SCANCODE_DOWN]){
+                    setDireccion(partida,"aba");
+                }
+                if(keys[SDL_SCANCODE_SPACE]){
+                    //
+                }
+                break;
+                /*
+            case SDL_MOUSEBUTTONDOWN:
+                if(SDL_GetMouseState(NULL,NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)){
+                    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "CLICK","Con el boton izquierdo del mouse.",NULL);
+                }
+                break;
+                */
         }
-        void reubicamosPersonaALaIzquierda (Persona &persona){
-            persona.c=persona.c-1; //o persona.c--;
-        }
-        void reubicamosPersonaAbajo (Persona &persona){
-            persona.f=persona.f+1; //o persona.f++;
-        }
-        void reubicamosPersonaArriba (Persona &persona){
-            persona.f=persona.f-1; //o persona.f--;
-        }
-
-        */
+    }
+}

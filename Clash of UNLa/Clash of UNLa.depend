@@ -1,0 +1,102 @@
+# depslib dependency file v1.0
+1559195248 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
+	"Bandido.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559195120 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+	<SDL.h>
+
+1559195306 source:c:\users\matias\documents\github\ayed\clash of unla\celda.cpp
+	"Celda.h"
+	"Locomotora.h"
+	<SDL.h>
+	<SDL_image.h>
+	<string.h>
+
+1559195306 c:\users\matias\documents\github\ayed\clash of unla\celda.h
+	<SDL.h>
+	"Locomotora.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+
+1559195306 c:\users\matias\documents\github\ayed\clash of unla\locomotora.h
+	"Vagon.h"
+
+1559195128 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
+	<SDL.h>
+
+1559195123 c:\users\matias\documents\github\ayed\clash of unla\mina.h
+	<SDL.h>
+
+1559195124 c:\users\matias\documents\github\ayed\clash of unla\moneda.h
+	<SDL.h>
+
+1559195306 source:c:\users\matias\documents\github\ayed\clash of unla\locomotora.cpp
+	"Locomotora.h"
+	"Vagon.h"
+
+1559196831 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<Windows.h>
+	<MMsystem.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Partida.h"
+	"Locomotora.h"
+	"Vagon.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+
+1559195306 c:\users\matias\documents\github\ayed\clash of unla\partida.h
+	<SDL.h>
+	"Celda.h"
+	"Terreno.h"
+	"Locomotora.h"
+
+1559195306 c:\users\matias\documents\github\ayed\clash of unla\terreno.h
+	"Locomotora.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+
+1559195122 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
+	"Mina.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559195123 source:c:\users\matias\documents\github\ayed\clash of unla\moneda.cpp
+	"Moneda.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559195482 source:c:\users\matias\documents\github\ayed\clash of unla\partida.cpp
+	<string.h>
+	<SDL.h>
+	"Partida.h"
+	"Celda.h"
+	"Terreno.h"
+	"Locomotora.h"
+	"Bandido.h"
+	<ctime>
+	<stdlib.h>
+
+1559195306 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
+	"Terreno.h"
+	"Locomotora.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+
+1559195124 source:c:\users\matias\documents\github\ayed\clash of unla\vagon.cpp
+	"Vagon.h"
+	<string.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+

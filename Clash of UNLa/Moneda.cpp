@@ -1,42 +1,30 @@
 #include "Moneda.h";
-#include "Sprite.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
-/*----------------------------------------------------------------------------*/
-//                           IMPLEMENTACION DE PRIMITIVAS
-/*----------------------------------------------------------------------------*/
+void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int altoSprite){
+    moneda.f=f;//coordenada logica y
+    moneda.c=c;//coordenada logica x
 
+    moneda.imagen=IMG_LoadTexture(renderer,"img/moneda.png");
+    //SDL_QueryTexture(moneda.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
 
-void crearMoneda(Moneda &moneda,Sprite  &sprite, int intervaloVida){
-   moneda.sprite=sprite;
-   moneda.intervaloVida=intervaloVida;
+    moneda.rectImag.y=(moneda.f*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
+    moneda.rectImag.x=(moneda.c*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    moneda.rectImag.w=anchoCelda;//ancho
+    moneda.rectImag.h=altoSprite;//alto
 }
-/*----------------------------------------------------------------------------*/
-
-Sprite getSprite(Moneda *moneda){
-    return moneda->sprite;
+int getFila(Moneda *moneda){
+    return moneda->f;
 }
-/*----------------------------------------------------------------------------*/
-
-bool setSprite(Moneda &moneda, Sprite &sprite){
-    moneda.sprite=sprite;
+int getColumna(Moneda *moneda){
+    return moneda->c;
 }
-/*----------------------------------------------------------------------------*/
-int intervaloVida(Moneda *moneda){
- return moneda->intervaloVida;
-}
-/*----------------------------------------------------------------------------*/
-bool setIntervaloVida(Moneda &moneda, int intervaloVida){
-  moneda.intervaloVida=intervaloVida;
-}
-
-
 void dibujarMoneda(Moneda *moneda,SDL_Renderer* renderer){
-    SDL_RenderCopy(renderer,moneda->sprite.imagen,NULL,&(moneda->sprite.rectImag));
+    SDL_RenderCopy(renderer,moneda->imagen,NULL,&(moneda->rectImag));
 }
 void destruirMoneda(Moneda *moneda){
-    SDL_DestroyTexture(moneda->sprite.imagen);
+    SDL_DestroyTexture(moneda->imagen);
 }
 
 
