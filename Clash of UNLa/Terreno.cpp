@@ -4,43 +4,49 @@
 #include "Mina.h"
 #include "Moneda.h"
 
-void crearTerreno(Terreno &mapa,int f,int c){
-    mapa.f=f;//coordenada logica y
-    mapa.c=c;//coordenada logica x
+/*----------------------------------------------------------------------------*/
+//                           IMPLEMENTACION DE PRIMITIVAS
+/*----------------------------------------------------------------------------*/
+void crearTerreno(Terreno &terreno,int fila,int columna){
+    terreno.fila=fila;
+    terreno.columna=columna;
 
-    mapa.ptrNodoVagon=NULL;//al principio no tiene vagons
-    mapa.ptrBandido=NULL;//un unico bandido por casilla
-    mapa.ptrMina=NULL;
-    mapa.ptrMoneda=NULL;
+    terreno.ptrNodoVagon=NULL;
+    terreno.ptrBandido=NULL;
+    terreno.ptrMina=NULL;
+    terreno.ptrMoneda=NULL;
 }
-void dibujarTerreno(SDL_Renderer* renderer,Terreno &mapa, int intervalo){
-    if(mapa.ptrBandido!=NULL){
-        dibujarBandido(mapa.ptrBandido,renderer);
+/*----------------------------------------------------------------------------*/
+void dibujarTerreno(SDL_Renderer* renderer,Terreno &terreno, int intervalo){
+    if(terreno.ptrBandido!=NULL){
+        dibujarBandido(terreno.ptrBandido,renderer);
     }
-    if(mapa.ptrMina!=NULL){
-        dibujarMina(mapa.ptrMina,renderer);
+    if(terreno.ptrMina!=NULL){
+        dibujarMina(terreno.ptrMina,renderer);
     }
-    if(mapa.ptrMoneda!=NULL){
-        dibujarMoneda(mapa.ptrMoneda,renderer);
+    if(terreno.ptrMoneda!=NULL){
+        dibujarMoneda(terreno.ptrMoneda,renderer);
     }
-    if(mapa.ptrNodoVagon!=NULL){
-        dibujarVagon(mapa.ptrNodoVagon->vagon,renderer,intervalo);
+    if(terreno.ptrNodoVagon!=NULL){
+        dibujarVagon(terreno.ptrNodoVagon->vagon,renderer,intervalo);
     }
 }
-void destruirTerreno(Terreno &mapa){
+/*----------------------------------------------------------------------------*/
+void destruirTerreno(Terreno &terreno){
     //la locomotora se destruye en otro lugar, pero aquí hay otros tda:
-    if(mapa.ptrBandido!=NULL){
-        destruirBandido(mapa.ptrBandido);
-        delete mapa.ptrBandido;
+    if(terreno.ptrBandido!=NULL){
+        destruirBandido(terreno.ptrBandido);
+        delete terreno.ptrBandido;
     }
-    if(mapa.ptrMina!=NULL){
-        destruirMina(mapa.ptrMina);
-        delete mapa.ptrMina;
+    if(terreno.ptrMina!=NULL){
+        destruirMina(terreno.ptrMina);
+        delete terreno.ptrMina;
     }
-    if(mapa.ptrMoneda!=NULL){
-        destruirMoneda(mapa.ptrMoneda);
-        delete mapa.ptrMoneda;
+    if(terreno.ptrMoneda!=NULL){
+        destruirMoneda(terreno.ptrMoneda);
+        delete terreno.ptrMoneda;
     }
-    //delete &mapa;
+    //delete &terreno;
 }
+/*----------------------------------------------------------------------------*/
 

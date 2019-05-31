@@ -88,7 +88,7 @@ void eliminarNodo(Locomotora &locomotora, PtrNodoVagon ptrNodo){
         delete ptrNodo;//borro el nodo
    }
 }
-void destruirLocomotora(Locomotora &locomotora){
+void eliminarLocomotora(Locomotora &locomotora){
     while (!listaVacia(locomotora)){
         eliminarNodo(locomotora,primero(locomotora));
     }

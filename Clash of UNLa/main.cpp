@@ -3,8 +3,6 @@
 #include <conio.h>// agrega la funcuion getch(); que es trabante de procesos
 #include <stdlib.h>//permite utilizar new y delete
 
-#include <Windows.h>//sonido
-#include <MMsystem.h>//sonido
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -15,6 +13,7 @@
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -70,22 +69,25 @@ int main(int argc, char** argv) {
         Locomotora locomotora;
         crearLocomotora(locomotora);
         Vagon vagon;
-        crearVagon(vagon,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite);//el primero es c1
+        Item item;
+        //C1 es la locomotora
+        crearVagon(vagon,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//el primero es c1
         ubicarVagon(partida,adicionarPrincipio(locomotora,vagon));
         setDireccion(partida,getDireccion(primero(locomotora)->vagon));//la direccion de la partida es = a la del primer vagon
 
-        crearVagon(vagon,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite);//los demás son c2
-        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite);
-        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite);
-        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite);
-        ubicarVagon(partida,adicionarUltimo(locomotora,vagon));
+        //Vagones c2
+        crearVagon(vagon,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
+        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
+        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,4,item);
+        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        crearVagon(vagon,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,5,item);
+        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
 
         Bandido bandido;
         Bandido *ptrBandido = &bandido;
-        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite);
+        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,item,3);
         ubicarBandido(partida,ptrBandido);
 
         Mina mina;
@@ -95,7 +97,7 @@ int main(int argc, char** argv) {
 
         Moneda moneda;
         Moneda *ptrMoneda = &moneda;
-        crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite);
+        crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite,5);
         ubicarMoneda(partida,ptrMoneda);
 
 
@@ -137,7 +139,7 @@ int main(int argc, char** argv) {
             }
         }//FIN DEL BUCLE
         cout<<"Destruimos locomotora"<<endl;
-        destruirLocomotora(locomotora);
+        eliminarLocomotora(locomotora);
         cout<<"Destruimos partida"<<endl;
         destruirPartida(partida);
         cout<<"Destruimos renderer"<<endl;
@@ -184,9 +186,9 @@ void cambiarColumna(Partida &partida,PtrNodoVagon ptrNodo){
         if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **mapaAux=getTerreno(partida);// partida.mapa
-            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(partida);// partida.tablero
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
@@ -201,9 +203,9 @@ void cambiarCapaInicio(Partida &partida, PtrNodoVagon ptrNodo){
         if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **mapaAux=getTerreno(partida);// partida.mapa
-            mapaAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(partida);// partida.mapa
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
         }
@@ -216,9 +218,9 @@ void cambiarCapaFinal(Partida &partida, PtrNodoVagon ptrNodo){
         if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **mapaAux=getTerreno(partida);// partida.mapa
-            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            mapaAux[(getFila(ptrNodo->vagon)*2)+desplazamiento+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(partida);// partida.mapa
             tableroAux[getFila(ptrNodo->vagon)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
             setFila(ptrNodo->vagon,desplazamiento);//actualizo la fila en la que se encuentra
@@ -226,6 +228,9 @@ void cambiarCapaFinal(Partida &partida, PtrNodoVagon ptrNodo){
         cambiarCapaFinal(partida,ptrNodo->siguiente);
     }
 }
+
+
+
 void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]){
     if(ptrNodo!=NULL){
         //validar la direccion;

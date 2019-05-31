@@ -1,6 +1,9 @@
 #include "Mina.h";
 #include <SDL.h>
 #include <SDL_image.h>
+/*----------------------------------------------------------------------------*/
+//                           IMPLEMENTACION DE PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int altoSprite){
     mina.f=f;//coordenada logica y
@@ -14,15 +17,19 @@ void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, i
     mina.rectImag.w=anchoCelda;//ancho
     mina.rectImag.h=altoSprite;//alto
 }
+/*----------------------------------------------------------------------------*/
 int getFila(Mina *mina){
     return mina->f;
 }
+/*----------------------------------------------------------------------------*/
 int getColumna(Mina *mina){
     return mina->c;
 }
+/*----------------------------------------------------------------------------*/
 void dibujarMina(Mina *mina,SDL_Renderer* renderer){
     SDL_RenderCopy(renderer,mina->imagen,NULL,&(mina->rectImag));
 }
+/*----------------------------------------------------------------------------*/
 void destruirMina(Mina *mina){
     SDL_DestroyTexture(mina->imagen);
 }

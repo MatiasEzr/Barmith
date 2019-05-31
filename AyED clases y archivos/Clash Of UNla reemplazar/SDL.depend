@@ -137,3 +137,122 @@
 	"Terreno.h"
 	"Celda.h"
 
+1559192153 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\bandido.cpp
+	"Bandido.h"
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559192178 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\bandido.h
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Sprite.h"
+	"Item.h"
+
+1559189235 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\sprite.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1559020924 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\item.h
+	<string>
+
+1559194015 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\celda.cpp
+	"Celda.h"
+	"Locomotora.h"
+	"Bandido.h"
+	"Moneda.h"
+	<SDL.h>
+	<SDL_image.h>
+	<string.h>
+
+1559193982 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\celda.h
+	<SDL.h>
+	"Locomotora.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Sprite.h"
+	"Vagon.h"
+
+1559187547 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\locomotora.h
+	"Vagon.h"
+
+1559189238 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\vagon.h
+	<SDL.h>
+
+1559193475 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\mina.h
+	"Sprite.h"
+	"Item.h"
+	<SDL.h>
+
+1559193625 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\moneda.h
+	"Sprite.h"
+	<SDL.h>
+
+1559019540 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\item.cpp
+
+1559187687 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\locomotora.cpp
+	"Locomotora.h"
+	"vagon.h"
+
+1559194742 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\main.cpp
+	<string.h>
+	<conio.h>
+	<Windows.h>
+	<MMsystem.h>
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Sprite.h"
+	"Bandido.h"
+	"Partida.h"
+	"Celda.h"
+
+1559193727 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\partida.h
+	<SDL.h>
+	"Bandido.h"
+	"Terreno.h"
+	"Celda.h"
+
+1559194555 c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\terreno.h
+	"Celda.h"
+	"Vagon.h"
+
+1559188901 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\mina.cpp
+	"Mina.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559193787 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\moneda.cpp
+	"Moneda.h"
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559189233 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\sprite.cpp
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+	<cstring>
+	<string>
+	<iostream>
+
+1559192182 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\terreno.cpp
+	<string.h>
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	"Terreno.h"
+	"Celda.h"
+
+1559189240 source:c:\users\matias\documents\github\ayed\ayed clases y archivos\clash of unla reemplazar\vagon.cpp
+	"Vagon.h"
+	<string.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+

@@ -2,7 +2,11 @@
 #include "Locomotora.h"
 #include <SDL.h>
 #include <SDL_image.h>
-#include <string.h>//permite utilizar strcat(char,char) strcpy(char,char);
+#include <string.h>
+
+/*----------------------------------------------------------------------------*/
+//                           IMPLEMENTACION DE PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 
 void crearCelda(Celda &celda,int f,int c,int ancho, int alto, SDL_Renderer* renderer,char rand[]){
     celda.f=f;//coordenada logica y

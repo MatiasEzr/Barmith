@@ -1,14 +1,27 @@
 #include "Locomotora.h"
 #include "Vagon.h"
+
+/*----------------------------------------------------------------------------*/
+//                           IMPLEMENTACION DE PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 void crearLocomotora(Locomotora &locomotora){
     locomotora.primero=NULL;
 }
 bool listaVacia(Locomotora &locomotora){
-    return (locomotora.primero == NULL);
+    return (locomotora.primero == finLista());
 }
+
+/*----------------------------------------------------------------------------*/
+PtrNodoVagon finLista() {
+  return NULL;
+}
+
+/*----------------------------------------------------------------------------*/
+
 PtrNodoVagon primero(Locomotora &locomotora){
     return locomotora.primero;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon siguiente(Locomotora &locomotora, PtrNodoVagon ptrNodo){
     PtrNodoVagon ptrNodoAux=NULL;
     if ((!listaVacia(locomotora)) && (ptrNodo != NULL)){
@@ -16,6 +29,7 @@ PtrNodoVagon siguiente(Locomotora &locomotora, PtrNodoVagon ptrNodo){
     }
     return ptrNodoAux;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon anterior(Locomotora &locomotora, PtrNodoVagon ptrNodo){
     PtrNodoVagon ptrPrevio = NULL;
     PtrNodoVagon ptrCursor = primero(locomotora);
@@ -27,72 +41,98 @@ PtrNodoVagon anterior(Locomotora &locomotora, PtrNodoVagon ptrNodo){
 
     return ptrPrevio;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon ultimo(Locomotora &locomotora){
     return anterior(locomotora,NULL);
 }
-PtrNodoVagon crearNodo(Vagon vagon){
-    PtrNodoVagon ptrAux = new Nodo;//reservo memoria para el nodo
+/*----------------------------------------------------------------------------*/
+PtrNodoVagon crearNodoLocomotora(Vagon vagon){
+    PtrNodoVagon ptrAux = new NodoLocomotora;//reservo memoria para el nodo
     ptrAux->vagon =vagon;
     ptrAux->siguiente = NULL;
     return ptrAux;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon adicionarPrincipio(Locomotora &locomotora, Vagon vagon){
-    PtrNodoVagon ptrNuevoNodo = crearNodo(vagon);//crea el nodo
-    ptrNuevoNodo->siguiente=locomotora.primero;//lo incorpora al principio de la lista
-    locomotora.primero = ptrNuevoNodo;
-    return ptrNuevoNodo;
+    PtrNodoVagon ptrNuevoNodoLocomotora = crearNodoLocomotora(vagon);//crea el nodo
+    ptrNuevoNodoLocomotora->siguiente=locomotora.primero;//lo incorpora al principio de la lista
+    locomotora.primero = ptrNuevoNodoLocomotora;
+    return ptrNuevoNodoLocomotora;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon adicionarAntes(Locomotora &locomotora, Vagon vagon, PtrNodoVagon ptrNodo){
-    PtrNodoVagon ptrNuevoNodo = NULL;
+    PtrNodoVagon ptrNuevoNodoLocomotora = NULL;
     if(listaVacia(locomotora)){//si la lista esta vacia se adiciona al principio
-        ptrNuevoNodo = adicionarPrincipio(locomotora,vagon);
+        ptrNuevoNodoLocomotora = adicionarPrincipio(locomotora,vagon);
     }else{
         if (ptrNodo != NULL){
             if(ptrNodo==primero(locomotora)){
-                ptrNuevoNodo = adicionarPrincipio(locomotora,vagon);
+                ptrNuevoNodoLocomotora = adicionarPrincipio(locomotora,vagon);
             }else{
-                ptrNuevoNodo = crearNodo(vagon);
+                ptrNuevoNodoLocomotora = crearNodoLocomotora(vagon);
                 PtrNodoVagon nodoAnterior = anterior(locomotora,ptrNodo);
-                nodoAnterior->siguiente=ptrNuevoNodo;
-                ptrNuevoNodo->siguiente = ptrNodo;
+                nodoAnterior->siguiente=ptrNuevoNodoLocomotora;
+                ptrNuevoNodoLocomotora->siguiente = ptrNodo;
             }
         }
     }
-    return ptrNuevoNodo;
+    return ptrNuevoNodoLocomotora;
 }
+/*----------------------------------------------------------------------------*/
 PtrNodoVagon adicionarDespues(Locomotora &locomotora, Vagon vagon, PtrNodoVagon ptrNodo){
-    PtrNodoVagon ptrNuevoNodo = NULL;
+    PtrNodoVagon ptrNuevoNodoLocomotora = NULL;
     if(listaVacia(locomotora)){//si la lista esta vacia se adiciona al principio
-        ptrNuevoNodo = adicionarPrincipio(locomotora,vagon);
+        ptrNuevoNodoLocomotora = adicionarPrincipio(locomotora,vagon);
     }else{
         if (ptrNodo != NULL){
-            ptrNuevoNodo = crearNodo(vagon);
-            ptrNuevoNodo->siguiente = ptrNodo->siguiente;
-            ptrNodo->siguiente = ptrNuevoNodo;
+            ptrNuevoNodoLocomotora = crearNodoLocomotora(vagon);
+            ptrNuevoNodoLocomotora->siguiente = ptrNodo->siguiente;
+            ptrNodo->siguiente = ptrNuevoNodoLocomotora;
         }
     }
-    return ptrNuevoNodo;
+    return ptrNuevoNodoLocomotora;
 }
-PtrNodoVagon adicionarUltimo(Locomotora &locomotora, Vagon vagon){
+/*----------------------------------------------------------------------------*/
+PtrNodoVagon adicionarFinal(Locomotora &locomotora, Vagon vagon){
     return adicionarDespues(locomotora,vagon,ultimo(locomotora));
 }
-void eliminarNodo(Locomotora &locomotora, PtrNodoVagon ptrNodo){
-    if ((!listaVacia(locomotora)) && (ptrNodo != NULL)) {//verifica que la lista no esté vacia y que ptrNodo exista
-        if (ptrNodo == primero(locomotora)){//si es el primero entonces hago que la lista apunte a su siguiente
-            locomotora.primero = siguiente(locomotora,ptrNodo);
+/*----------------------------------------------------------------------------*/
+
+
+void eliminarNodo(Locomotora &locomotora, PtrNodoVagon ptrNodoVagon){
+    if ((!listaVacia(locomotora)) && (ptrNodoVagon != NULL)) {//verifica que la lista no esté vacia y que ptrNodo exista
+        if (ptrNodoVagon == primero(locomotora)){//si es el primero entonces hago que la lista apunte a su siguiente
+            locomotora.primero = siguiente(locomotora,ptrNodoVagon);
         }else {
-            PtrNodoVagon ptrPrevio = anterior(locomotora, ptrNodo);
-            ptrPrevio->siguiente = ptrNodo->siguiente;
+            PtrNodoVagon ptrPrevio = anterior(locomotora, ptrNodoVagon);
+            ptrPrevio->siguiente = ptrNodoVagon->siguiente;
         }
-        destruirVagon(ptrNodo->vagon);//como circulo es un TDA hay que llamar a su destructor.
-        delete ptrNodo;//borro el nodo
+        destruirVagon(ptrNodoVagon->vagon);//como circulo es un TDA hay que llamar a su destructor.
+        delete ptrNodoVagon;//borro el nodo
    }
 }
-void destruirLocomotora(Locomotora &locomotora){
+/*----------------------------------------------------------------------------*/
+
+void eliminarNodoPrimero(Locomotora &locomotora) {
+
+  if (! listaVacia(locomotora))
+    eliminarNodo(locomotora,primero(locomotora));
+}
+
+/*----------------------------------------------------------------------------*/
+void eliminarNodoUltimo(Locomotora &locomotora) {
+
+  if (! listaVacia(locomotora))
+    eliminarNodo(locomotora,ultimo(locomotora));
+}
+
+/*----------------------------------------------------------------------------*/
+void eliminarLocomotora(Locomotora &locomotora){
     while (!listaVacia(locomotora)){
         eliminarNodo(locomotora,primero(locomotora));
     }
 }
+/*----------------------------------------------------------------------------*/
 int longitud(Locomotora &locomotora){
     PtrNodoVagon ptrCursor = primero(locomotora);
     int longitud = 0;
@@ -102,3 +142,4 @@ int longitud(Locomotora &locomotora){
     }
     return longitud;
 }
+
