@@ -7,7 +7,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "Partida.h"
+#include "Game.h"
 #include "Locomotora.h"
 #include "Vagon.h"
 #include "Bandido.h"
@@ -19,13 +19,13 @@ using namespace std;
 
 #define milisegundos 30
 
-void evaluarEventosTeclado(Partida &partida,SDL_Event &event,const unsigned char *keys);
+void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys);
 void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]);
 
-void cambiarCapaInicio(Partida &partida,PtrNodoVagon ptrNodo);
-void cambiarCapaFinal(Partida &partida,PtrNodoVagon ptrNodo);
-void cambiarColumna(Partida &partida,PtrNodoVagon ptrNodo);
-bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo);
+void cambiarCapaInicio(Game &game,PtrNodoVagon ptrNodo);
+void cambiarCapaFinal(Game &game,PtrNodoVagon ptrNodo);
+void cambiarColumna(Game &game,PtrNodoVagon ptrNodo);
+bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo);
 int main(int argc, char** argv) {
         //PlaySound(TEXT("media/musica.wav"),NULL, SND_ASYNC);
         //Si no se escucha la música es porque hay que agregar un linck al codeblocks:
@@ -61,10 +61,10 @@ int main(int argc, char** argv) {
         const unsigned char *keys;
         keys = SDL_GetKeyboardState(NULL);
 
-        Partida partida;
-        crearPartida(partida,filas,columnas,anchoCelda,altoCelda,altoSprite);
-        setTablero(partida,renderer);
-        setTerreno(partida);
+        Game game;
+        crearGame(game,filas,columnas,anchoCelda,altoCelda,altoSprite);
+        setTablero(game,renderer);
+        setTerreno(game);
 
         Locomotora locomotora;
         crearLocomotora(locomotora);
@@ -72,76 +72,78 @@ int main(int argc, char** argv) {
         Item item;
         //C1 es la locomotora
         crearVagon(vagon,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//el primero es c1
-        ubicarVagon(partida,adicionarPrincipio(locomotora,vagon));
-        setDireccion(partida,getDireccion(primero(locomotora)->vagon));//la direccion de la partida es = a la del primer vagon
+        ubicarVagon(game,adicionarPrincipio(locomotora,vagon));
+        setDireccion(game,getDireccion(primero(locomotora)->vagon));//la direccion de la game es = a la del primer vagon
 
         //Vagones c2
         crearVagon(vagon,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
-        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        ubicarVagon(game,adicionarFinal(locomotora,vagon));
         crearVagon(vagon,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
-        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        ubicarVagon(game,adicionarFinal(locomotora,vagon));
         crearVagon(vagon,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,4,item);
-        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        ubicarVagon(game,adicionarFinal(locomotora,vagon));
         crearVagon(vagon,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,5,item);
-        ubicarVagon(partida,adicionarFinal(locomotora,vagon));
+        ubicarVagon(game,adicionarFinal(locomotora,vagon));
 
         Bandido bandido;
         Bandido *ptrBandido = &bandido;
         crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,item,3);
-        ubicarBandido(partida,ptrBandido);
+        ubicarBandido(game,ptrBandido);
 
         Mina mina;
         Mina *ptrMina = &mina;
         crearMina(mina,renderer,4,2,anchoCelda, altoCelda, altoSprite);
-        ubicarMina(partida,ptrMina);
+        ubicarMina(game,ptrMina);
 
         Moneda moneda;
         Moneda *ptrMoneda = &moneda;
         crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite,5);
-        ubicarMoneda(partida,ptrMoneda);
+        ubicarMoneda(game,ptrMoneda);
 
 
-        dibujarTablero(partida,renderer);
+        dibujarTablero(game,renderer);
+        dibujarSprite(game,renderer);
         SDL_RenderPresent(renderer);//APLICA EL CAMBIO
         SDL_Delay(500);
-        while(!getGameOver(partida)){
+        while(!getGameOver(game)){
 
-            evaluarEventosTeclado(partida,event,keys);//setea la direccion siguiente en partida.direccion
+            evaluarEventosTeclado(game,event,keys);//setea la direccion siguiente en game.direccion
 
-            if(getIntervalo(partida)==10){
-                setIntervalo(partida,0);
+            if(getIntervalo(game)==10){
+                setIntervalo(game,0);
 
-                cambiarColumna(partida,primero(locomotora));//fila del tablero
-                cambiarCapaFinal(partida,primero(locomotora));//capa del mapa
+                cambiarColumna(game,primero(locomotora));//fila del tablero
+                cambiarCapaFinal(game,primero(locomotora));//capa del mapa
                 //hasta aca todos los carritos se encuentran en su punto casilla de tablero
                 //podemos evaluar la adquisición de monedas, de minas o ataques de bandidos
 
                 //luego redireccionamos a todos los vagons desde el primero
-                cambiarDireccion(primero(locomotora),getDireccion(partida));
+                cambiarDireccion(primero(locomotora),getDireccion(game));
 
-                setGameOver(partida,evaluarColisiones(partida,primero(locomotora)));
+                //setGameOver(game,evaluarColisiones(game,primero(locomotora)));
 
             }
-            if(!getGameOver(partida)){
-                if(getIntervalo(partida)==1){
+            if(!getGameOver(game)){
+                if(getIntervalo(game)==1){
                     //desde el princpio de la lista, si se mira hacia abajo o hacia arribaen el intervalo 1
                     //entonces lo desplazo a la siquietne capa
-                    cambiarCapaInicio(partida,primero(locomotora));//capa del mapa
+                    cambiarCapaInicio(game,primero(locomotora));//capa del mapa
                 }
 
                 //Render
                 SDL_RenderClear(renderer);//borro todo
-                dibujarTablero(partida,renderer);
+                dibujarTablero(game,renderer);
+                dibujarSprite(game,renderer);
                 SDL_RenderPresent(renderer);//APLICA EL CAMBIO
                 SDL_Delay(milisegundos);
 
-                setIntervalo(partida,getIntervalo(partida)+1);//partida.intervalo++;
+                setIntervalo(game,getIntervalo(game)+1);//game.intervalo++;
             }
         }//FIN DEL BUCLE
         cout<<"Destruimos locomotora"<<endl;
         eliminarLocomotora(locomotora);
-        cout<<"Destruimos partida"<<endl;
-        destruirPartida(partida);
+        cout<<"Destruimos game"<<endl;
+        destruirGame(game);
         cout<<"Destruimos renderer"<<endl;
         SDL_DestroyRenderer(renderer);
         cout<<"Destruimos window"<<endl;
@@ -154,7 +156,7 @@ int main(int argc, char** argv) {
     getch();
     return 0;
 }
-bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo){
+/*bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo){
     bool colision=true;
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
@@ -166,9 +168,9 @@ bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo){
     int c=getColumna(ptrNodo->vagon)+desplazamientoHorizontal;
     int f=getFila(ptrNodo->vagon)+desplazamientoVertical;
 
-    if((c>=0 && c<getColumnaLimite(partida)) && (f>=0 && f<getFilaLimite(partida))){
+    if((c>=0 && c<getColumnaLimite(game)) && (f>=0 && f<getFilaLimite(game))){
         //el tren aun se encuentra en el tablero!
-        Celda celdaAux =getTablero(partida)[f][c];
+        Celda celdaAux =getTablero(game)[f][c];
         if(celdaAux.ptrNodoVagon==NULL){
             //y el tren no se chocoará con otro vagón
             colision=false;
@@ -180,52 +182,53 @@ bool evaluarColisiones(Partida &partida,PtrNodoVagon ptrNodo){
     }
     return colision;
 }
-void cambiarColumna(Partida &partida,PtrNodoVagon ptrNodo){
+*/
+void cambiarColumna(Game &game,PtrNodoVagon ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
         if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            Terreno **terrenoAux=getTerreno(game);// game.mapa
             terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
             terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
-            Celda **tableroAux=getTablero(partida);// partida.tablero
+            Celda **tableroAux=getTablero(game);// game.tablero
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
             setColumna(ptrNodo->vagon,desplazamiento);
         }
-        cambiarColumna(partida,ptrNodo->siguiente);
+        cambiarColumna(game,ptrNodo->siguiente);
     }
 }
-void cambiarCapaInicio(Partida &partida, PtrNodoVagon ptrNodo){
+void cambiarCapaInicio(Game &game, PtrNodoVagon ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
         if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            Terreno **terrenoAux=getTerreno(game);// game.mapa
             terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
             terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
-            Celda **tableroAux=getTablero(partida);// partida.mapa
+            Celda **tableroAux=getTablero(game);// game.mapa
             tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
         }
-        cambiarCapaInicio(partida,ptrNodo->siguiente);
+        cambiarCapaInicio(game,ptrNodo->siguiente);
     }
 }
-void cambiarCapaFinal(Partida &partida, PtrNodoVagon ptrNodo){
+void cambiarCapaFinal(Game &game, PtrNodoVagon ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
         if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
         if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
-            Terreno **terrenoAux=getTerreno(partida);// partida.mapa
+            Terreno **terrenoAux=getTerreno(game);// game.mapa
             terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
             terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
-            Celda **tableroAux=getTablero(partida);// partida.mapa
+            Celda **tableroAux=getTablero(game);// game.mapa
             tableroAux[getFila(ptrNodo->vagon)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
             setFila(ptrNodo->vagon,desplazamiento);//actualizo la fila en la que se encuentra
         }
-        cambiarCapaFinal(partida,ptrNodo->siguiente);
+        cambiarCapaFinal(game,ptrNodo->siguiente);
     }
 }
 
@@ -251,27 +254,27 @@ void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]){
         cambiarDireccion(ptrNodo->siguiente,dirAnterior);
     }
 }
-void evaluarEventosTeclado(Partida &partida,SDL_Event &event,const unsigned char *keys){
+void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys){
     if(SDL_PollEvent(&event)){//indica que hay eventos pendientes
         switch(event.type){
             case SDL_QUIT:
-                setGameOver(partida, true);
+                setGameOver(game, true);
             break;
             case SDL_KEYDOWN:
                 if(keys[SDL_SCANCODE_ESCAPE]){
-                    setGameOver(partida, true);
+                    setGameOver(game, true);
                 }
                 if(keys[SDL_SCANCODE_LEFT]){
-                    setDireccion(partida,"izq");
+                    setDireccion(game,"izq");
                 }
                 if(keys[SDL_SCANCODE_RIGHT]){
-                    setDireccion(partida,"der");
+                    setDireccion(game,"der");
                 }
                 if(keys[SDL_SCANCODE_UP]){
-                    setDireccion(partida,"arr");
+                    setDireccion(game,"arr");
                 }
                 if(keys[SDL_SCANCODE_DOWN]){
-                    setDireccion(partida,"aba");
+                    setDireccion(game,"aba");
                 }
                 if(keys[SDL_SCANCODE_SPACE]){
                     //

@@ -36,6 +36,8 @@
 		<Unit filename="Bandido.h" />
 		<Unit filename="Celda.cpp" />
 		<Unit filename="Celda.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
 		<Unit filename="Item.cpp" />
 		<Unit filename="Item.h" />
 		<Unit filename="Locomotora.cpp" />
@@ -46,8 +48,6 @@
 		<Unit filename="Moneda.h" />
 		<Unit filename="Parametros.cpp" />
 		<Unit filename="Parametros.h" />
-		<Unit filename="Partida.cpp" />
-		<Unit filename="Partida.h" />
 		<Unit filename="Sprite.cpp" />
 		<Unit filename="Sprite.h" />
 		<Unit filename="Terreno.cpp" />

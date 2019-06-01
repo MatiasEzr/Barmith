@@ -1,0 +1,769 @@
+# depslib dependency file v1.0
+1557007295 source:c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+
+1557007408 source:c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1557006851 c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\parametros.h
+	<string>
+
+1556947783 source:c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556947837 c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1556953294 source:c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556953226 c:\users\gus\desktop\tp ayed 2019 clash of unla\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1556947784 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556947838 c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1557028314 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+
+1557028314 c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\parametros.h
+	<string>
+
+1556953296 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556953228 c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1557028332 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v2\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1556947784 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556947838 c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1557210863 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+
+1557028316 c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\parametros.h
+	<string>
+
+1556953296 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556953228 c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1557028334 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1557206792 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\terreno.cpp
+	"Terreno.h"
+
+1557206792 c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\terreno.h
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v3\clash_of_unla\vehiculo.cpp
+
+1556947784 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556947838 c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1556953296 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1556953228 c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1557028334 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1557645694 c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1557206792 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\terreno.cpp
+	"Terreno.h"
+
+1557206792 c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\terreno.h
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\vehiculo.cpp
+
+1557646408 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v4\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+
+1559019915 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559019906 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559022381 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"ListaComanda.h"
+
+1557645694 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1556953296 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559025813 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1557646903 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1557206792 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\terreno.cpp
+	"Terreno.h"
+
+1557206792 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\terreno.h
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\vehiculo.cpp
+
+1559020005 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019752 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025430 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025279 c:\users\gus\desktop\tp ayed 2019 clash of unla v6\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559068488 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559071520 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559020005 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019752 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025430 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025279 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559025813 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1559071134 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"Minas.h"
+	"ListaComanda.h"
+	"ListaMinas.h"
+
+1559067980 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1559025813 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557646903 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1557206792 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\terreno.cpp
+	"Terreno.h"
+
+1557206792 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\terreno.h
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v7\clash_of_unla\vehiculo.cpp
+
+1559068488 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559071520 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559020005 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019752 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025430 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025279 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559025813 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1559100630 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"Minas.h"
+	"Terreno.h"
+	"ListaComanda.h"
+	"ListaMinas.h"
+
+1559067980 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1559025813 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557646903 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559100752 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\terreno.cpp
+	"Terreno.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559100736 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\terreno.h
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\vehiculo.cpp
+
+1559100770 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\vagon.cpp
+	"Vagon.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559100514 c:\users\gus\desktop\tp ayed 2019 clash of unla v8\clash_of_unla\vagon.h
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<string>
+	"string.h"
+
+1559068488 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559071520 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559020005 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019752 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025430 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025279 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559025813 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1559100934 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"Minas.h"
+	"Terreno.h"
+	"ListaComanda.h"
+	"ListaMinas.h"
+
+1559067980 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1559100736 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\terreno.h
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+
+1559025813 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557646903 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559100752 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\terreno.cpp
+	"Terreno.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\tiempodejuego.h
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\vehiculo.cpp
+
+1559108602 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\locomotora.cpp
+	"Locomotora.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559108355 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\locomotora.h
+	<stdlib.h>
+	<stdio.h>
+
+1559108665 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\vagon.cpp
+	"Vagon.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559108665 c:\users\gus\desktop\tp ayed 2019 clash of unla v9\clash_of_unla\vagon.h
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<string>
+	"string.h"
+
+1559068488 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559071520 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559020005 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019752 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025430 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025279 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559025813 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1559110386 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\locomotora.cpp
+	"Locomotora.h"
+
+1559109130 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\locomotora.h
+	"Vagon.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559110017 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\vagon.h
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<string>
+	"string.h"
+
+1559100934 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"Minas.h"
+	"Terreno.h"
+	"ListaComanda.h"
+	"ListaMinas.h"
+
+1559067980 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1559100736 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\terreno.h
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+
+1559025813 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557646903 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559100752 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\terreno.cpp
+	"Terreno.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557206744 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\tiempodejuego.h
+
+1559110017 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\vagon.cpp
+	"Vagon.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1557207082 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\vehiculo.cpp
+
+1559151577 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\item.cpp
+	"Item.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559151591 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\item.h
+	<stdlib.h>
+	<stdio.h>
+
+1559152064 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\bandido.cpp
+	"Bandido.h"
+
+1559152064 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\bandido.h
+
+1559152041 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\caja.cpp
+	"Caja.h"
+
+1559152043 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\caja.h
+
+1559152099 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\estacion.cpp
+	"Estacion.h"
+
+1559152098 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\estacion.h
+
+1559152502 source:c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\moneda.cpp
+	"Moneda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559152412 c:\users\gus\desktop\tp ayed 2019 clash of unla v10\clash_of_unla\moneda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559152066 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\bandido.cpp
+	"Bandido.h"
+
+1559152066 g:\tp ayed 2019 clash of unla v10\clash_of_unla\bandido.h
+
+1559152042 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\caja.cpp
+	"Caja.h"
+
+1559152044 g:\tp ayed 2019 clash of unla v10\clash_of_unla\caja.h
+
+1559152840 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\cola_item.cpp
+	"Cola_Item.h"
+
+1559152840 g:\tp ayed 2019 clash of unla v10\clash_of_unla\cola_item.h
+	"Item.h"
+
+1559151592 g:\tp ayed 2019 clash of unla v10\clash_of_unla\item.h
+	<stdlib.h>
+	<stdio.h>
+
+1559068490 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559071522 g:\tp ayed 2019 clash of unla v10\clash_of_unla\comanda.h
+	<stdlib.h>
+	<stdio.h>
+
+1559152100 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\estacion.cpp
+	"Estacion.h"
+
+1559152100 g:\tp ayed 2019 clash of unla v10\clash_of_unla\estacion.h
+
+1559151578 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\item.cpp
+	"Item.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559020006 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\listacomanda.cpp
+	"ListaComanda.h"
+
+1559019754 g:\tp ayed 2019 clash of unla v10\clash_of_unla\listacomanda.h
+	"Comanda.h"
+
+1559025432 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\listaminas.cpp
+	"ListaMinas.h"
+
+1559025280 g:\tp ayed 2019 clash of unla v10\clash_of_unla\listaminas.h
+	"Minas.h"
+
+1559025814 g:\tp ayed 2019 clash of unla v10\clash_of_unla\minas.h
+	<stdlib.h>
+	<stdio.h>
+
+1559110388 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\locomotora.cpp
+	"Locomotora.h"
+
+1559109132 g:\tp ayed 2019 clash of unla v10\clash_of_unla\locomotora.h
+	"Vagon.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559110018 g:\tp ayed 2019 clash of unla v10\clash_of_unla\vagon.h
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<string>
+	"string.h"
+
+1559100936 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<strings.h>
+	<fstream>
+	<sstream>
+	<iomanip>
+	<ctype.h>
+	"Parametros.h"
+	"Comanda.h"
+	"Minas.h"
+	"Terreno.h"
+	"ListaComanda.h"
+	"ListaMinas.h"
+
+1559067982 g:\tp ayed 2019 clash of unla v10\clash_of_unla\parametros.h
+	<stdlib.h>
+	<stdio.h>
+
+1559100738 g:\tp ayed 2019 clash of unla v10\clash_of_unla\terreno.h
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+
+1559025814 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\minas.cpp
+	"Minas.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559152504 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\moneda.cpp
+	"Moneda.h"
+	<stdlib.h>
+	<stdio.h>
+
+1559152414 g:\tp ayed 2019 clash of unla v10\clash_of_unla\moneda.h
+	<stdlib.h>
+	<stdio.h>
+
+1557646904 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1559100754 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\terreno.cpp
+	"Terreno.h"
+	<stdlib.h>
+	<stdio.h>
+
+1557206744 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\tiempodejuego.cpp
+	"TiempoDeJuego.h"
+
+1557206744 g:\tp ayed 2019 clash of unla v10\clash_of_unla\tiempodejuego.h
+
+1559110018 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\vagon.cpp
+	"Vagon.h"
+	<iostream>
+	<string>
+	"string.h"
+
+1557207082 source:g:\tp ayed 2019 clash of unla v10\clash_of_unla\vehiculo.cpp
+
