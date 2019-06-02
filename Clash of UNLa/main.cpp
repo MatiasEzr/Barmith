@@ -9,7 +9,6 @@
 
 #include "Game.h"
 #include "Locomotora.h"
-#include "Vagon.h"
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
@@ -47,24 +46,33 @@ int main(int argc, char** argv) {
         SDL_Window *window;
         SDL_Renderer *renderer;
 
-        window = SDL_CreateWindow(
-            "Clash of UNLa",
-            SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,
-            anchoVentana,altoVentana,
-            SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC
-            );
-
-        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
-        IMG_Init(IMG_INIT_PNG);
 
         SDL_Event event;
         const unsigned char *keys;
         keys = SDL_GetKeyboardState(NULL);
 
+        window = SDL_CreateWindow("Clash of UNLa",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,anchoVentana,altoVentana,SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC);
+
+        renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+        IMG_Init(IMG_INIT_PNG);
+
+
+
         Game game;
-        crearGame(game,filas,columnas,anchoCelda,altoCelda,altoSprite);
+
+
+        crearGame(game);
+        setFila(game,filas);
+        setColumna(game,columnas);
+        setFilaTerreno(game);
+        setAnchoCelda(game,anchoCelda);
+        setAltoCelda(game,altoCelda);
+        setAltoSprite(game,altoSprite);
         setTablero(game,renderer);
         setTerreno(game);
+
+
+
 
         Locomotora locomotora;
         crearLocomotora(locomotora);
@@ -120,7 +128,7 @@ int main(int argc, char** argv) {
                 //luego redireccionamos a todos los vagons desde el primero
                 cambiarDireccion(primero(locomotora),getDireccion(game));
 
-                //setGameOver(game,evaluarColisiones(game,primero(locomotora)));
+                setGameOver(game,evaluarColisiones(game,primero(locomotora)));
 
             }
             if(!getGameOver(game)){
@@ -156,7 +164,9 @@ int main(int argc, char** argv) {
     getch();
     return 0;
 }
-/*bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo){
+
+///*******************************METODOS A CAMBIAR/MODIFICAR******************///
+bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo){
     bool colision=true;
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
@@ -168,7 +178,7 @@ int main(int argc, char** argv) {
     int c=getColumna(ptrNodo->vagon)+desplazamientoHorizontal;
     int f=getFila(ptrNodo->vagon)+desplazamientoVertical;
 
-    if((c>=0 && c<getColumnaLimite(game)) && (f>=0 && f<getFilaLimite(game))){
+    if((c>=0 && c<getColumna(game)) && (f>=0 && f<getFila(game))){
         //el tren aun se encuentra en el tablero!
         Celda celdaAux =getTablero(game)[f][c];
         if(celdaAux.ptrNodoVagon==NULL){
@@ -182,7 +192,7 @@ int main(int argc, char** argv) {
     }
     return colision;
 }
-*/
+
 void cambiarColumna(Game &game,PtrNodoVagon ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;

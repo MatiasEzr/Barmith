@@ -25,7 +25,7 @@
 1559281638 c:\users\matias\documents\github\ayed\clash of unla\locomotora.h
 	"Vagon.h"
 
-1559287978 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
+1559470447 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
 	"Item.h"
 	<SDL.h>
 
@@ -39,16 +39,15 @@
 	"Locomotora.h"
 	"Vagon.h"
 
-1559360970 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+1559470542 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
 	<stdlib.h>
 	<SDL.h>
 	<SDL_image.h>
-	"Partida.h"
+	"Game.h"
 	"Locomotora.h"
-	"Vagon.h"
 	"Bandido.h"
 	"Mina.h"
 	"Moneda.h"
@@ -94,7 +93,7 @@
 	"Mina.h"
 	"Moneda.h"
 
-1559287407 source:c:\users\matias\documents\github\ayed\clash of unla\vagon.cpp
+1559470481 source:c:\users\matias\documents\github\ayed\clash of unla\vagon.cpp
 	"Vagon.h"
 	"Item.h"
 	<string.h>
@@ -252,6 +251,23 @@
 	<stdlib.h>
 
 1559407495 c:\users\matias\desktop\clash of unla\game.h
+	<SDL.h>
+	"Celda.h"
+	"Terreno.h"
+	"Locomotora.h"
+
+1559469639 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
+	<string.h>
+	<SDL.h>
+	"Game.h"
+	"Celda.h"
+	"Terreno.h"
+	"Locomotora.h"
+	"Bandido.h"
+	<ctime>
+	<stdlib.h>
+
+1559469639 c:\users\matias\documents\github\ayed\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"

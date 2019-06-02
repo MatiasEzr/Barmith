@@ -12,28 +12,20 @@
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 
-void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int altoSprite){
+void crearGame(Game &game){
     game.gameover=false;
     game.intervalo=0;
+    game.altoSprite=0;
+    game.anchoCelda=0;
+    game.altoCelda=0;
 
-    game.anchoCelda=anchoCelda;
-    game.altoCelda=altoCelda;
-    game.altoSprite=altoSprite;
+    game.fila=0;
+    game.columna=0;
+    game.filaTerreno =0;
 
-    game.fila=fila;
-    game.columna=columna;
-    game.filaTerreno = (fila*2)-1;
-
-    game.tablero= new Celda*[game.fila];
-    for (int f = 0; f < game.fila; f++){
-        game.tablero[f] = new Celda[game.columna];
-    }
-
-    game.terreno= new Terreno*[game.filaTerreno];
-    for (int f = 0; f < game.filaTerreno; f++){
-        game.terreno[f] = new Terreno[game.columna];
-    }
-    strcpy(game.direccion,"direccion");
+    game.tablero= 0;
+    game.terreno= 0;
+    strcpy(game.direccion,"aba");
 
 }
 /*----------------------------------------------------------------------------*/
@@ -41,8 +33,25 @@ int getAnchoCelda(Game &game){
     return game.anchoCelda;
 }
 /*----------------------------------------------------------------------------*/
+void setAnchoCelda(Game &game,int anchoCelda){
+    game.anchoCelda=anchoCelda;
+}
+/*----------------------------------------------------------------------------*/
+
 int getAltoCelda(Game &game){
     return game.altoCelda;
+}
+/*----------------------------------------------------------------------------*/
+void setAltoCelda(Game &game,int altoCelda){
+    game.altoCelda=altoCelda;
+}
+/*----------------------------------------------------------------------------*/
+int getAltoSprite(Game &game){
+    return game.altoSprite;
+}
+/*----------------------------------------------------------------------------*/
+void setAltoSprite(Game &game,int altoSprite){
+    game.altoSprite=altoSprite;
 }
 /*----------------------------------------------------------------------------*/
 int getIntervalo(Game &game){
@@ -54,7 +63,11 @@ void setIntervalo(Game &game, int intervalo){
 }
 /*----------------------------------------------------------------------------*/
 void setTablero(Game &game,SDL_Renderer* renderer){
-    srand(time(0));//semilla para aleatorio: cambia el valor inicial del random dentro de la libreria stdlib.h
+    game.tablero= new Celda*[game.fila];
+    for (int f = 0; f < game.fila; f++){
+        game.tablero[f] = new Celda[game.columna];
+    }
+    srand(time(0));
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
             Celda celda;
@@ -73,6 +86,11 @@ Celda** getTablero(Game &game){
 /*----------------------------------------------------------------------------*/
 
 void setTerreno(Game &game){
+game.terreno=new Terreno*[game.filaTerreno];
+   for (int f = 0; f < game.filaTerreno; f++){
+        game.terreno[f] = new Terreno[game.columna];
+    }
+
     for(int f=0;f<game.filaTerreno;f++){
         for(int c=0;c<game.columna;c++){
             Terreno terreno;
@@ -156,11 +174,30 @@ char* getDireccion(Game &game){
     return game.direccion;
 }
 /*----------------------------------------------------------------------------*/
-int getColumnaLimite(Game &game){
-    return game.columna;
-}
-/*----------------------------------------------------------------------------*/
-int getFilaLimite(Game &game){
+int getFila(Game &game){
     return game.fila;
 }
 /*----------------------------------------------------------------------------*/
+
+void setFila(Game &game,int fila){
+    game.fila=fila;
+}
+/*----------------------------------------------------------------------------*/
+
+int getColumna(Game &game){
+    return game.columna;
+}
+/*----------------------------------------------------------------------------*/
+
+void setColumna(Game &game,int columna){
+    game.columna=columna;
+}
+/*----------------------------------------------------------------------------*/
+
+int getFilaTerreno(Game &game){
+    return game.filaTerreno;
+}
+/*----------------------------------------------------------------------------*/
+void setFilaTerreno(Game &game){
+  game.filaTerreno=(getFila(game)*2)-1;
+}

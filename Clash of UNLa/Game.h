@@ -32,25 +32,32 @@ typedef struct{
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda, int altoSprite);
+void crearGame(Game &game);
+void setAltoSprite(Game &game,int altoSprite);
+int getAltoSprite(Game &game);
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game);
 /*----------------------------------------------------------------------------*/
+void setAnchoCelda(Game &game,int anchoCelda);
+/*----------------------------------------------------------------------------*/
 int getAltoCelda(Game &game);
+/*----------------------------------------------------------------------------*/
+void setAltoCelda(Game &game,int altoCelda);
 /*----------------------------------------------------------------------------*/
 int getIntervalo(Game &game);
 /*----------------------------------------------------------------------------*/
 void setIntervalo(Game &game, int intervalo);
 /*----------------------------------------------------------------------------*/
-void setTablero(Game &game,SDL_Renderer *renderer);
-/*----------------------------------------------------------------------------*/
 Celda** getTablero(Game &game);
 /*----------------------------------------------------------------------------*/
-void setTerreno(Game &game);
+void setTablero(Game &game,SDL_Renderer *renderer);
 /*----------------------------------------------------------------------------*/
 Terreno** getTerreno(Game &game);
 /*----------------------------------------------------------------------------*/
+void setTerreno(Game &game);
+/*----------------------------------------------------------------------------*/
 void dibujarTablero(Game game,SDL_Renderer *renderer);
+/*----------------------------------------------------------------------------*/
 void dibujarSprite(Game game,SDL_Renderer *renderer);
 
 /*----------------------------------------------------------------------------*/
@@ -72,8 +79,15 @@ void setDireccion(Game &game,char direccion[]);
 /*----------------------------------------------------------------------------*/
 char* getDireccion(Game &game);
 /*----------------------------------------------------------------------------*/
-int getColumnaLimite(Game &game);
+int getColumna(Game &game);
 /*----------------------------------------------------------------------------*/
-int getFilaLimite(Game &game);
+void setColumna(Game &game,int columna);
 /*----------------------------------------------------------------------------*/
+int getFila(Game &game);
+/*----------------------------------------------------------------------------*/
+void setFila(Game &game,int fila);
+/*----------------------------------------------------------------------------*/
+int getFilaTerreno(Game &game);
+/*----------------------------------------------------------------------------*/
+void setFilaTerreno(Game &game);
 #endif
