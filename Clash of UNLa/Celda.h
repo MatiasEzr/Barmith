@@ -2,10 +2,10 @@
 #define __SUELO_H__
 
 #include <SDL.h>
-#include "Locomotora.h"
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
+#include "Lista.h"
 
 typedef struct{
     int f;
@@ -13,7 +13,7 @@ typedef struct{
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
 
-    PtrNodoVagon ptrNodoVagon;
+    PtrNodoLista ptrNodoVagon;
     Bandido *ptrBandido;
     Mina *ptrMina;
     Moneda *ptrMoneda;

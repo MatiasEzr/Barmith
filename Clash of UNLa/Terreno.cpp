@@ -1,8 +1,9 @@
 #include "Terreno.h"
-#include "Locomotora.h"
 #include "Bandido.h";
 #include "Mina.h"
 #include "Moneda.h"
+#include "Vagon.h"
+#include "Lista.h"
 
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
@@ -28,7 +29,7 @@ void dibujarTerreno(SDL_Renderer* renderer,Terreno &terreno, int intervalo){
         dibujarMoneda(terreno.ptrMoneda,renderer);
     }
     if(terreno.ptrNodoVagon!=NULL){
-        dibujarVagon(terreno.ptrNodoVagon->vagon,renderer,intervalo);
+        dibujarVagon(*(Vagon*)terreno.ptrNodoVagon->ptrDato,renderer,intervalo);
     }
 }
 /*----------------------------------------------------------------------------*/

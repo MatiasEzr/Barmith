@@ -1,10 +1,13 @@
 #include <string.h>
+#include <fstream>
+#include <sstream>
 #include <SDL.h>
 #include "Game.h"
 #include "Celda.h"
 #include "Terreno.h"
-#include "Locomotora.h"
 #include "Bandido.h"
+#include "Lista.h"
+#include "Vagon.h"
 #include <ctime> //time.h o ctime agregan funciones que leen el reloj interno del procesador. la funcion time(NULL) devuelve el tiempo actual en milisegundos. la usamos para los aleatorios.
 #include <stdlib.h>//permite utilizar itoa(int,char,int); y la funcion para aleatorios rand()
 
@@ -34,7 +37,7 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int 
         game.terreno[f] = new Terreno[game.columna];
     }
     strcpy(game.direccion,"direccion");
-
+    crearLista(game.minas,NULL);
 }
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game){
@@ -87,6 +90,63 @@ Terreno** getTerreno(Game &game){
     return game.terreno;
 }
 /*----------------------------------------------------------------------------*/
+void setMinas(Game &game, SDL_Renderer * renderer){
+    ifstream entrada("Minas.txt");
+
+    string strposx,strposy,strcoditem,strip,strseq1,strseq2,strseq3,strseq4,strseq5;
+    int posX,posY,codItem,ip,seq1,seq2,seq3,seq4,seq5;
+    string cadena;
+    while(!entrada.eof()){
+          getline(entrada,cadena,'\n');
+          if(cadena != ""){
+              stringstream cadena2(cadena);
+              Mina *mina = new Mina;
+
+              getline(cadena2,strposx,';');
+              posX=atoi(strposx.c_str());
+
+              getline(cadena2,strposy,';');
+              posY=atoi(strposx.c_str());
+
+              getline(cadena2,strcoditem,';');
+              codItem=atoi(strcoditem.c_str());
+
+              getline(cadena2,strip,';');
+              ip=atoi(strip.c_str());
+
+              getline(cadena2,strseq1,';');
+              seq1=atoi(strseq1.c_str());
+
+              getline(cadena2,strseq2,';');
+              seq2=atoi(strseq2.c_str());
+
+              getline(cadena2,strseq3,';');
+              seq3=atoi(strseq3.c_str());
+
+              getline(cadena2,strseq4,';');
+              seq4=atoi(strseq4.c_str());
+
+              getline(cadena2,strseq5,';');
+              seq5=atoi(strseq5.c_str());
+
+              int secuencia[5] = {seq1,seq2,seq3,seq4,seq5};
+              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia, (Item)codItem);
+              ubicarMina(game, mina);
+
+              adicionarFinal(game.minas,mina);
+
+              delete mina;
+              cadena2.clear();
+          }
+    }
+    entrada.close();
+    fflush(stdin);
+}
+/*----------------------------------------------------------------------------*/
+Lista getMinas(Game &game){
+    return game.minas;
+}
+/*----------------------------------------------------------------------------*/
 void dibujarTablero(Game game,SDL_Renderer *renderer){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
@@ -114,6 +174,7 @@ void destruirGame(Game &game){
             destruirTerreno(game.terreno[f][c]);
         }
     }
+    eliminarLista(game.minas);
     //delete &game;
 }
 /*----------------------------------------------------------------------------*/
@@ -125,9 +186,9 @@ void setGameOver(Game &game, bool flag){
     game.gameover=flag;
 }
 /*----------------------------------------------------------------------------*/
-void ubicarVagon(Game &game,PtrNodoVagon ptrNodo){
-    game.tablero[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;//celda.ptrNosoVagon=ptrNodo
-    game.terreno[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;//terreno.ptrNosoVagon=ptrNodo
+void ubicarVagon(Game &game,PtrNodoLista ptrNodo){
+    game.tablero[getFila(*(Vagon*)ptrNodo->ptrDato)][getColumna(*(Vagon*)ptrNodo->ptrDato)].ptrNodoVagon=ptrNodo;//celda.ptrNosoVagon=ptrNodo
+    game.terreno[getFila(*(Vagon*)ptrNodo->ptrDato)*2][getColumna(*(Vagon*)ptrNodo->ptrDato)].ptrNodoVagon=ptrNodo;//terreno.ptrNosoVagon=ptrNodo
 }
 /*----------------------------------------------------------------------------*/
 void ubicarBandido(Game &game,Bandido *bandido){

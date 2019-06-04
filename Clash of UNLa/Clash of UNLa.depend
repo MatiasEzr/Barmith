@@ -257,3 +257,141 @@
 	"Terreno.h"
 	"Locomotora.h"
 
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\bandido.cpp
+	"Bandido.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\bandido.h
+	<SDL.h>
+	"Item.h"
+
+1559673323 c:\users\ezequiel\git\barmith\clash of unla\item.h
+	<string>
+
+1559665807 source:c:\users\ezequiel\git\barmith\clash of unla\celda.cpp
+	"Celda.h"
+	<SDL.h>
+	<SDL_image.h>
+	<string.h>
+
+1559665975 c:\users\ezequiel\git\barmith\clash of unla\celda.h
+	<SDL.h>
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\locomotora.h
+	"Vagon.h"
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\vagon.h
+	"Item.h"
+	<SDL.h>
+
+1559676170 c:\users\ezequiel\git\barmith\clash of unla\mina.h
+	<SDL.h>
+	"Item.h"
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\moneda.h
+	<SDL.h>
+
+1559680856 source:c:\users\ezequiel\git\barmith\clash of unla\game.cpp
+	<string.h>
+	<fstream>
+	<sstream>
+	<SDL.h>
+	"Game.h"
+	"Celda.h"
+	"Terreno.h"
+	"Bandido.h"
+	"Lista.h"
+	"Vagon.h"
+	<ctime>
+	<stdlib.h>
+
+1559678701 c:\users\ezequiel\git\barmith\clash of unla\game.h
+	<SDL.h>
+	"Celda.h"
+	"Terreno.h"
+	"Lista.h"
+
+1559666015 c:\users\ezequiel\git\barmith\clash of unla\terreno.h
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\item.cpp
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\locomotora.cpp
+	"Locomotora.h"
+	"Vagon.h"
+
+1559680697 source:c:\users\ezequiel\git\barmith\clash of unla\main.cpp
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	"Game.h"
+	"Vagon.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Item.h"
+	"Lista.h"
+
+1559677018 source:c:\users\ezequiel\git\barmith\clash of unla\mina.cpp
+	"Mina.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\moneda.cpp
+	"Moneda.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\parametros.h
+	<string>
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\sprite.cpp
+	"Sprite.h"
+	<SDL.h>
+	<SDL_image.h>
+	<cstring>
+	<string>
+	<iostream>
+
+1559436750 c:\users\ezequiel\git\barmith\clash of unla\sprite.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1559667064 source:c:\users\ezequiel\git\barmith\clash of unla\terreno.cpp
+	"Terreno.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Vagon.h"
+	"Lista.h"
+
+1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\vagon.cpp
+	"Vagon.h"
+	"Item.h"
+	<string.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+
+1558132001 c:\users\ezequiel\git\barmith\clash of unla\lista.h
+
+1558132143 source:c:\users\ezequiel\git\barmith\clash of unla\lista.cpp
+	"Lista.h"
+

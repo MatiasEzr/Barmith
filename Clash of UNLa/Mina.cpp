@@ -5,10 +5,15 @@
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 
-void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int altoSprite){
+void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
+               int altoSprite, int ip, int secuencia[5], Item item){
     mina.f=f;//coordenada logica y
     mina.c=c;//coordenada logica x
-
+    mina.ip=ip;//intervalo de produccion
+    mina.item=item;//item de la mina
+    for(int i=0;i<5;i++){
+        mina.secuencia[i] = secuencia[i];
+    }
     mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
     //SDL_QueryTexture(mina.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
 
@@ -22,8 +27,42 @@ int getFila(Mina *mina){
     return mina->f;
 }
 /*----------------------------------------------------------------------------*/
+void setFila(Mina &mina, int fila){
+    mina.f = fila;
+}
+/*----------------------------------------------------------------------------*/
 int getColumna(Mina *mina){
     return mina->c;
+}
+/*----------------------------------------------------------------------------*/
+void setColumna(Mina &mina, int columna){
+    mina.c = columna;
+}
+/*----------------------------------------------------------------------------*/
+int getIP(Mina &mina){
+    return mina.ip;
+}
+/*----------------------------------------------------------------------------*/
+void setIP(Mina &mina, int IP){
+    mina.ip = IP;
+}
+/*----------------------------------------------------------------------------*/
+int* getSecuencia(Mina &mina){
+    return mina.secuencia;
+}
+/*----------------------------------------------------------------------------*/
+void setSecuencia(Mina &mina, int secuencia[5]){
+    for(int i=0;i<5;i++){
+        mina.secuencia[i] = secuencia[i];
+    }
+}
+/*----------------------------------------------------------------------------*/
+Item getItem(Mina &mina){
+    return mina.item;
+}
+/*----------------------------------------------------------------------------*/
+void setItem(Mina &mina, Item item){
+    mina.item = item;
 }
 /*----------------------------------------------------------------------------*/
 void dibujarMina(Mina *mina,SDL_Renderer* renderer){

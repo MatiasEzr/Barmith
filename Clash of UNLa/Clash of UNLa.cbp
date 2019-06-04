@@ -40,8 +40,8 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Item.cpp" />
 		<Unit filename="Item.h" />
-		<Unit filename="Locomotora.cpp" />
-		<Unit filename="Locomotora.h" />
+		<Unit filename="Lista.cpp" />
+		<Unit filename="Lista.h" />
 		<Unit filename="Mina.cpp" />
 		<Unit filename="Mina.h" />
 		<Unit filename="Moneda.cpp" />

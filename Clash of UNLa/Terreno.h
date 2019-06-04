@@ -1,10 +1,10 @@
 #ifndef __MAPA_H__
 #define __MAPA_H__
 
-#include "Locomotora.h"
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
+#include "Lista.h"
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ typedef struct{
     int fila;
     int columna;
 
-    PtrNodoVagon ptrNodoVagon;
+    PtrNodoLista ptrNodoVagon;
     Bandido *ptrBandido;
     Mina *ptrMina;
     Moneda *ptrMoneda;

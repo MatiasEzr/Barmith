@@ -8,38 +8,38 @@
 #include <SDL_image.h>
 
 #include "Game.h"
-#include "Locomotora.h"
 #include "Vagon.h"
 #include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
 #include "Item.h"
+#include "Lista.h"
 
 using namespace std;
 
 #define milisegundos 30
 
 void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys);
-void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]);
+void cambiarDireccion(PtrNodoLista ptrNodo,char direccion[]);
 
-void cambiarCapaInicio(Game &game,PtrNodoVagon ptrNodo);
-void cambiarCapaFinal(Game &game,PtrNodoVagon ptrNodo);
-void cambiarColumna(Game &game,PtrNodoVagon ptrNodo);
-bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo);
+void cambiarCapaInicio(Game &game,PtrNodoLista ptrNodo);
+void cambiarCapaFinal(Game &game,PtrNodoLista ptrNodo);
+void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
+bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
         //PlaySound(TEXT("media/musica.wav"),NULL, SND_ASYNC);
         //Si no se escucha la música es porque hay que agregar un linck al codeblocks:
         //settings->complier...->linker settings-> link libraries-> add-> escribimos winmm ->aceptamos todo.
         /*datros que leo desde un archivo************/
-        int filas = 20;
-        int columnas = 15;
-        int anchoCelda =70;
+        int filas = 15;
+        int columnas = 20;
+        int anchoCelda = 70;
         int altoCelda = 40;
         int altoSprite = 70;
         /********************************************/
 
-        int anchoVentana = (columnas+2)*anchoCelda;
-        int altoVentana = (filas+2)*altoCelda;;
+        int anchoVentana = 800;
+        int altoVentana = 600;
 
 
     if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
@@ -65,35 +65,32 @@ int main(int argc, char** argv) {
         crearGame(game,filas,columnas,anchoCelda,altoCelda,altoSprite);
         setTablero(game,renderer);
         setTerreno(game);
+        setMinas(game, renderer);
 
-        Locomotora locomotora;
-        crearLocomotora(locomotora);
-        Vagon vagon;
+        Lista locomotora;
+        crearLista(locomotora,NULL);
+        Vagon vagon1, vagon2, vagon3, vagon4, vagon5;
         Item item;
         //C1 es la locomotora
-        crearVagon(vagon,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//el primero es c1
-        ubicarVagon(game,adicionarPrincipio(locomotora,vagon));
-        setDireccion(game,getDireccion(primero(locomotora)->vagon));//la direccion de la game es = a la del primer vagon
+        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//el primero es c1
+        ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
+        setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));//la direccion de la game es = a la del primer vagon
 
         //Vagones c2
-        crearVagon(vagon,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
-        ubicarVagon(game,adicionarFinal(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
-        ubicarVagon(game,adicionarFinal(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,4,item);
-        ubicarVagon(game,adicionarFinal(locomotora,vagon));
-        crearVagon(vagon,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,5,item);
-        ubicarVagon(game,adicionarFinal(locomotora,vagon));
+        crearVagon(vagon2,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon2));
+        crearVagon(vagon3,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon3));
+        crearVagon(vagon4,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,4,item);
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon4));
+        crearVagon(vagon5,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,5,item);
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon5));
+
 
         Bandido bandido;
         Bandido *ptrBandido = &bandido;
         crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,item,3);
         ubicarBandido(game,ptrBandido);
-
-        Mina mina;
-        Mina *ptrMina = &mina;
-        crearMina(mina,renderer,4,2,anchoCelda, altoCelda, altoSprite);
-        ubicarMina(game,ptrMina);
 
         Moneda moneda;
         Moneda *ptrMoneda = &moneda;
@@ -141,7 +138,7 @@ int main(int argc, char** argv) {
             }
         }//FIN DEL BUCLE
         cout<<"Destruimos locomotora"<<endl;
-        eliminarLocomotora(locomotora);
+        eliminarLista(locomotora);
         cout<<"Destruimos game"<<endl;
         destruirGame(game);
         cout<<"Destruimos renderer"<<endl;
@@ -156,7 +153,7 @@ int main(int argc, char** argv) {
     getch();
     return 0;
 }
-/*bool evaluarColisiones(Game &game,PtrNodoVagon ptrNodo){
+/*bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
     bool colision=true;
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
@@ -181,64 +178,71 @@ int main(int argc, char** argv) {
         cout<<"Nos salimos del cuadrante en "<<f<<"/"<<c<<endl;
     }
     return colision;
-}
-*/
-void cambiarColumna(Game &game,PtrNodoVagon ptrNodo){
+}*/
+
+void cambiarColumna(Game &game,PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
-        if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamiento=1;//subo una capa
-        if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamiento=-1;//bajo una capa
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        if(strcmp(getDireccion(*vagon),"der")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(*vagon),"izq")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
             Terreno **terrenoAux=getTerreno(game);// game.mapa
-            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            terrenoAux[getFila(*vagon)*2][getColumna(*vagon)].ptrNodoVagon=NULL;
+            terrenoAux[getFila(*vagon)*2][getColumna(*vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(game);// game.tablero
-            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
-            setColumna(ptrNodo->vagon,desplazamiento);
+            tableroAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
+            tableroAux[getFila(*vagon)][getColumna(*vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            setColumna(*vagon,desplazamiento);
         }
-        cambiarColumna(game,ptrNodo->siguiente);
+        delete vagon;
+        cambiarColumna(game,ptrNodo->sgte);
     }
 }
-void cambiarCapaInicio(Game &game, PtrNodoVagon ptrNodo){
+void cambiarCapaInicio(Game &game, PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
-        if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
-        if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        if(strcmp(getDireccion(*vagon),"aba")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(*vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
             Terreno **terrenoAux=getTerreno(game);// game.mapa
-            terrenoAux[getFila(ptrNodo->vagon)*2][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            terrenoAux[getFila(*vagon)*2][getColumna(*vagon)].ptrNodoVagon=NULL;
+            terrenoAux[(getFila(*vagon)*2)+desplazamiento][getColumna(*vagon)].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(game);// game.mapa
-            tableroAux[getFila(ptrNodo->vagon)][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
+            tableroAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
         }
-        cambiarCapaInicio(game,ptrNodo->siguiente);
+        delete vagon;
+        cambiarCapaInicio(game,ptrNodo->sgte);
     }
 }
-void cambiarCapaFinal(Game &game, PtrNodoVagon ptrNodo){
+void cambiarCapaFinal(Game &game, PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
-        if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamiento=1;//subo una capa
-        if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamiento=-1;//bajo una capa
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        if(strcmp(getDireccion(*vagon),"aba")==0)desplazamiento=1;//subo una capa
+        if(strcmp(getDireccion(*vagon),"arr")==0)desplazamiento=-1;//bajo una capa
         if(desplazamiento!=0){
             Terreno **terrenoAux=getTerreno(game);// game.mapa
-            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=NULL;
-            terrenoAux[(getFila(ptrNodo->vagon)*2)+desplazamiento+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
+            terrenoAux[(getFila(*vagon)*2)+desplazamiento][getColumna(*vagon)].ptrNodoVagon=NULL;
+            terrenoAux[(getFila(*vagon)*2)+desplazamiento+desplazamiento][getColumna(*vagon)].ptrNodoVagon=ptrNodo;
             Celda **tableroAux=getTablero(game);// game.mapa
-            tableroAux[getFila(ptrNodo->vagon)+desplazamiento][getColumna(ptrNodo->vagon)].ptrNodoVagon=ptrNodo;
-            setFila(ptrNodo->vagon,desplazamiento);//actualizo la fila en la que se encuentra
+            tableroAux[getFila(*vagon)+desplazamiento][getColumna(*vagon)].ptrNodoVagon=ptrNodo;
+            setFila(*vagon,desplazamiento);//actualizo la fila en la que se encuentra
         }
-        cambiarCapaFinal(game,ptrNodo->siguiente);
+        delete vagon;
+        cambiarCapaFinal(game,ptrNodo->sgte);
     }
 }
 
 
 
-void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]){
+void cambiarDireccion(PtrNodoLista ptrNodo,char direccion[]){
     if(ptrNodo!=NULL){
         //validar la direccion;
         char dirAnterior[4];
-        strcpy(dirAnterior,getDireccion(ptrNodo->vagon));//guardo la direccion anterior
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        strcpy(dirAnterior,getDireccion(*vagon));//guardo la direccion anterior
         //si dirAnterior es izq entonces direccion no puede ser der
         //si dirAnterior es der entonces direccion no puede ser izq
         //si dirAnterior es arr entonces direccion no puede ser aba
@@ -249,9 +253,10 @@ void cambiarDireccion(PtrNodoVagon ptrNodo,char direccion[]){
             (strcmp(dirAnterior,"arr")==0 && strcmp(direccion,"aba")!=0) ||
             (strcmp(dirAnterior,"aba")==0 && strcmp(direccion,"arr")!=0)
         ){
-            setDireccion(ptrNodo->vagon,direccion);//cargo la nueva dirección
+            setDireccion(*vagon,direccion);//cargo la nueva dirección
         }
-        cambiarDireccion(ptrNodo->siguiente,dirAnterior);
+        delete vagon;
+        cambiarDireccion(ptrNodo->sgte,dirAnterior);
     }
 }
 void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys){

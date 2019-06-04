@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include "Celda.h"
 #include "Terreno.h"
-#include "Locomotora.h"
+#include "Lista.h"
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -27,6 +27,7 @@ typedef struct{
 
     char direccion[4];
 
+    Lista minas;
 }Game;
 
 /*----------------------------------------------------------------------------*/
@@ -50,6 +51,10 @@ void setTerreno(Game &game);
 /*----------------------------------------------------------------------------*/
 Terreno** getTerreno(Game &game);
 /*----------------------------------------------------------------------------*/
+void setMinas(Game &game, SDL_Renderer * renderer);
+/*----------------------------------------------------------------------------*/
+Lista getMinas(Game &game);
+/*----------------------------------------------------------------------------*/
 void dibujarTablero(Game game,SDL_Renderer *renderer);
 void dibujarSprite(Game game,SDL_Renderer *renderer);
 
@@ -60,7 +65,7 @@ void setGameOver(Game &game, bool flag);
 /*----------------------------------------------------------------------------*/
 void destruirGame(Game &game);
 /*----------------------------------------------------------------------------*/
-void ubicarVagon(Game &game,PtrNodoVagon ptrNodo);
+void ubicarVagon(Game &game,PtrNodoLista ptrNodo);
 /*----------------------------------------------------------------------------*/
 void ubicarBandido(Game &game,Bandido *bandido);
 /*----------------------------------------------------------------------------*/

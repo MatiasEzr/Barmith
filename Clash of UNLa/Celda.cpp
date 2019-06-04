@@ -1,5 +1,4 @@
 #include "Celda.h"
-#include "Locomotora.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string.h>
