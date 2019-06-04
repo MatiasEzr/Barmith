@@ -7,31 +7,69 @@
 
 void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,Item item){
     strcpy(vagon.miniatura,miniatura);
-    vagon.fila=fila;//coordenada logica y
+    vagon.fila= fila;//coordenada logica y
     vagon.columna=columna;//coordenada logica x
     strcpy(vagon.direccion,direccion);
     vagon.anchoCelda=anchoCelda;
-    vagon.altoCelda=altoCelda;
+    vagon.altoCelda= altoCelda;
     vagon.altoSprite=altoSprite;
-    vagon.item=item;
+    //vagon.item=NULL;
 }
 /*----------------------------------------------------------------------------*/
+char* getMiniatura(Vagon &vagon){
+    return vagon.miniatura;
+}
+/*----------------------------------------------------------------------------*/
+void setMiniatura(Vagon &vagon,char miniatura[]){
+    strcpy(vagon.miniatura,miniatura);
+}
+/*----------------------------------------------------------------------------*/
+
 int getFila(Vagon &vagon){
     return vagon.fila;
-}
-/*----------------------------------------------------------------------------*/
-int getColumna(Vagon &vagon){
-    return vagon.columna;
 }
 /*----------------------------------------------------------------------------*/
 void setFila(Vagon &vagon,int desplazamiento){
     vagon.fila=vagon.fila+desplazamiento;
 }
 /*----------------------------------------------------------------------------*/
+int getColumna(Vagon &vagon){
+    return vagon.columna;
+}
+
+/*----------------------------------------------------------------------------*/
 void setColumna(Vagon &vagon,int desplazamiento){
     vagon.columna=vagon.columna+desplazamiento;
 }
 /*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+int getAnchoCelda(Vagon &vagon){
+    return vagon.anchoCelda;
+}
+/*----------------------------------------------------------------------------*/
+void setAnchoCelda(Vagon &vagon,int anchoCelda){
+    vagon.anchoCelda=anchoCelda;
+}
+/*----------------------------------------------------------------------------*/
+
+int getAltoCelda(Vagon &vagon){
+    return vagon.altoCelda;
+}
+/*----------------------------------------------------------------------------*/
+void setAltoCelda(Vagon &vagon,int altoCelda){
+    vagon.altoCelda=altoCelda;
+}
+/*----------------------------------------------------------------------------*/
+int getAltoSprite(Vagon &vagon){
+    return vagon.altoSprite;
+}
+/*----------------------------------------------------------------------------*/
+void setAltoSprite(Vagon &vagon,int altoSprite){
+    vagon.altoSprite=altoSprite;
+}
+/*----------------------------------------------------------------------------*/
+
+
 void dibujarVagon(Vagon &vagon,SDL_Renderer* renderer,int intervalo){
     char imagen[10] = "img/";    //strcat(<cadena_destino>, <cadena_fuente>);
     strcat(imagen,vagon.miniatura);  //La función strcat añade el contenido de la <cadena_fuente> a la <cadena_destino>.

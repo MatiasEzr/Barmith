@@ -23,6 +23,22 @@ typedef struct{
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
 /*----------------------------------------------------------------------------*/
+void setAltoSprite(Vagon &vagon,int altoSprite);
+/*----------------------------------------------------------------------------*/
+int getAltoSprite(Vagon &vagon);
+/*----------------------------------------------------------------------------*/
+int getAnchoCelda(Vagon &vagon);
+/*----------------------------------------------------------------------------*/
+void setAnchoCelda(Vagon &vagon,int anchoCelda);
+/*----------------------------------------------------------------------------*/
+int getAltoCelda(Vagon &vagon);
+/*----------------------------------------------------------------------------*/
+void setAltoCelda(Vagon &vagon,int altoCelda);
+/*----------------------------------------------------------------------------*/
+char* getMiniatura(Vagon &vagon);
+void setMiniatura(Vagon &vagon,char miniatura[]);
+
+
 /*
   pre : el vagon no debe haber sido creado.
   post: el vagon queda creado y preparado para ser usado.
@@ -30,6 +46,7 @@ typedef struct{
   Vagon: estructura de datos a ser creado.
 */
 void crearVagon(Vagon &vagon,char miniatura[], int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,Item item);
+
 /*----------------------------------------------------------------------------*/
 /*
   pre : el vagon  debe haber sido creado.
