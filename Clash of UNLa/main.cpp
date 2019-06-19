@@ -1,12 +1,11 @@
-#include <iostream>//iostream: es una libreria que nos permite la entrada (cin) y salida (cout) de datos
-#include <string.h>//permite utilizar strcat(char,char) strcpy(char,char);
-#include <conio.h>// agrega la funcuion getch(); que es trabante de procesos
+#include <iostream>
+#include <string.h>/
+#include <conio.h>
 #include <stdlib.h>//permite utilizar new y delete
 
 
 #include <SDL.h>
 #include <SDL_image.h>
-
 #include "Game.h"
 #include "Vagon.h"
 #include "Bandido.h"
@@ -14,12 +13,17 @@
 #include "Moneda.h"
 #include "Item.h"
 #include "Lista.h"
+#include "Parametros.h"
 
 using namespace std;
 
 #define milisegundos 30
 
-void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys);
+void correrGame(Game &game,int anchoVentana,int altoVentana);
+void leerArchivos(Game &game,SDL_Renderer *renderer);
+void imprimirMinas(Game &game);
+
+void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys);
 void cambiarDireccion(PtrNodoLista ptrNodo,char direccion[]);
 
 void cambiarCapaInicio(Game &game,PtrNodoLista ptrNodo);
@@ -27,10 +31,8 @@ void cambiarCapaFinal(Game &game,PtrNodoLista ptrNodo);
 void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
 bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
-        //PlaySound(TEXT("media/musica.wav"),NULL, SND_ASYNC);
-        //Si no se escucha la música es porque hay que agregar un linck al codeblocks:
-        //settings->complier...->linker settings-> link libraries-> add-> escribimos winmm ->aceptamos todo.
-        /*datros que leo desde un archivo************/
+
+        /*datos que leo desde un archivo************/
         int filas = 15;
         int columnas = 20;
         int anchoCelda = 70;
@@ -42,8 +44,41 @@ int main(int argc, char** argv) {
         int altoVentana = 600;
 
 
-    if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
+    Game game;
+    crearGame(game,filas,columnas,anchoCelda,altoCelda,altoSprite);
+    correrGame(game,anchoVentana,altoVentana);
 
+    cout<<"presione una tecla para salir..."<<endl;
+    getch();
+    return 0;
+}
+
+void leerArchivos(Game &game,SDL_Renderer *renderer){
+
+}
+
+
+void imprimirMinas(Game &game){
+
+     if(!listaVacia(game.minas)){
+            cout<<"Lector de minas"<<endl;
+             PtrNodoLista nodo=primero(game.minas);
+             while(nodo !=finLista()){
+                //El nodo apunta al dato, y casteo el dato a casilla
+                Mina* mina =(Mina*) nodo->ptrDato;
+                cout<<"posX:"<<getColumna(mina)<<";posY:"<<getFila(mina)<<";codItem: "<<";IP: "<<getIP(*mina)<<";seq: "<<getSecuencia(*mina)<<endl;
+                nodo = siguiente(game.minas, nodo);
+                }
+
+             }
+
+        }
+
+void correrGame(Game &game,int anchoVentana,int altoVentana){
+if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
+        int anchoCelda=game.anchoCelda;
+        int altoCelda=game.altoCelda;
+        int altoSprite=game.altoSprite;
         SDL_Window *window;
         SDL_Renderer *renderer;
 
@@ -61,12 +96,13 @@ int main(int argc, char** argv) {
         const unsigned char *keys;
         keys = SDL_GetKeyboardState(NULL);
 
-        Game game;
-        crearGame(game,filas,columnas,anchoCelda,altoCelda,altoSprite);
+
+
+
+
         setTablero(game,renderer);
         setTerreno(game);
         setMinas(game, renderer);
-
         Lista locomotora;
         crearLista(locomotora,NULL);
         Vagon vagon1, vagon2, vagon3, vagon4, vagon5;
@@ -100,15 +136,15 @@ int main(int argc, char** argv) {
 
         dibujarTablero(game,renderer);
         dibujarSprite(game,renderer);
-        SDL_RenderPresent(renderer);//APLICA EL CAMBIO
+        SDL_RenderPresent(renderer);
         SDL_Delay(500);
-        while(!getGameOver(game)){
 
-            evaluarEventosTeclado(game,event,keys);//setea la direccion siguiente en game.direccion
+
+        while(!getGameOver(game)){
+            controlarEventos(game,event,keys);//setea la direccion siguiente en game.direccion
 
             if(getIntervalo(game)==10){
                 setIntervalo(game,0);
-
                 cambiarColumna(game,primero(locomotora));//fila del tablero
                 cambiarCapaFinal(game,primero(locomotora));//capa del mapa
                 //hasta aca todos los carritos se encuentran en su punto casilla de tablero
@@ -117,7 +153,8 @@ int main(int argc, char** argv) {
                 //luego redireccionamos a todos los vagons desde el primero
                 cambiarDireccion(primero(locomotora),getDireccion(game));
 
-                //setGameOver(game,evaluarColisiones(game,primero(locomotora)));
+
+                setGameOver(game,evaluarColisiones(game,primero(locomotora)));
 
             }
             if(!getGameOver(game)){
@@ -127,43 +164,41 @@ int main(int argc, char** argv) {
                     cambiarCapaInicio(game,primero(locomotora));//capa del mapa
                 }
 
-                //Render
-                SDL_RenderClear(renderer);//borro todo
+
+                SDL_RenderClear(renderer);
                 dibujarTablero(game,renderer);
                 dibujarSprite(game,renderer);
-                SDL_RenderPresent(renderer);//APLICA EL CAMBIO
+                SDL_RenderPresent(renderer);
                 SDL_Delay(milisegundos);
 
-                setIntervalo(game,getIntervalo(game)+1);//game.intervalo++;
+                setIntervalo(game,getIntervalo(game)+1);
             }
-        }//FIN DEL BUCLE
-        cout<<"Destruimos locomotora"<<endl;
+        }
+        cout<<"Destruimos las instancias"<<endl;
         eliminarLista(locomotora);
-        cout<<"Destruimos game"<<endl;
         destruirGame(game);
-        cout<<"Destruimos renderer"<<endl;
         SDL_DestroyRenderer(renderer);
-        cout<<"Destruimos window"<<endl;
         SDL_DestroyWindow(window);
         IMG_Quit();
         SDL_Quit();
-        cout<<"GAME OVER!"<<endl;
-    }//find el if
-    cout<<"presione una tecla para salir..."<<endl;
-    getch();
-    return 0;
+        cout<<"Fin del juego"<<endl;
+    }
 }
-/*bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
+
+
+
+bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
     bool colision=true;
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
-    if(strcmp(getDireccion(ptrNodo->vagon),"aba")==0)desplazamientoVertical=1;
-    if(strcmp(getDireccion(ptrNodo->vagon),"arr")==0)desplazamientoVertical=-1;
-    if(strcmp(getDireccion(ptrNodo->vagon),"der")==0)desplazamientoHorizontal=1;
-    if(strcmp(getDireccion(ptrNodo->vagon),"izq")==0)desplazamientoHorizontal=-1;
+    Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+    if(strcmp(getDireccion(*vagon),"aba")==0)desplazamientoVertical=1;
+    if(strcmp(getDireccion(*vagon),"arr")==0)desplazamientoVertical=-1;
+    if(strcmp(getDireccion(*vagon),"der")==0)desplazamientoHorizontal=1;
+    if(strcmp(getDireccion(*vagon),"izq")==0)desplazamientoHorizontal=-1;
 
-    int c=getColumna(ptrNodo->vagon)+desplazamientoHorizontal;
-    int f=getFila(ptrNodo->vagon)+desplazamientoVertical;
+    int c=getColumna(*vagon)+desplazamientoHorizontal;
+    int f=getFila(*vagon)+desplazamientoVertical;
 
     if((c>=0 && c<getColumnaLimite(game)) && (f>=0 && f<getFilaLimite(game))){
         //el tren aun se encuentra en el tablero!
@@ -178,7 +213,7 @@ int main(int argc, char** argv) {
         cout<<"Nos salimos del cuadrante en "<<f<<"/"<<c<<endl;
     }
     return colision;
-}*/
+}
 
 void cambiarColumna(Game &game,PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
@@ -259,7 +294,7 @@ void cambiarDireccion(PtrNodoLista ptrNodo,char direccion[]){
         cambiarDireccion(ptrNodo->sgte,dirAnterior);
     }
 }
-void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys){
+void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
     if(SDL_PollEvent(&event)){//indica que hay eventos pendientes
         switch(event.type){
             case SDL_QUIT:
@@ -295,3 +330,5 @@ void evaluarEventosTeclado(Game &game,SDL_Event &event,const unsigned char *keys
         }
     }
 }
+
+

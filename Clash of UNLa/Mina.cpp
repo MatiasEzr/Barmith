@@ -7,15 +7,15 @@
 
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
                int altoSprite, int ip, int secuencia[5], Item item){
-    mina.f=f;//coordenada logica y
     mina.c=c;//coordenada logica x
+    mina.f=f;//coordenada logica y
     mina.ip=ip;//intervalo de produccion
     mina.item=item;//item de la mina
     for(int i=0;i<5;i++){
         mina.secuencia[i] = secuencia[i];
     }
     mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
-    //SDL_QueryTexture(mina.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
+
 
     mina.rectImag.y=(mina.f*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
     mina.rectImag.x=(mina.c*anchoCelda)+anchoCelda;//coordenada de dibujo x

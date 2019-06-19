@@ -9,8 +9,8 @@ typedef struct{
     string claveS;
     string claveP;
     string claveA;
-    string clavePOSXE;
-    string clavePOSYE;
+    string claveposXE;
+    string claveposYE;
     string claveIM;
     string claveVM;
     string claveIB;
@@ -20,18 +20,18 @@ typedef struct{
 }Parametros;
 
 
-void crear_parametros(Parametros &parametros);
+void crearParametros(Parametros &parametros);
 
 
 
-void destruir_parametros(Parametros &parametros);
+void destruirParametros(Parametros &parametros);
 
 
 void setClaveS(Parametros &parametros, string clav);
 void setClaveP(Parametros &parametros, string clav);
 void setClaveA(Parametros &parametros, string clav);
-void setClavePOSXE(Parametros &parametros, string clav);
-void setClavePOSYE(Parametros &parametros, string clav);
+void setClavePosXE(Parametros &parametros, string clav);
+void setClavePosYE(Parametros &parametros, string clav);
 void setClaveIM(Parametros &parametros, string clav);
 void setClaveVM(Parametros &parametros, string clav);
 void setClaveIB(Parametros &parametros, string clav);
@@ -42,8 +42,8 @@ void setClaveIP(Parametros &parametros, string clav);
 string getClaveS(Parametros &parametros);
 string getClaveP(Parametros &parametros);
 string getClaveA(Parametros &parametros);
-string getClavePOSXE(Parametros &parametros);
-string getClavePOSYE(Parametros &parametros);
+string getClavePosXE(Parametros &parametros);
+string getClavePosYE(Parametros &parametros);
 string getClaveIM(Parametros &parametros);
 string getClaveVM(Parametros &parametros);
 string getClaveIB(Parametros &parametros);
@@ -53,10 +53,10 @@ string getClaveIP(Parametros &parametros);
 
 
 
-void setValor(Parametros &parametros, string val);
+//void setValor(Parametros &parametros, string val);
 
 
-string getValor(Parametros &parametros);
+//string getValor(Parametros &parametros);
 
 
 #endif // CONFIGURACION_H_INCLUDED

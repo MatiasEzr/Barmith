@@ -12,26 +12,27 @@ using namespace std;
 post: Parametros creado y listo para ser usado
 Parametros: instancia sobre la que se invoca la primitiva **/
 
-void crear_parametros(Parametros &parametros){
+void crearParametros(Parametros &parametros){
 /*    parametros.clave="NULL";
     parametros.valor="NULL";
     */
-      parametros.claveA=parametros.valor;
-       parametros.claveIM=parametros.valor;
-       parametros.claveIP=parametros.valor;
-       parametros.claveP=parametros.valor;
-       parametros.clavePOSXE=parametros.valor;
-       parametros.clavePOSYE=parametros.valor;
        parametros.claveS=parametros.valor;
-       parametros.claveVB=parametros.valor;
+       parametros.claveP=parametros.valor;
+       parametros.claveA=parametros.valor;
+       parametros.claveposXE=parametros.valor;
+       parametros.claveposYE=parametros.valor;
+       parametros.claveIM=parametros.valor;
        parametros.claveVM=parametros.valor;
+       parametros.claveIB=parametros.valor;
+       parametros.claveIP=parametros.valor;
+       parametros.claveVB=parametros.valor;
 }
 
 /** pre: la instancia Parametros debe haberse creado y no debe estar destruida
 post: destruye la instancia de Parametros y ya no podrá reutilizarse
 Parametros: instancia sobre la que se invoca la primitiva **/
 
-void destruir_parametros(Parametros &parametros){}
+void destruirParametros(Parametros &parametros){}
 
 /** pre: la instancia Parametros debe haber sido creada y no debe estar destruida
 post: el atributo clave queda seteado en Parametros
@@ -49,14 +50,14 @@ void setClaveA(Parametros &parametros, string clav){
 parametros.claveA=clav;
 }
 
-void setClavePOSXE(Parametros &parametros, string clav){
-parametros.clavePOSXE=clav;
+void setClavePosXE(Parametros &parametros, string clav){
+parametros.claveposXE=clav;
 }
 
-void setClavePOSYE(Parametros &parametros, string clav){
-parametros.clavePOSYE=clav;
-}
+void setClavePosYE(Parametros &parametros, string clav){
+parametros.claveposYE=clav;
 
+}
 void setClaveIM(Parametros &parametros, string clav){
 parametros.claveIM=clav;
 }
@@ -85,11 +86,11 @@ string getClaveA(Parametros &parametros){
     return parametros.claveA;
 }
 
-string getClavePOSXE(Parametros &parametros){
-    return parametros.clavePOSXE;
+string getClavePosXE(Parametros &parametros){
+    return parametros.claveposXE;
 }
-string getClavePOSYE(Parametros &parametros){
-    return parametros.clavePOSYE;
+string getClavePosYE(Parametros &parametros){
+    return parametros.claveposYE;
 }
 string getClaveIM(Parametros &parametros){
     return parametros.claveIM;

@@ -106,7 +106,7 @@ void setMinas(Game &game, SDL_Renderer * renderer){
               posX=atoi(strposx.c_str());
 
               getline(cadena2,strposy,';');
-              posY=atoi(strposx.c_str());
+              posY=atoi(strposy.c_str());
 
               getline(cadena2,strcoditem,';');
               codItem=atoi(strcoditem.c_str());
@@ -147,6 +147,79 @@ Lista getMinas(Game &game){
     return game.minas;
 }
 /*----------------------------------------------------------------------------*/
+
+
+void setComanda(Game &game){
+ ifstream entrada("Comanda.txt");
+
+    string strcoditem,strcantidad;
+    string codItem;
+    int cantidad;
+    string cadena;
+    while(!entrada.eof()){
+          getline(entrada,cadena,'\n');
+          if(cadena != ""){
+              stringstream cadena2(cadena);
+              Comanda *comanda = new Comanda;
+
+              getline(cadena2,strcoditem,';');
+              codItem=atoi(strcoditem.c_str());
+
+              getline(cadena2,strcantidad,';');
+              cantidad=atoi(strcantidad.c_str());
+
+              crearComanda(*comanda,codItem,cantidad);
+              game.comanda=*comanda;
+
+              delete comanda;
+              cadena2.clear();
+          }
+    }
+    entrada.close();
+    fflush(stdin);
+
+}
+/*----------------------------------------------------------------------------*/
+Comanda getComanda(Game &game){
+    return game.comanda;
+}
+/*----------------------------------------------------------------------------*/
+
+/*void setParametros(Game &game){
+    ifstream entrada("Parametros.txt");
+
+    string strcoditem,str;
+    string codItem;
+
+    string cadena;
+    while(!entrada.eof()){
+          getline(entrada,cadena,'\n');
+          if(cadena != ""){
+              stringstream cadena2(cadena);
+              Parametros *parametros = new Parametros;
+
+              getline(cadena2,strcoditem,';');
+              codItem=atoi(strcoditem.c_str());
+
+
+
+              crearParametros(*parametros,);
+              game.parametros=*parametros;
+
+              delete parametros;
+              cadena2.clear();
+          }
+    }
+    entrada.close();
+    fflush(stdin);
+}
+*/
+/*----------------------------------------------------------------------------*/
+Parametros getParametros(Game &game){
+    return game.parametros;
+}
+/*----------------------------------------------------------------------------*/
+
 void dibujarTablero(Game game,SDL_Renderer *renderer){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
