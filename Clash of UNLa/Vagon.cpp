@@ -13,6 +13,7 @@ void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direcci
     vagon.anchoCelda=anchoCelda;
     vagon.altoCelda= altoCelda;
     vagon.altoSprite=altoSprite;
+    vagon.detenido=false;
     //vagon.item=NULL;
 }
 /*----------------------------------------------------------------------------*/
@@ -77,10 +78,15 @@ void dibujarVagon(Vagon &vagon,SDL_Renderer* renderer,int intervalo){
 
     strcat(imagen,vagon.direccion);strcat(imagen,"/");
 
-    char cadenaIntervalo[5];
-    itoa(intervalo,cadenaIntervalo,10);
-    strcat(imagen,cadenaIntervalo);strcat(imagen,".png");
-
+    if(!(vagon.detenido)){
+        char cadenaIntervalo[5];
+        itoa(intervalo,cadenaIntervalo,10);
+        strcat(imagen,cadenaIntervalo);
+    }
+    else{
+        strcat(imagen,"0");
+    }
+    strcat(imagen,".png");
     //img\c1\aba\0.png
 
     vagon.imagen=IMG_LoadTexture(renderer,imagen);
@@ -94,10 +100,18 @@ void dibujarVagon(Vagon &vagon,SDL_Renderer* renderer,int intervalo){
     if(strcmp(vagon.direccion,"der")==0)desplazamientoHorizontal=1;
     if(strcmp(vagon.direccion,"izq")==0)desplazamientoHorizontal=-1;
 
-    vagon.rectImag.y=((vagon.fila*vagon.altoCelda)+vagon.altoCelda-(vagon.altoSprite-vagon.altoCelda))+(desplazamientoVertical*(vagon.altoCelda/10)*intervalo);//coordenada de dibujo y
-    vagon.rectImag.x=((vagon.columna*vagon.anchoCelda)+vagon.anchoCelda)+(desplazamientoHorizontal*(vagon.anchoCelda/10)*intervalo);//coordenada de dibujo x
-    vagon.rectImag.w=vagon.anchoCelda;//70
-    vagon.rectImag.h=vagon.altoSprite;//70
+    if(!(vagon.detenido)){
+        vagon.rectImag.y= vagon.fila*vagon.altoCelda +(desplazamientoVertical*(vagon.altoCelda/10)*intervalo);//coordenada de dibujo y
+        vagon.rectImag.x= vagon.columna*vagon.anchoCelda +(desplazamientoHorizontal*(vagon.anchoCelda/10)*intervalo);//coordenada de dibujo x
+        vagon.rectImag.w=vagon.anchoCelda;//70
+        vagon.rectImag.h=vagon.altoSprite;//70
+    }
+    else{
+        vagon.rectImag.y= vagon.fila*vagon.altoCelda;//coordenada de dibujo y
+        vagon.rectImag.x= vagon.columna*vagon.anchoCelda;//coordenada de dibujo x
+        vagon.rectImag.w=vagon.anchoCelda;//70
+        vagon.rectImag.h=vagon.altoSprite;//70
+    }
 
     SDL_RenderCopy(renderer,vagon.imagen,NULL,&(vagon.rectImag));
 }

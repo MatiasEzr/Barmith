@@ -21,9 +21,6 @@ typedef struct{
 
     int fila;
     int columna;
-    int filaTerreno;
-
-    Celda** tablero;
 
     Terreno** terreno;
 
@@ -49,11 +46,7 @@ int getIntervalo(Game &game);
 /*----------------------------------------------------------------------------*/
 void setIntervalo(Game &game, int intervalo);
 /*----------------------------------------------------------------------------*/
-void setTablero(Game &game,SDL_Renderer *renderer);
-/*----------------------------------------------------------------------------*/
-Celda** getTablero(Game &game);
-/*----------------------------------------------------------------------------*/
-void setTerreno(Game &game);
+void setTerreno(Game &game, SDL_Renderer * renderer);
 /*----------------------------------------------------------------------------*/
 Terreno** getTerreno(Game &game);
 /*----------------------------------------------------------------------------*/
@@ -71,11 +64,9 @@ Parametros getParametros(Game &game);
 /*----------------------------------------------------------------------------*/
 void setParametros(Game &game);
 /*----------------------------------------------------------------------------*/
-void dibujarTablero(Game game,SDL_Renderer *renderer);
+void dibujarTerreno(Game game,SDL_Renderer *renderer);
 /*----------------------------------------------------------------------------*/
-
-void dibujarSprite(Game game,SDL_Renderer *renderer);
-
+void dibujarEntidades(Game game,SDL_Renderer *renderer);
 /*----------------------------------------------------------------------------*/
 bool getGameOver(Game &game);
 /*----------------------------------------------------------------------------*/
@@ -98,5 +89,7 @@ char* getDireccion(Game &game);
 int getColumnaLimite(Game &game);
 /*----------------------------------------------------------------------------*/
 int getFilaLimite(Game &game);
+/*----------------------------------------------------------------------------*/
+void evaluarColisionConMina(Game &game,Lista &locomotora);
 /*----------------------------------------------------------------------------*/
 #endif

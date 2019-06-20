@@ -11,8 +11,8 @@ void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna,
     bandido.imagen=IMG_LoadTexture(renderer,"img/bandido.png");
     //SDL_QueryTexture(bandido.imagen,NULL,NULL,0,0);//tal vez este no haga falta, se utiliza para buscar el ancho/alto de la imagen pero nosotros ya lo tenemos de antemano
 
-    bandido.rectImag.y=(bandido.fila*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
-    bandido.rectImag.x=(bandido.columna*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    bandido.rectImag.y=(bandido.fila*altoCelda);//coordenada de dibujo y
+    bandido.rectImag.x=(bandido.columna*anchoCelda);//coordenada de dibujo x
     bandido.rectImag.w=anchoCelda;//ancho
     bandido.rectImag.h=altoSprite;//alto
     bandido.item=item;

@@ -25,15 +25,9 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int 
 
     game.fila=fila;
     game.columna=columna;
-    game.filaTerreno = (fila*2)-1;
 
-    game.tablero= new Celda*[game.fila];
+    game.terreno= new Terreno*[game.fila];
     for (int f = 0; f < game.fila; f++){
-        game.tablero[f] = new Celda[game.columna];
-    }
-
-    game.terreno= new Terreno*[game.filaTerreno];
-    for (int f = 0; f < game.filaTerreno; f++){
         game.terreno[f] = new Terreno[game.columna];
     }
     strcpy(game.direccion,"direccion");
@@ -56,30 +50,15 @@ void setIntervalo(Game &game, int intervalo){
     game.intervalo=intervalo;
 }
 /*----------------------------------------------------------------------------*/
-void setTablero(Game &game,SDL_Renderer* renderer){
-    srand(time(0));//semilla para aleatorio: cambia el valor inicial del random dentro de la libreria stdlib.h
+
+void setTerreno(Game &game, SDL_Renderer * renderer){
+    srand(time(0));
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
-            Celda celda;
-
+            Terreno terreno;
             char aux [2];//cadena que guarda valores entre 0 y 4
             itoa((rand()%6),aux,10);//valor aleatorio entre 0 y 4, pasados a string en base 10
-            crearCelda(celda,f,c,getAnchoCelda(game),getAltoCelda(game),renderer,aux);
-            game.tablero[f][c]=celda;
-        }
-    }
-}
-/*----------------------------------------------------------------------------*/
-Celda** getTablero(Game &game){
-    return game.tablero;
-}
-/*----------------------------------------------------------------------------*/
-
-void setTerreno(Game &game){
-    for(int f=0;f<game.filaTerreno;f++){
-        for(int c=0;c<game.columna;c++){
-            Terreno terreno;
-            crearTerreno(terreno,f,c);
+            crearTerreno(terreno,f,c,getAnchoCelda(game),getAltoCelda(game),renderer,aux);
             game.terreno[f][c]=terreno;
         }
     }
@@ -135,7 +114,6 @@ void setMinas(Game &game, SDL_Renderer * renderer){
 
               adicionarFinal(game.minas,mina);
 
-              delete mina;
               cadena2.clear();
           }
     }
@@ -219,30 +197,25 @@ Parametros getParametros(Game &game){
     return game.parametros;
 }
 /*----------------------------------------------------------------------------*/
-
-void dibujarTablero(Game game,SDL_Renderer *renderer){
+void dibujarTerreno(Game game,SDL_Renderer *renderer){
+ for(int f=0;f<game.fila;f++){
+        for(int c=0;c<game.columna;c++){
+            dibujarTerreno(game.terreno[f][c], renderer);
+        }
+    }
+}
+/*----------------------------------------------------------------------------*/
+void dibujarEntidades(Game game,SDL_Renderer *renderer){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
-            dibujarCelda(renderer,game.tablero[f][c]);
+            dibujarEntidad(game.terreno[f][c], renderer, game.intervalo);
         }
     }
 
 }
 /*----------------------------------------------------------------------------*/
-void dibujarSprite(Game game,SDL_Renderer *renderer){
- for(int f=0;f<game.filaTerreno;f++){
-        for(int c=0;c<game.columna;c++){
-            dibujarTerreno(renderer,game.terreno[f][c],game.intervalo);
-        }
-    }
-}
 void destruirGame(Game &game){
     for(int f=0;f<game.fila;f++){
-        for(int c=0;c<game.columna;c++){
-            destruirCelda(game.tablero[f][c]);
-        }
-    }
-    for(int f=0;f<game.filaTerreno;f++){
         for(int c=0;c<game.columna;c++){
             destruirTerreno(game.terreno[f][c]);
         }
@@ -260,27 +233,19 @@ void setGameOver(Game &game, bool flag){
 }
 /*----------------------------------------------------------------------------*/
 void ubicarVagon(Game &game,PtrNodoLista ptrNodo){
-    game.tablero[getFila(*(Vagon*)ptrNodo->ptrDato)][getColumna(*(Vagon*)ptrNodo->ptrDato)].ptrNodoVagon=ptrNodo;//celda.ptrNosoVagon=ptrNodo
-    game.terreno[getFila(*(Vagon*)ptrNodo->ptrDato)*2][getColumna(*(Vagon*)ptrNodo->ptrDato)].ptrNodoVagon=ptrNodo;//terreno.ptrNosoVagon=ptrNodo
+    game.terreno[getFila(*(Vagon*)ptrNodo->ptrDato)][getColumna(*(Vagon*)ptrNodo->ptrDato)].ptrNodoVagon=ptrNodo;//celda.ptrNosoVagon=ptrNodo
 }
 /*----------------------------------------------------------------------------*/
 void ubicarBandido(Game &game,Bandido *bandido){
-    game.tablero[getFila(bandido)][getColumna(bandido)].ptrBandido=bandido;
-    game.terreno[(getFila(bandido)*2)-1][getColumna(bandido)].ptrBandido=bandido;
+    game.terreno[getFila(bandido)][getColumna(bandido)].ptrBandido=bandido;
 }
 /*----------------------------------------------------------------------------*/
 void ubicarMina(Game &game,Mina *mina){
-    game.tablero[getFila(mina)][getColumna(mina)].ptrMina=mina;
-    int ajusteFila=(getFila(mina)*2)-1;
-    if(ajusteFila<0)ajusteFila=0;
-    game.terreno[ajusteFila][getColumna(mina)].ptrMina=mina;
+    game.terreno[getFila(mina)][getColumna(mina)].ptrMina=mina;
 }
 /*----------------------------------------------------------------------------*/
 void ubicarMoneda(Game &game,Moneda *moneda){
-    game.tablero[getFila(moneda)][getColumna(moneda)].ptrMoneda=moneda;
-    int ajusteFila=(getFila(moneda)*2)-1;
-    if(ajusteFila<0)ajusteFila=0;
-    game.terreno[ajusteFila][getColumna(moneda)].ptrMoneda=moneda;
+    game.terreno[getFila(moneda)][getColumna(moneda)].ptrMoneda=moneda;
 }
 /*----------------------------------------------------------------------------*/
 void setDireccion(Game &game,char direccion[]){
@@ -296,5 +261,34 @@ int getColumnaLimite(Game &game){
 /*----------------------------------------------------------------------------*/
 int getFilaLimite(Game &game){
     return game.fila;
+}
+/*----------------------------------------------------------------------------*/
+void evaluarColisionConMina(Game &game,Lista &locomotora){
+    int desplazamientoHorizontal=0;
+    int desplazamientoVertical=0;
+    Vagon *vagon = (Vagon*)primero(locomotora)->ptrDato;
+    PtrNodoLista nodo = primero(locomotora);
+    if(strcmp(getDireccion(*vagon),"aba")==0)desplazamientoVertical=1;
+    if(strcmp(getDireccion(*vagon),"arr")==0)desplazamientoVertical=-1;
+    if(strcmp(getDireccion(*vagon),"der")==0)desplazamientoHorizontal=1;
+    if(strcmp(getDireccion(*vagon),"izq")==0)desplazamientoHorizontal=-1;
+
+    int columna=getColumna(*vagon)+desplazamientoHorizontal;
+    int fila=getFila(*vagon)+desplazamientoVertical;
+
+    if(game.terreno[fila][columna].ptrMina!=NULL && !(vagon->detenido)){
+        while(nodo!=finLista()){
+            vagon = (Vagon*)nodo->ptrDato;
+            vagon->detenido = true;
+            nodo = siguiente(locomotora, nodo);
+        }
+    }
+    else if(game.terreno[fila][columna].ptrMina==NULL && vagon->detenido){
+        while(nodo!=finLista()){
+            vagon = (Vagon*)nodo->ptrDato;
+            vagon->detenido = false;
+            nodo = siguiente(locomotora, nodo);
+        }
+    }
 }
 /*----------------------------------------------------------------------------*/

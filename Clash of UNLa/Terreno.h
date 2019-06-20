@@ -12,6 +12,8 @@
 typedef struct{
     int fila;
     int columna;
+    SDL_Texture *imagen;
+    SDL_Rect rectImag;
 
     PtrNodoLista ptrNodoVagon;
     Bandido *ptrBandido;
@@ -27,7 +29,7 @@ typedef struct{
 
   terreno : estructura de datos a ser creado.
 */
-void crearTerreno(Terreno &mapa,int fila,int columna);
+void crearTerreno(Terreno &mapa,int fila,int columna, int ancho, int alto, SDL_Renderer* renderer,char rand[]);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el terreno debe haber sido creado.
@@ -37,7 +39,17 @@ void crearTerreno(Terreno &mapa,int fila,int columna);
 
 */
 
-void dibujarTerreno(SDL_Renderer* renderer,Terreno &mapa, int intervalo);
+void dibujarTerreno(Terreno &mapa, SDL_Renderer* renderer);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el terreno debe haber sido creado.
+  post: se dibuja la entidad
+
+  bandido: estructura de datos a ser usado.
+
+*/
+
+void dibujarEntidad(Terreno &mapa, SDL_Renderer* renderer, int intervalo);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el terreno debe haber sido creado.

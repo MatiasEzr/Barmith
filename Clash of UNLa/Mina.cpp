@@ -17,8 +17,8 @@ void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, i
     mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
 
 
-    mina.rectImag.y=(mina.f*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
-    mina.rectImag.x=(mina.c*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    mina.rectImag.y=(mina.f*altoCelda);//coordenada de dibujo y
+    mina.rectImag.x=(mina.c*anchoCelda);//coordenada de dibujo x
     mina.rectImag.w=anchoCelda;//ancho
     mina.rectImag.h=altoSprite;//alto
 }

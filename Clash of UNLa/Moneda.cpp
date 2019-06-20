@@ -12,8 +12,8 @@ void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, in
 
     moneda.imagen=IMG_LoadTexture(renderer,"img/moneda.png");
 
-    moneda.rectImag.y=(moneda.fila*altoCelda)+altoCelda-(altoSprite-altoCelda);//coordenada de dibujo y
-    moneda.rectImag.x=(moneda.columna*anchoCelda)+anchoCelda;//coordenada de dibujo x
+    moneda.rectImag.y=(moneda.fila*altoCelda);//coordenada de dibujo y
+    moneda.rectImag.x=(moneda.columna*anchoCelda);//coordenada de dibujo x
     moneda.rectImag.w=anchoCelda;//ancho
     moneda.rectImag.h=altoSprite;//alto
     moneda.intervaloVida=intervaloVida;
