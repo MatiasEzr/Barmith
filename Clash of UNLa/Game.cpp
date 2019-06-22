@@ -32,6 +32,7 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int 
     }
     strcpy(game.direccion,"direccion");
     crearLista(game.minas,NULL);
+    crearLista(game.comanda,NULL);
 }
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game){
@@ -73,7 +74,7 @@ void setMinas(Game &game, SDL_Renderer * renderer){
     ifstream entrada("Minas.txt");
 
     string strposx,strposy,strcoditem,strip,strseq1,strseq2,strseq3,strseq4,strseq5;
-    int posX,posY,codItem,ip,seq1,seq2,seq3,seq4,seq5;
+    int posX,posY,coditem,ip,seq1,seq2,seq3,seq4,seq5;
     string cadena;
     while(!entrada.eof()){
           getline(entrada,cadena,'\n');
@@ -88,7 +89,7 @@ void setMinas(Game &game, SDL_Renderer * renderer){
               posY=atoi(strposy.c_str());
 
               getline(cadena2,strcoditem,';');
-              codItem=atoi(strcoditem.c_str());
+              coditem=atoi(strcoditem.c_str());
 
               getline(cadena2,strip,';');
               ip=atoi(strip.c_str());
@@ -109,7 +110,7 @@ void setMinas(Game &game, SDL_Renderer * renderer){
               seq5=atoi(strseq5.c_str());
 
               int secuencia[5] = {seq1,seq2,seq3,seq4,seq5};
-              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia, (Item)codItem);
+              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia,coditem);
               ubicarMina(game, mina);
 
               adicionarFinal(game.minas,mina);
@@ -130,8 +131,7 @@ Lista getMinas(Game &game){
 void setComanda(Game &game){
  ifstream entrada("Comanda.txt");
 
-    string strcoditem,strcantidad;
-    string codItem;
+    string codItem,strcantidad;
     int cantidad;
     string cadena;
     while(!entrada.eof()){
@@ -140,16 +140,14 @@ void setComanda(Game &game){
               stringstream cadena2(cadena);
               Comanda *comanda = new Comanda;
 
-              getline(cadena2,strcoditem,';');
-              codItem=atoi(strcoditem.c_str());
+              getline(cadena2,codItem,';');
 
               getline(cadena2,strcantidad,';');
               cantidad=atoi(strcantidad.c_str());
 
               crearComanda(*comanda,codItem,cantidad);
-              game.comanda=*comanda;
+              adicionarFinal(game.comanda,comanda);
 
-              delete comanda;
               cadena2.clear();
           }
     }
@@ -158,7 +156,7 @@ void setComanda(Game &game){
 
 }
 /*----------------------------------------------------------------------------*/
-Comanda getComanda(Game &game){
+Lista getComanda(Game &game){
     return game.comanda;
 }
 /*----------------------------------------------------------------------------*/
@@ -248,6 +246,12 @@ void ubicarMoneda(Game &game,Moneda *moneda){
     game.terreno[getFila(moneda)][getColumna(moneda)].ptrMoneda=moneda;
 }
 /*----------------------------------------------------------------------------*/
+void ubicarEstacion(Game &game,Estacion *estacion){
+        game.terreno[getFila(estacion)][getColumna(estacion)].ptrEstacion=estacion;
+
+}
+/*----------------------------------------------------------------------------*/
+
 void setDireccion(Game &game,char direccion[]){
     strcpy(game.direccion,direccion);
 }

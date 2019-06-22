@@ -5,6 +5,7 @@
 #include "Mina.h"
 #include "Moneda.h"
 #include "Lista.h"
+#include "Estacion.h"
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -19,6 +20,7 @@ typedef struct{
     Bandido *ptrBandido;
     Mina *ptrMina;
     Moneda *ptrMoneda;
+    Estacion *ptrEstacion;
 }Terreno;
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS

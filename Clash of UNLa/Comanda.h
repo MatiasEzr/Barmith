@@ -1,12 +1,9 @@
 #ifndef COMANDA_H
 #define COMANDA_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
 #include <fstream>
-#include <sstream>
-#include <iostream>
+
 using namespace std;
 
 

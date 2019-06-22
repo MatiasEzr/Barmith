@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>/
 #include <conio.h>
-#include <stdlib.h>//permite utilizar new y delete
+#include <stdlib.h>
 
 
 #include <SDL.h>
@@ -22,6 +22,7 @@ using namespace std;
 void correrGame(Game &game,int anchoVentana,int altoVentana);
 void leerArchivos(Game &game,SDL_Renderer *renderer);
 void imprimirMinas(Game &game);
+void imprimirComanda(Game &game);
 
 void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys);
 void cambiarDireccion(Game &game,Lista &locomotora);
@@ -65,15 +66,36 @@ void imprimirMinas(Game &game){
             cout<<"Lector de minas"<<endl;
              PtrNodoLista nodo=primero(game.minas);
              while(nodo !=finLista()){
-                //El nodo apunta al dato, y casteo el dato a casilla
+                //El nodo apunta al dato, y casteo el dato a mina
                 Mina* mina =(Mina*) nodo->ptrDato;
-                cout<<"posX:"<<getColumna(mina)<<";posY:"<<getFila(mina)<<";codItem: "<<";IP: "<<getIP(*mina)<<";seq: "<<getSecuencia(*mina)<<endl;
+                cout<<"posX:"<<getColumna(mina)<<";posY:"<<getFila(mina)<<";codItem:"<<getCodItem(mina)<<";IP:"<<getIP(*mina)<<";";
+                for(int i=0;i<5;i++){
+                    cout<<"seq["<<i+1<<"]:"<<getSecuencia(*mina)[i]<<" ";
+                }
+                cout<<endl;
                 nodo = siguiente(game.minas, nodo);
                 }
-
              }
 
         }
+void imprimirComanda(Game &game){
+       if(!listaVacia(game.comanda)){
+            cout<<"Lector de Comanda"<<endl;
+             PtrNodoLista nodo=primero(game.comanda);
+             while(nodo !=finLista()){
+                //El nodo apunta al dato, y casteo el dato a Comanda
+                Comanda* comanda =(Comanda*) nodo->ptrDato;
+                cout<<"codItem:"<<comanda->codItem<<";cantidad:"<<comanda->cantidad<<endl;
+                 nodo = siguiente(game.comanda, nodo);
+                }
+             }
+        }
+
+
+ void imprimirParametros(){
+
+
+ }
 
 void correrGame(Game &game,int anchoVentana,int altoVentana){
 if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
@@ -96,23 +118,30 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         SDL_Event event;
         const unsigned char *keys;
         keys = SDL_GetKeyboardState(NULL);
-
-
+        setComanda(game);
+        imprimirComanda(game);
 
 
 
         setTerreno(game, renderer);
         setMinas(game, renderer);
+        imprimirMinas(game);
+
+        Estacion estacion;
+        Estacion *ptrEstacion=&estacion;
+        crearEstacion(estacion,renderer,4,7,anchoCelda,altoCelda,altoSprite);
+        ubicarEstacion(game,ptrEstacion);
+
         Lista locomotora;
         crearLista(locomotora,NULL);
         Vagon vagon1, vagon2, vagon3, vagon4, vagon5;
         Item item;
-        //C1 es la locomotora
-        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//el primero es c1
-        ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
-        setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));//la direccion de la game es = a la del primer vagon
 
-        //Vagones c2
+        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//
+        ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
+        setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));
+
+
         crearVagon(vagon2,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
         ubicarVagon(game,adicionarFinal(locomotora,&vagon2));
         crearVagon(vagon3,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
@@ -141,7 +170,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
 
         while(!getGameOver(game)){
-            controlarEventos(game,event,keys);//setea la direccion siguiente en game.direccion
+            controlarEventos(game,event,keys);
 
             if(getIntervalo(game)==10){
                 setIntervalo(game,0);
@@ -197,10 +226,10 @@ bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
     int f=getFila(*vagon)+desplazamientoVertical;
 
     if((c>=0 && c<getColumnaLimite(game)) && (f>=0 && f<getFilaLimite(game))){
-        //el tren aun se encuentra en el tablero!
+
         Terreno terrenoAux =getTerreno(game)[f][c];
         if(terrenoAux.ptrNodoVagon==NULL){
-            //y el tren no se chocoará con otro vagón
+
             colision=false;
         }else{
             cout<<"Chocamos con otro vagon en "<<f<<"/"<<c<<endl;
@@ -215,10 +244,10 @@ void cambiarColumna(Game &game,PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
         Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
-        if(strcmp(getDireccion(*vagon),"der")==0)desplazamiento=1;//subo una capa
-        if(strcmp(getDireccion(*vagon),"izq")==0)desplazamiento=-1;//bajo una capa
+        if(strcmp(getDireccion(*vagon),"der")==0)desplazamiento=1;
+        if(strcmp(getDireccion(*vagon),"izq")==0)desplazamiento=-1;
         if(desplazamiento!=0){
-            Terreno **terrenoAux=getTerreno(game);// game.mapa
+            Terreno **terrenoAux=getTerreno(game);
             terrenoAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
             terrenoAux[getFila(*vagon)][getColumna(*vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
             setColumna(*vagon,desplazamiento);
@@ -231,15 +260,15 @@ void cambiarFila(Game &game, PtrNodoLista ptrNodo){
     if(ptrNodo!=NULL){
         int desplazamiento=0;
         Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
-        if(strcmp(getDireccion(*vagon),"aba")==0)desplazamiento=1;//subo una capa
-        if(strcmp(getDireccion(*vagon),"arr")==0)desplazamiento=-1;//bajo una capa
+        if(strcmp(getDireccion(*vagon),"aba")==0)desplazamiento=1;
+        if(strcmp(getDireccion(*vagon),"arr")==0)desplazamiento=-1;
         if(desplazamiento!=0){
-            Terreno **terrenoAux=getTerreno(game);// game.mapa
+            Terreno **terrenoAux=getTerreno(game);
             if(ptrNodo->sgte==finLista()){
                 terrenoAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
             }
             terrenoAux[getFila(*vagon)+desplazamiento][getColumna(*vagon)].ptrNodoVagon=ptrNodo;
-            setFila(*vagon,desplazamiento);//actualizo la fila en la que se encuentra
+            setFila(*vagon,desplazamiento);
         }
         cambiarFila(game,ptrNodo->sgte);
     }
@@ -255,10 +284,6 @@ void cambiarDireccion(Game &game, Lista &locomotora){
         Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
         char dirAnterior[4];
         strcpy(dirAnterior, getDireccion(*vagon));
-        //si dirAnterior es izq entonces direccion no puede ser der
-        //si dirAnterior es der entonces direccion no puede ser izq
-        //si dirAnterior es arr entonces direccion no puede ser aba
-        //si dirAnterior es aba entonces direccion no puede ser arr
         if(
             ((strcmp(dirAnterior,"izq")==0 && strcmp(direccion,"der")!=0) ||
             (strcmp(dirAnterior,"der")==0 && strcmp(direccion,"izq")!=0) ||
@@ -273,7 +298,7 @@ void cambiarDireccion(Game &game, Lista &locomotora){
     }
 }
 void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
-    if(SDL_PollEvent(&event)){//indica que hay eventos pendientes
+    if(SDL_PollEvent(&event)){
         switch(event.type){
             case SDL_QUIT:
                 setGameOver(game, true);

@@ -6,11 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
-               int altoSprite, int ip, int secuencia[5], Item item){
+               int altoSprite, int ip, int secuencia[5], int codItem){
     mina.c=c;//coordenada logica x
     mina.f=f;//coordenada logica y
     mina.ip=ip;//intervalo de produccion
-    mina.item=item;//item de la mina
+    mina.codItem=codItem;//item de la mina
     for(int i=0;i<5;i++){
         mina.secuencia[i] = secuencia[i];
     }
@@ -57,12 +57,12 @@ void setSecuencia(Mina &mina, int secuencia[5]){
     }
 }
 /*----------------------------------------------------------------------------*/
-Item getItem(Mina &mina){
-    return mina.item;
+int getCodItem(Mina *mina){
+    return mina->codItem;
 }
 /*----------------------------------------------------------------------------*/
-void setItem(Mina &mina, Item item){
-    mina.item = item;
+void setCodItem(Mina &mina, int codItem){
+    mina.codItem = codItem;
 }
 /*----------------------------------------------------------------------------*/
 void dibujarMina(Mina *mina,SDL_Renderer* renderer){

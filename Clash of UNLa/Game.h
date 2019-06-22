@@ -7,6 +7,7 @@
 #include "Lista.h"
 #include "Comanda.h"
 #include "Parametros.h"
+#include "Estacion.h"
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -28,7 +29,7 @@ typedef struct{
 
     Lista minas;
 
-    Comanda comanda;
+    Lista comanda;
 
     Parametros parametros;
 }Game;
@@ -55,7 +56,7 @@ void setMinas(Game &game, SDL_Renderer * renderer);
 Lista getMinas(Game &game);
 
 /*----------------------------------------------------------------------------*/
-Comanda getComanda(Game &game);
+Lista getComanda(Game &game);
 /*----------------------------------------------------------------------------*/
 void setComanda(Game &game);
 /*----------------------------------------------------------------------------*/
@@ -81,6 +82,8 @@ void ubicarBandido(Game &game,Bandido *bandido);
 void ubicarMina(Game &game,Mina *mina);
 /*----------------------------------------------------------------------------*/
 void ubicarMoneda(Game &game,Moneda *moneda);
+/*----------------------------------------------------------------------------*/
+void ubicarEstacion(Game &game,Estacion *estacion);
 /*----------------------------------------------------------------------------*/
 void setDireccion(Game &game,char direccion[]);
 /*----------------------------------------------------------------------------*/

@@ -83,6 +83,7 @@ void dibujarMoneda(Moneda *moneda,SDL_Renderer* renderer);
   moneda: estructura de datos a ser usado.
 
 */
+
 void destruirMoneda(Moneda *moneda);
 
 #endif

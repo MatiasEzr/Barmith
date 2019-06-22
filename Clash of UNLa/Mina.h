@@ -1,8 +1,14 @@
 #ifndef __MINA_H__
 #define __MINA_H__
 
+
+
+
 #include <SDL.h>
-#include "Item.h"
+#include "Cola.h"
+
+using namespace std;
+
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -11,12 +17,15 @@ typedef struct{
     int f;
     int c;
     int ip;
+    int codItem;
     int secuencia[5];
-    Item item;
-
+    Cola cajas;
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
 }Mina;
+
+/*----------------------------------------------------------------------------*/
+//                                PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 /*
   pre : la mina no debe haber sido creada.
@@ -25,7 +34,7 @@ typedef struct{
   Mina : estructura de datos a ser creado.
 */
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda,
-                int altoCelda, int altoSprite, int ip, int secuencia[5], Item item);
+                int altoCelda, int altoSprite, int ip, int secuencia[5],int codItem);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la mina debe haber sido creada.
@@ -105,11 +114,11 @@ void setSecuencia(Mina &mina, int secuencia[5]);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la mina debe haber sido creado.
-  post: se obtiene el item que produce la mina.
+  post: se obtiene el codItem que produce la mina.
 
   return: item
 */
-Item getItem(Mina &mina);
+int getCodItem(Mina *mina);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -117,9 +126,9 @@ Item getItem(Mina &mina);
   post: se setea el item de la mina.
 
   mina: estructura de datos a ser usada.
-  item: item que producira la mina.
+  codItem: item que producira la mina.
 */
-void setItem(Mina &mina, Item item);
+void setCodItem(Mina &mina, int codItem);
 
 /*----------------------------------------------------------------------------*/
 /*

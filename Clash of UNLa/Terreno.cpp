@@ -4,6 +4,9 @@
 #include "Moneda.h"
 #include "Vagon.h"
 #include "Lista.h"
+#include "Estacion.h"
+#include <stdio.h>
+#include <string.h>
 #include <SDL_image.h>
 
 /*----------------------------------------------------------------------------*/
@@ -17,6 +20,7 @@ void crearTerreno(Terreno &terreno,int fila,int columna, int ancho, int alto, SD
     terreno.ptrBandido=NULL;
     terreno.ptrMina=NULL;
     terreno.ptrMoneda=NULL;
+    terreno.ptrEstacion=NULL;
 
     char imagen[30]="img/suelo_";
 	strcat(imagen,rand);
@@ -45,6 +49,8 @@ void dibujarEntidad(Terreno &terreno,SDL_Renderer* renderer, int intervalo){
     }
     if(terreno.ptrNodoVagon!=NULL){
         dibujarVagon(*(Vagon*)terreno.ptrNodoVagon->ptrDato,renderer,intervalo);
+    } if(terreno.ptrEstacion!=NULL){
+        dibujarEstacion(terreno.ptrEstacion,renderer);
     }
 }
 /*----------------------------------------------------------------------------*/
