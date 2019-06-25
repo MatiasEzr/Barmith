@@ -17,7 +17,7 @@ typedef struct{
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
     int capacidad; //5kg*cantidad_monedas
-    Item item; //Indica el tipoVagon a traves del item que lleva
+    string codItem; //Indica el tipoVagon a traves del item que lleva
     bool detenido;
 }Vagon;
 

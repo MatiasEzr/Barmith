@@ -1,8 +1,11 @@
-#ifndef __BANDIDO_H__
-#define __BANDIDO_H__
+#ifndef BANDIDO_H__
+#define BANDIDO_H__
+#include <string>
 
 #include <SDL.h>
-#include "Item.h"
+
+using namespace std;
+
 
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
@@ -10,8 +13,8 @@
 typedef struct{
     int fila;
     int columna;
-    Item item;
     int cantidadItem;
+    string codItem;
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
 }Bandido;
@@ -24,7 +27,7 @@ typedef struct{
 
   bandido : estructura de datos a ser creado.
 */
-void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,Item item, int cantidadItem);
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem, int cantidadItem);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.
@@ -47,19 +50,19 @@ int getColumna(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.
-  post: se obtiene la cantidadItem que pide el bandido
+  post: se obtiene la cantidadstring que pide el bandido
 
-  return : cantidadItem
+  return : cantidadstring
 */
 int getCantidadItem(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.
-  post: se obtiene el Item que pide el bandido
+  post: se obtiene el string que pide el bandido
 
-  return : Item
+  return : string
 */
-Item getItem(Bandido *bandido);
+string getCodItem(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
 ///SETTERS
 

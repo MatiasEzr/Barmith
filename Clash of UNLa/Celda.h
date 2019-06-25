@@ -6,7 +6,9 @@
 #include "Mina.h"
 #include "Moneda.h"
 #include "Lista.h"
-
+/*----------------------------------------------------------------------------*/
+//                                ESTRUCTURAS
+/*----------------------------------------------------------------------------*/
 typedef struct{
     int f;
     int c;
@@ -19,6 +21,9 @@ typedef struct{
     Moneda *ptrMoneda;
 
 }Celda;
+/*----------------------------------------------------------------------------*/
+//                                PRIMITIVAS
+/*----------------------------------------------------------------------------*/
 
 void crearCelda(Celda &celda,int f,int c,int ancho, int alto, SDL_Renderer* renderer,char rand[]);
 void dibujarCelda(SDL_Renderer* renderer,Celda &celda);

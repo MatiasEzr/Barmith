@@ -1,4 +1,5 @@
 #include <string.h>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <SDL.h>
@@ -8,8 +9,9 @@
 #include "Bandido.h"
 #include "Lista.h"
 #include "Vagon.h"
-#include <ctime> //time.h o ctime agregan funciones que leen el reloj interno del procesador. la funcion time(NULL) devuelve el tiempo actual en milisegundos. la usamos para los aleatorios.
-#include <stdlib.h>//permite utilizar itoa(int,char,int); y la funcion para aleatorios rand()
+#include <ctime>
+#include <stdlib.h>/
+
 
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
@@ -33,6 +35,7 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int 
     strcpy(game.direccion,"direccion");
     crearLista(game.minas,NULL);
     crearLista(game.comanda,NULL);
+    crearParametros(game.parametros);
 }
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game){
@@ -70,7 +73,7 @@ Terreno** getTerreno(Game &game){
     return game.terreno;
 }
 /*----------------------------------------------------------------------------*/
-void setMinas(Game &game, SDL_Renderer * renderer){
+void leerMinas(Game &game, SDL_Renderer * renderer){
     ifstream entrada("Minas.txt");
 
     string strposx,strposy,strcoditem,strip,strseq1,strseq2,strseq3,strseq4,strseq5;
@@ -128,7 +131,7 @@ Lista getMinas(Game &game){
 /*----------------------------------------------------------------------------*/
 
 
-void setComanda(Game &game){
+void leerComanda(Game &game){
  ifstream entrada("Comanda.txt");
 
     string codItem,strcantidad;
@@ -161,35 +164,46 @@ Lista getComanda(Game &game){
 }
 /*----------------------------------------------------------------------------*/
 
-/*void setParametros(Game &game){
+void leerParametros(Game &game){
     ifstream entrada("Parametros.txt");
-
-    string strcoditem,str;
-    string codItem;
-
-    string cadena;
+    string clave,valor;
+     if(entrada.fail()){
+         cout<<"No se pudo abrir el archivo Parametros.txt ";
+        exit(EXIT_FAILURE);
+    }
     while(!entrada.eof()){
-          getline(entrada,cadena,'\n');
-          if(cadena != ""){
-              stringstream cadena2(cadena);
-              Parametros *parametros = new Parametros;
-
-              getline(cadena2,strcoditem,';');
-              codItem=atoi(strcoditem.c_str());
-
-
-
-              crearParametros(*parametros,);
-              game.parametros=*parametros;
-
-              delete parametros;
-              cadena2.clear();
-          }
+    getline(entrada,clave,'=');
+    getline(entrada,valor);
+    setParametros(game,clave,valor);
     }
     entrada.close();
     fflush(stdin);
 }
-*/
+
+void setParametros(Game &game, string clave, string valor){
+    if (clave == "s" || clave == "S")
+        game.parametros.claveS = valor;
+    else if (clave == "p" || clave == "P")
+        game.parametros.claveP = valor;
+    else if (clave == "a" || clave == "A")
+        game.parametros.claveA = valor;
+    else if (clave == "posXE")
+        game.parametros.claveposXE = valor;
+    else if (clave == "posYE")
+        game.parametros.claveposYE = valor;
+    else if (clave == "im" || clave == "iM" || clave == "Im" || clave == "IM")
+        game.parametros.claveIM = valor;
+    else if (clave == "vm" || clave == "vM" || clave == "Vm" || clave == "VM")
+        game.parametros.claveVM = valor;
+    else if (clave == "ib" || clave == "iB" || clave == "Ib" || clave == "IB")
+        game.parametros.claveIB = valor;
+    else if (clave == "vb" || clave == "vB" || clave == "Vb" || clave == "VB")
+        game.parametros.claveVB =valor;
+    else if (clave == "ip" || clave == "iP" || clave == "Ip" || clave == "IP")
+        game.parametros.claveIP =valor;
+
+    }
+
 /*----------------------------------------------------------------------------*/
 Parametros getParametros(Game &game){
     return game.parametros;

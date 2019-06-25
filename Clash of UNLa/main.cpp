@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>/
+#include <string.h>
 #include <conio.h>
 #include <stdlib.h>
 
@@ -63,7 +63,9 @@ void leerArchivos(Game &game,SDL_Renderer *renderer){
 void imprimirMinas(Game &game){
 
      if(!listaVacia(game.minas)){
+            cout << "======================" << endl;
             cout<<"Lector de minas"<<endl;
+            cout << "======================" << endl;
              PtrNodoLista nodo=primero(game.minas);
              while(nodo !=finLista()){
                 //El nodo apunta al dato, y casteo el dato a mina
@@ -76,11 +78,18 @@ void imprimirMinas(Game &game){
                 nodo = siguiente(game.minas, nodo);
                 }
              }
+              // Agrego un par de líneas a la consola
+            cout << endl;
+            cout << endl;
+            cout << endl;
+
 
         }
 void imprimirComanda(Game &game){
        if(!listaVacia(game.comanda)){
-            cout<<"Lector de Comanda"<<endl;
+             cout << "======================" << endl;
+            cout << "= Lector de Comanda =" << endl;
+            cout << "======================" << endl;
              PtrNodoLista nodo=primero(game.comanda);
              while(nodo !=finLista()){
                 //El nodo apunta al dato, y casteo el dato a Comanda
@@ -89,13 +98,30 @@ void imprimirComanda(Game &game){
                  nodo = siguiente(game.comanda, nodo);
                 }
              }
+         // Agrego un par de líneas a la consola
+            cout << endl;
+            cout << endl;
+            cout << endl;
+
         }
 
 
- void imprimirParametros(){
+ void imprimirParametros(Game &game){
+            cout << "======================" << endl;
+            cout<<"Lector de Parametros"<<endl;
+            cout << "======================" << endl;
 
 
- }
+            cout<<"S:"<<game.parametros.claveS<<"\nP:"<<game.parametros.claveP<<"\nA:"<<game.parametros.claveA<<endl;
+            cout<<"posXE:"<<game.parametros.claveposXE<<"\nposYE:"<<game.parametros.claveposYE<<"\nIM:"<<game.parametros.claveIM<<endl;
+            cout<<"VM:"<<game.parametros.claveIM<<"\nIB:"<<game.parametros.claveIB<<"\nVB:"<<game.parametros.claveVB<<"\nIP:"<<game.parametros.claveIP<<endl;
+             // Agrego un par de líneas a la consola
+            cout << endl;
+            cout << endl;
+            cout << endl;
+
+             }
+
 
 void correrGame(Game &game,int anchoVentana,int altoVentana){
 if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
@@ -118,13 +144,16 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         SDL_Event event;
         const unsigned char *keys;
         keys = SDL_GetKeyboardState(NULL);
-        setComanda(game);
+        leerParametros(game); //Archivo
+        imprimirParametros(game);
+
+        leerComanda(game); //Archivo
         imprimirComanda(game);
 
 
 
         setTerreno(game, renderer);
-        setMinas(game, renderer);
+        leerMinas(game, renderer); //Archivo
         imprimirMinas(game);
 
         Estacion estacion;
@@ -154,7 +183,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
         Bandido bandido;
         Bandido *ptrBandido = &bandido;
-        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,item,3);
+        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,"Oro",3);
         ubicarBandido(game,ptrBandido);
 
         Moneda moneda;

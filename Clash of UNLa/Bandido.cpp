@@ -4,7 +4,7 @@
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,Item item,int cantidadItem){
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem,int cantidadItem){
     bandido.fila=fila;//coordenada logica y
     bandido.columna=columna;//coordenada logica x
 
@@ -15,7 +15,7 @@ void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna,
     bandido.rectImag.x=(bandido.columna*anchoCelda);//coordenada de dibujo x
     bandido.rectImag.w=anchoCelda;//ancho
     bandido.rectImag.h=altoSprite;//alto
-    bandido.item=item;
+    bandido.codItem=codItem;
     bandido.cantidadItem=cantidadItem;
 }
 /*----------------------------------------------------------------------------*/
@@ -27,11 +27,11 @@ int getColumna(Bandido *bandido){
     return bandido->columna;
 }
 /*----------------------------------------------------------------------------*/
-Item item(Bandido * bandido){
-    return bandido->item;
+string getCodItem(Bandido * bandido){
+    return bandido->codItem;
 }
 /*----------------------------------------------------------------------------*/
-int cantidadItem(Bandido *bandido){
+int getCantidadItem(Bandido *bandido){
     return bandido->cantidadItem;
 }
 /*----------------------------------------------------------------------------*/
@@ -44,8 +44,8 @@ void setColumna(Bandido *bandido,int columna){
     bandido->columna=columna;
 }
 /*----------------------------------------------------------------------------*/
-void setItem(Bandido *bandido,Item item){
-    bandido->item=item;
+void setCodItem(Bandido *bandido,string codItem){
+    bandido->codItem=codItem;
 }
 /*----------------------------------------------------------------------------*/
 void setCantidadItem(Bandido *bandido,int cantidadItem){

@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Bandido.cpp" />
 		<Unit filename="Bandido.h" />
+		<Unit filename="Caja.cpp" />
+		<Unit filename="Caja.h" />
 		<Unit filename="Celda.cpp" />
 		<Unit filename="Celda.h" />
 		<Unit filename="Cola.cpp" />

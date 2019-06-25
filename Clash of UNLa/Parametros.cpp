@@ -13,9 +13,9 @@ post: Parametros creado y listo para ser usado
 Parametros: instancia sobre la que se invoca la primitiva **/
 
 void crearParametros(Parametros &parametros){
-/*    parametros.clave="NULL";
+   // parametros.clave="NULL";
     parametros.valor="NULL";
-    */
+
        parametros.claveS=parametros.valor;
        parametros.claveP=parametros.valor;
        parametros.claveA=parametros.valor;

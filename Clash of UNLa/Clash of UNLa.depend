@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
+1561437162 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
 	"Bandido.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+1561438967 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+	<string>
 	<SDL.h>
-	"Item.h"
 
 1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\celda.cpp
 	"Celda.h"
@@ -14,7 +14,7 @@
 	<SDL_image.h>
 	<string.h>
 
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\celda.h
+1561435092 c:\users\matias\documents\github\ayed\clash of unla\celda.h
 	<SDL.h>
 	"Bandido.h"
 	"Mina.h"
@@ -24,7 +24,7 @@
 1559281638 c:\users\matias\documents\github\ayed\clash of unla\locomotora.h
 	"Vagon.h"
 
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
+1561445634 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
 	"Item.h"
 	<SDL.h>
 
@@ -39,7 +39,7 @@
 	"Locomotora.h"
 	"Vagon.h"
 
-1561221118 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+1561449745 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
@@ -89,7 +89,7 @@
 	<ctime>
 	<stdlib.h>
 
-1561221287 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
+1561437187 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
 	"Terreno.h"
 	"Bandido.h"
 	"Mina.h"
@@ -111,12 +111,12 @@
 
 1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\item.cpp
 
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\parametros.cpp
+1561446565 source:c:\users\matias\documents\github\ayed\clash of unla\parametros.cpp
 	"Parametros.h"
 	<iostream>
 	<string>
 
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\parametros.h
+1561446245 c:\users\matias\documents\github\ayed\clash of unla\parametros.h
 	<string>
 
 1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\sprite.cpp
@@ -408,8 +408,9 @@
 
 1561177196 c:\users\matias\documents\github\ayed\clash of unla\lista.h
 
-1561220500 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
+1561449678 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
 	<string.h>
+	<iostream>
 	<fstream>
 	<sstream>
 	<SDL.h>
@@ -422,7 +423,7 @@
 	<ctime>
 	<stdlib.h>
 
-1561220611 c:\users\matias\documents\github\ayed\clash of unla\game.h
+1561449037 c:\users\matias\documents\github\ayed\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"
@@ -470,4 +471,10 @@
 1561221572 c:\users\matias\documents\github\ayed\clash of unla\estacion.h
 	<SDL.h>
 	<SDL_image.h>
+
+1561445250 source:c:\users\matias\documents\github\ayed\clash of unla\caja.cpp
+	"Caja.h"
+
+1561445269 c:\users\matias\documents\github\ayed\clash of unla\caja.h
+	<string>
 
