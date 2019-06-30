@@ -98,6 +98,10 @@ int getColumnaLimite(Game &game);
 /*----------------------------------------------------------------------------*/
 int getFilaLimite(Game &game);
 /*----------------------------------------------------------------------------*/
-void evaluarColisionConMina(Game &game,Lista &locomotora);
+void evaluarColision(Game &game,Lista &locomotora);
+/*----------------------------------------------------------------------------*/
+void actualizarMinas(Game &game);
+/*----------------------------------------------------------------------------*/
+void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora);
 /*----------------------------------------------------------------------------*/
 #endif

@@ -1,11 +1,12 @@
 #include "Vagon.h"
 #include "Item.h"
+#include "Pila.h"
 #include <string.h>//permite utilizar strcat(char,char) strcpy(char,char);
 #include <stdlib.h>//permite utilizar itoa(int,char,int);
 #include <SDL.h>
 #include <SDL_image.h>
 
-void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,Item item){
+void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,string item){
     strcpy(vagon.miniatura,miniatura);
     vagon.fila= fila;//coordenada logica y
     vagon.columna=columna;//coordenada logica x
@@ -14,7 +15,10 @@ void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direcci
     vagon.altoCelda= altoCelda;
     vagon.altoSprite=altoSprite;
     vagon.detenido=false;
-    //vagon.item=NULL;
+    crearPila(vagon.cajas);
+    vagon.capacidad = capacidad;
+    vagon.cantidadItem = 0;
+    vagon.codItem=item;
 }
 /*----------------------------------------------------------------------------*/
 char* getMiniatura(Vagon &vagon){
@@ -118,6 +122,7 @@ void dibujarVagon(Vagon &vagon,SDL_Renderer* renderer,int intervalo){
 /*----------------------------------------------------------------------------*/
 void destruirVagon(Vagon &vagon){
     SDL_DestroyTexture(vagon.imagen);
+    eliminarPila(vagon.cajas);
     //delete &vagon;
 }
 /*----------------------------------------------------------------------------*/
@@ -127,5 +132,37 @@ char* getDireccion(Vagon &vagon){
 /*----------------------------------------------------------------------------*/
 void setDireccion(Vagon &vagon,char direccion[]){
     strcpy(vagon.direccion,direccion);
+}
+/*----------------------------------------------------------------------------*/
+int getCapacidad(Vagon &vagon){
+    return vagon.capacidad;
+}
+/*----------------------------------------------------------------------------*/
+void setCapacidad(Vagon &vagon, int capacidad){
+    vagon.capacidad = capacidad;
+}
+/*----------------------------------------------------------------------------*/
+int getCantidadItem(Vagon &vagon){
+    return vagon.cantidadItem;
+}
+/*----------------------------------------------------------------------------*/
+void setCantidadItem(Vagon &vagon, int cantidadItem){
+    vagon.cantidadItem = cantidadItem;
+}
+/*----------------------------------------------------------------------------*/
+string getCodItem(Vagon &vagon){
+    return vagon.codItem;
+}
+/*----------------------------------------------------------------------------*/
+void setCodItem(Vagon &vagon, string codItem){
+    vagon.codItem = codItem;
+}
+/*----------------------------------------------------------------------------*/
+Pila * getCajas(Vagon &vagon){
+    return &(vagon.cajas);
+}
+/*----------------------------------------------------------------------------*/
+void setCajas(Vagon &vagon, Pila cajas){
+    vagon.cajas = cajas;
 }
 /*----------------------------------------------------------------------------*/

@@ -3,9 +3,10 @@
 
 
 
-
+#include <string>
 #include <SDL.h>
 #include "Cola.h"
+#include "Lista.h"
 
 using namespace std;
 
@@ -17,8 +18,10 @@ typedef struct{
     int f;
     int c;
     int ip;
-    int codItem;
+    string codItem;
     int secuencia[5];
+    int secuenciaActual;
+    int intervaloActual;
     Cola cajas;
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
@@ -34,7 +37,7 @@ typedef struct{
   Mina : estructura de datos a ser creado.
 */
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda,
-                int altoCelda, int altoSprite, int ip, int secuencia[5],int codItem);
+                int altoCelda, int altoSprite, int ip, int secuencia[5],string codItem);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la mina debe haber sido creada.
@@ -113,12 +116,48 @@ int* getSecuencia(Mina &mina);
 void setSecuencia(Mina &mina, int secuencia[5]);
 /*----------------------------------------------------------------------------*/
 /*
+  pre : la mina debe haber sido creada.
+  post: se obtiene la secuencia actual de la mina.
+
+  mina: estructura de datos a ser usada.
+  return: secuencia actual de la mina.
+*/
+int getSecuenciaActual(Mina &mina);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la mina debe haber sido creada.
+  post: se setea la secuencia actual de la mina.
+
+  mina: estructura de datos a ser usada.
+  intervalo: secuencia actual de la mina.
+*/
+void setSecuenciaActual(Mina &mina, int secuencia);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la mina debe haber sido creada.
+  post: se obtiene el intervalo actual de la mina.
+
+  mina: estructura de datos a ser usada.
+  return: intervalo actual de la mina.
+*/
+int getIntervarloActual(Mina &mina);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la mina debe haber sido creada.
+  post: se setea el intervalo actual de la mina.
+
+  mina: estructura de datos a ser usada.
+  intervalo: intervalo actual de la mina.
+*/
+void setIntervaloActual(Mina &mina, int intervalo);
+/*----------------------------------------------------------------------------*/
+/*
   pre : la mina debe haber sido creado.
   post: se obtiene el codItem que produce la mina.
 
   return: item
 */
-int getCodItem(Mina *mina);
+string getCodItem(Mina *mina);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -128,7 +167,7 @@ int getCodItem(Mina *mina);
   mina: estructura de datos a ser usada.
   codItem: item que producira la mina.
 */
-void setCodItem(Mina &mina, int codItem);
+void setCodItem(Mina &mina, string codItem);
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -151,6 +190,14 @@ void dibujarMina(Mina *mina,SDL_Renderer* renderer);
 */
 void destruirMina(Mina *mina);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : la mina debe haber sido creado.
+  post: se le asignan las cajas de la mina a los vagones correspondientes.
 
+  mina: estructura de datos a ser usado.
+  locomotora: lista de vagones.
+*/
+void recolectarCajas(Mina &mina, Lista &locomotora);
+/*----------------------------------------------------------------------------*/
 #endif
 

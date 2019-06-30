@@ -10,7 +10,10 @@
 #include "Lista.h"
 #include "Vagon.h"
 #include <ctime>
-#include <stdlib.h>/
+#include <stdlib.h>
+#include "Caja.h"
+#include "Mina.h"
+#include <SDL_ttf.h>
 
 
 /*----------------------------------------------------------------------------*/
@@ -77,7 +80,7 @@ void leerMinas(Game &game, SDL_Renderer * renderer){
     ifstream entrada("Minas.txt");
 
     string strposx,strposy,strcoditem,strip,strseq1,strseq2,strseq3,strseq4,strseq5;
-    int posX,posY,coditem,ip,seq1,seq2,seq3,seq4,seq5;
+    int posX,posY,ip,seq1,seq2,seq3,seq4,seq5;
     string cadena;
     while(!entrada.eof()){
           getline(entrada,cadena,'\n');
@@ -92,7 +95,6 @@ void leerMinas(Game &game, SDL_Renderer * renderer){
               posY=atoi(strposy.c_str());
 
               getline(cadena2,strcoditem,';');
-              coditem=atoi(strcoditem.c_str());
 
               getline(cadena2,strip,';');
               ip=atoi(strip.c_str());
@@ -113,7 +115,7 @@ void leerMinas(Game &game, SDL_Renderer * renderer){
               seq5=atoi(strseq5.c_str());
 
               int secuencia[5] = {seq1,seq2,seq3,seq4,seq5};
-              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia,coditem);
+              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia,strcoditem);
               ubicarMina(game, mina);
 
               adicionarFinal(game.minas,mina);
@@ -281,7 +283,7 @@ int getFilaLimite(Game &game){
     return game.fila;
 }
 /*----------------------------------------------------------------------------*/
-void evaluarColisionConMina(Game &game,Lista &locomotora){
+void evaluarColision(Game &game,Lista &locomotora){
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
     Vagon *vagon = (Vagon*)primero(locomotora)->ptrDato;
@@ -295,13 +297,24 @@ void evaluarColisionConMina(Game &game,Lista &locomotora){
     int fila=getFila(*vagon)+desplazamientoVertical;
 
     if(game.terreno[fila][columna].ptrMina!=NULL && !(vagon->detenido)){
+        recolectarCajas(*(game.terreno[fila][columna].ptrMina), locomotora);
         while(nodo!=finLista()){
             vagon = (Vagon*)nodo->ptrDato;
             vagon->detenido = true;
             nodo = siguiente(locomotora, nodo);
         }
     }
-    else if(game.terreno[fila][columna].ptrMina==NULL && vagon->detenido){
+    else if(game.terreno[fila][columna].ptrEstacion!=NULL && !(vagon->detenido)){
+        while(nodo!=finLista()){
+            vagon = (Vagon*)nodo->ptrDato;
+            vagon->detenido = true;
+            nodo = siguiente(locomotora, nodo);
+        }
+    }
+    else if(game.terreno[fila][columna].ptrMina==NULL &&
+            game.terreno[fila][columna].ptrEstacion==NULL &&
+            vagon->detenido){
+
         while(nodo!=finLista()){
             vagon = (Vagon*)nodo->ptrDato;
             vagon->detenido = false;
@@ -310,3 +323,95 @@ void evaluarColisionConMina(Game &game,Lista &locomotora){
     }
 }
 /*----------------------------------------------------------------------------*/
+void actualizarMinas(Game &game){
+    PtrNodoLista ptrMina = primero(game.minas);
+    while(ptrMina!=finLista()){
+        Mina * mina = (Mina*)ptrMina->ptrDato;
+        if(getIntervarloActual(*mina)==getIP(*mina)){
+            Caja *caja = new Caja;
+            int *secuencia = getSecuencia(*mina);
+            crearCaja(*caja,secuencia[getSecuenciaActual(*mina)],secuencia[getSecuenciaActual(*mina)],
+                      secuencia[getSecuenciaActual(*mina)],getCodItem(mina));
+            encolar(mina->cajas,caja);
+            setIntervaloActual(*mina,0);
+            if(getSecuenciaActual(*mina)==4){
+                setSecuenciaActual(*mina,0);
+            }
+            else{
+                setSecuenciaActual(*mina, getSecuenciaActual(*mina)+1);
+            }
+        }
+        else{
+            setIntervaloActual(*mina, getIntervarloActual(*mina)+1);
+        }
+        ptrMina = siguiente(game.minas,ptrMina);
+    }
+}
+
+void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
+    int oro=0; int plata=0; int bronce=0; int platino=0; int carbon=0; int roca=0;
+    int oroMax,plataMax,bronceMax,platinoMax,carbonMax,rocaMax;
+    PtrNodoLista ptrVagon = primero(locomotora);
+
+    while(ptrVagon!=finLista()){
+        Vagon * vagon = (Vagon*)ptrVagon->ptrDato;
+        if(getCodItem(*vagon)=="oro"){
+            oro += getCantidadItem(*vagon);
+        }
+        else if(getCodItem(*vagon)=="plata"){
+            plata += getCantidadItem(*vagon);
+        }
+        else if(getCodItem(*vagon)=="bronce"){
+            bronce += getCantidadItem(*vagon);
+        }
+        else if(getCodItem(*vagon)=="platino"){
+            platino += getCantidadItem(*vagon);
+        }
+        else if(getCodItem(*vagon)=="carbon"){
+            carbon += getCantidadItem(*vagon);
+        }
+        else if(getCodItem(*vagon)=="roca"){
+            roca += getCantidadItem(*vagon);
+        }
+        ptrVagon = siguiente(locomotora, ptrVagon);
+    }
+
+    PtrNodoLista ptrComanda = primero(game.comanda);
+    while(ptrComanda!=finLista()){
+        Comanda * comanda = (Comanda*)ptrComanda->ptrDato;
+        if(getCodItem(*comanda)=="oro"){oroMax = getCantidad(*comanda);}
+        else if(getCodItem(*comanda)=="plata"){plataMax = getCantidad(*comanda);}
+        else if(getCodItem(*comanda)=="bronce"){bronceMax = getCantidad(*comanda);}
+        else if(getCodItem(*comanda)=="platino"){platinoMax = getCantidad(*comanda);}
+        else if(getCodItem(*comanda)=="roca"){rocaMax = getCantidad(*comanda);}
+        else if(getCodItem(*comanda)=="carbon"){carbonMax = getCantidad(*comanda);}
+        ptrComanda = siguiente(game.comanda,ptrComanda);
+    }
+
+    string puntuacionStr = "Oro: "+to_string(oro) + "/" + to_string(oroMax) +
+                        "  Plata: "+to_string(plata) + "/" + to_string(plataMax) +
+                        "  Bronce: "+to_string(bronce) + "/" + to_string(bronceMax) +
+                        "  Platino: "+to_string(platino) + "/" + to_string(platinoMax) +
+                        "  Roca: "+to_string(roca) + "/" + to_string(rocaMax) +
+                        "  Carbon: "+to_string(carbon)+ "/" + to_string(carbonMax);
+    char const *puntuacion = puntuacionStr.c_str();
+
+    TTF_Font* arial = TTF_OpenFont("arial.ttf", 16);
+
+    SDL_Color blanco = {255, 255, 255};
+
+    SDL_Surface* surfaceMessage = TTF_RenderText_Blended(arial,puntuacion,blanco);
+
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    int texW = 0;
+    int texH = 0;
+    TTF_SizeText(arial, puntuacion, &texW, &texH);
+
+    SDL_Rect Message_rect = {0, 0, texW, texH};
+
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+    TTF_CloseFont(arial);
+    SDL_DestroyTexture(Message);
+    SDL_FreeSurface(surfaceMessage);
+}

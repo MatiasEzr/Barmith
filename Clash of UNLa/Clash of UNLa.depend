@@ -1,310 +1,45 @@
 # depslib dependency file v1.0
-1561437162 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
+1561841281 source:c:\users\ezequiel\git\barmith\clash of unla\bandido.cpp
 	"Bandido.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1561438967 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\bandido.h
 	<string>
 	<SDL.h>
 
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\celda.cpp
-	"Celda.h"
-	<SDL.h>
-	<SDL_image.h>
-	<string.h>
+1561841282 source:c:\users\ezequiel\git\barmith\clash of unla\caja.cpp
+	"Caja.h"
 
-1561435092 c:\users\matias\documents\github\ayed\clash of unla\celda.h
-	<SDL.h>
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Lista.h"
+1561917902 c:\users\ezequiel\git\barmith\clash of unla\caja.h
+	<string>
 
-1559281638 c:\users\matias\documents\github\ayed\clash of unla\locomotora.h
-	"Vagon.h"
-
-1561445634 c:\users\matias\documents\github\ayed\clash of unla\vagon.h
-	"Item.h"
-	<SDL.h>
-
-1561218585 c:\users\matias\documents\github\ayed\clash of unla\mina.h
-	<SDL.h>
+1561924763 source:c:\users\ezequiel\git\barmith\clash of unla\cola.cpp
 	"Cola.h"
 
-1561221524 c:\users\matias\documents\github\ayed\clash of unla\moneda.h
-	<SDL.h>
+1561924775 c:\users\ezequiel\git\barmith\clash of unla\cola.h
 
-1559289562 source:c:\users\matias\documents\github\ayed\clash of unla\locomotora.cpp
-	"Locomotora.h"
-	"Vagon.h"
-
-1561449745 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
-	<iostream>
-	<string.h>
-	<conio.h>
+1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\comanda.cpp
+	"Comanda.h"
 	<stdlib.h>
-	<SDL.h>
-	<SDL_image.h>
-	"Game.h"
-	"Vagon.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Item.h"
-	"Lista.h"
-	"Parametros.h"
-
-1559361307 c:\users\matias\documents\github\ayed\clash of unla\partida.h
-	<SDL.h>
-	"Celda.h"
-	"Terreno.h"
-	"Locomotora.h"
-
-1561220652 c:\users\matias\documents\github\ayed\clash of unla\terreno.h
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Lista.h"
-	"Estacion.h"
-
-1561215787 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
-	"Mina.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1561221628 source:c:\users\matias\documents\github\ayed\clash of unla\moneda.cpp
-	"Moneda.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1559360401 source:c:\users\matias\documents\github\ayed\clash of unla\partida.cpp
-	<string.h>
-	<SDL.h>
-	"Partida.h"
-	"Celda.h"
-	"Terreno.h"
-	"Locomotora.h"
-	"Bandido.h"
-	<ctime>
-	<stdlib.h>
-
-1561437187 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
-	"Terreno.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Vagon.h"
-	"Lista.h"
-	"Estacion.h"
 	<stdio.h>
 	<string.h>
-	<SDL_image.h>
 
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\vagon.cpp
-	"Vagon.h"
-	"Item.h"
-	<string.h>
-	<stdlib.h>
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\comanda.h
+	<fstream>
+
+1561841282 source:c:\users\ezequiel\git\barmith\clash of unla\estacion.cpp
+	"Estacion.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\item.cpp
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\estacion.h
+	<SDL.h>
+	<SDL_image.h>
 
-1561446565 source:c:\users\matias\documents\github\ayed\clash of unla\parametros.cpp
-	"Parametros.h"
+1561931881 source:c:\users\ezequiel\git\barmith\clash of unla\game.cpp
+	<string.h>
 	<iostream>
-	<string>
-
-1561446245 c:\users\matias\documents\github\ayed\clash of unla\parametros.h
-	<string>
-
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\sprite.cpp
-	"Sprite.h"
-	<SDL.h>
-	<SDL_image.h>
-	<cstring>
-	<string>
-	<iostream>
-
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\sprite.h
-	<SDL.h>
-	<SDL_image.h>
-	<string>
-
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\item.h
-	<string>
-
-1559289035 source:c:\users\matias\desktop\clash of unla\bandido.cpp
-	"Bandido.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1559289333 c:\users\matias\desktop\clash of unla\bandido.h
-	<SDL.h>
-	"Item.h"
-
-1559020924 c:\users\matias\desktop\clash of unla\item.h
-	<string>
-
-1559283107 source:c:\users\matias\desktop\clash of unla\celda.cpp
-	"Celda.h"
-	"Locomotora.h"
-	<SDL.h>
-	<SDL_image.h>
-	<string.h>
-
-1559195306 c:\users\matias\desktop\clash of unla\celda.h
-	<SDL.h>
-	"Locomotora.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-
-1559281638 c:\users\matias\desktop\clash of unla\locomotora.h
-	"Vagon.h"
-
-1559287978 c:\users\matias\desktop\clash of unla\vagon.h
-	"Item.h"
-	<SDL.h>
-
-1559289368 c:\users\matias\desktop\clash of unla\mina.h
-	<SDL.h>
-
-1559285707 c:\users\matias\desktop\clash of unla\moneda.h
-	<SDL.h>
-
-1559019540 source:c:\users\matias\desktop\clash of unla\item.cpp
-
-1559289562 source:c:\users\matias\desktop\clash of unla\locomotora.cpp
-	"Locomotora.h"
-	"Vagon.h"
-
-1559407617 source:c:\users\matias\desktop\clash of unla\main.cpp
-	<iostream>
-	<string.h>
-	<conio.h>
-	<stdlib.h>
-	<SDL.h>
-	<SDL_image.h>
-	"Game.h"
-	"Locomotora.h"
-	"Vagon.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Item.h"
-
-1559289173 source:c:\users\matias\desktop\clash of unla\mina.cpp
-	"Mina.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1559285409 source:c:\users\matias\desktop\clash of unla\moneda.cpp
-	"Moneda.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1559019551 source:c:\users\matias\desktop\clash of unla\parametros.cpp
-	"Parametros.h"
-	<iostream>
-	<string>
-
-1559019551 c:\users\matias\desktop\clash of unla\parametros.h
-	<string>
-
-1559189233 source:c:\users\matias\desktop\clash of unla\sprite.cpp
-	"Sprite.h"
-	<SDL.h>
-	<SDL_image.h>
-	<cstring>
-	<string>
-	<iostream>
-
-1559189235 c:\users\matias\desktop\clash of unla\sprite.h
-	<SDL.h>
-	<SDL_image.h>
-	<string>
-
-1559288320 source:c:\users\matias\desktop\clash of unla\terreno.cpp
-	"Terreno.h"
-	"Locomotora.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-
-1559359492 c:\users\matias\desktop\clash of unla\terreno.h
-	"Locomotora.h"
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-
-1559287407 source:c:\users\matias\desktop\clash of unla\vagon.cpp
-	"Vagon.h"
-	"Item.h"
-	<string.h>
-	<stdlib.h>
-	<SDL.h>
-	<SDL_image.h>
-
-1559407478 source:c:\users\matias\desktop\clash of unla\game.cpp
-	<string.h>
-	<SDL.h>
-	"Game.h"
-	"Celda.h"
-	"Terreno.h"
-	"Locomotora.h"
-	"Bandido.h"
-	<ctime>
-	<stdlib.h>
-
-1559407495 c:\users\matias\desktop\clash of unla\game.h
-	<SDL.h>
-	"Celda.h"
-	"Terreno.h"
-	"Locomotora.h"
-
-1560999240 source:c:\users\ezequiel\git\barmith\clash of unla\bandido.cpp
-	"Bandido.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\bandido.h
-	<SDL.h>
-	"Item.h"
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\item.h
-	<string>
-
-1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\celda.cpp
-	"Celda.h"
-	<SDL.h>
-	<SDL_image.h>
-	<string.h>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\celda.h
-	<SDL.h>
-	"Bandido.h"
-	"Mina.h"
-	"Moneda.h"
-	"Lista.h"
-
-1559436750 c:\users\ezequiel\git\barmith\clash of unla\locomotora.h
-	"Vagon.h"
-
-1560999589 c:\users\ezequiel\git\barmith\clash of unla\vagon.h
-	"Item.h"
-	<SDL.h>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\mina.h
-	<SDL.h>
-	"Item.h"
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\moneda.h
-	<SDL.h>
-
-1561002588 source:c:\users\ezequiel\git\barmith\clash of unla\game.cpp
-	<string.h>
 	<fstream>
 	<sstream>
 	<SDL.h>
@@ -316,34 +51,71 @@
 	"Vagon.h"
 	<ctime>
 	<stdlib.h>
+	"Caja.h"
+	"Mina.h"
+	<SDL_ttf.h>
 
-1561000462 c:\users\ezequiel\git\barmith\clash of unla\game.h
+1561925660 c:\users\ezequiel\git\barmith\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"
 	"Lista.h"
 	"Comanda.h"
 	"Parametros.h"
+	"Estacion.h"
 
-1560997678 c:\users\ezequiel\git\barmith\clash of unla\terreno.h
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\celda.h
+	<SDL.h>
 	"Bandido.h"
 	"Mina.h"
 	"Moneda.h"
 	"Lista.h"
 
+1561923549 c:\users\ezequiel\git\barmith\clash of unla\mina.h
+	<string>
+	<SDL.h>
+	"Cola.h"
+	"Lista.h"
+
+1560996426 c:\users\ezequiel\git\barmith\clash of unla\lista.h
+
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\moneda.h
+	<SDL.h>
+
+1561841282 c:\users\ezequiel\git\barmith\clash of unla\terreno.h
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+	"Estacion.h"
+
+1560996426 c:\users\ezequiel\git\barmith\clash of unla\parametros.h
+	<string>
+
+1561923797 c:\users\ezequiel\git\barmith\clash of unla\vagon.h
+	"Item.h"
+	<SDL.h>
+	"Pila.h"
+	<string>
+
+1560996426 c:\users\ezequiel\git\barmith\clash of unla\item.h
+	<string>
+
+1338753066 c:\users\ezequiel\git\barmith\clash of unla\pila.h
+
 1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\item.cpp
 
-1559436750 source:c:\users\ezequiel\git\barmith\clash of unla\locomotora.cpp
-	"Locomotora.h"
-	"Vagon.h"
+1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\lista.cpp
+	"Lista.h"
 
-1561003913 source:c:\users\ezequiel\git\barmith\clash of unla\main.cpp
+1561931184 source:c:\users\ezequiel\git\barmith\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
 	<stdlib.h>
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_ttf.h>
 	"Game.h"
 	"Vagon.h"
 	"Bandido.h"
@@ -353,8 +125,10 @@
 	"Lista.h"
 	"Parametros.h"
 
-1560999711 source:c:\users\ezequiel\git\barmith\clash of unla\mina.cpp
+1561931092 source:c:\users\ezequiel\git\barmith\clash of unla\mina.cpp
 	"Mina.h"
+	"Vagon.h"
+	"Caja.h"
 	<SDL.h>
 	<SDL_image.h>
 
@@ -363,118 +137,32 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\parametros.cpp
+1561841282 source:c:\users\ezequiel\git\barmith\clash of unla\parametros.cpp
 	"Parametros.h"
 	<iostream>
 	<string>
 
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\parametros.h
-	<string>
+1338781930 source:c:\users\ezequiel\git\barmith\clash of unla\pila.cpp
+	"Pila.h"
 
-1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\sprite.cpp
-	"Sprite.h"
-	<SDL.h>
-	<SDL_image.h>
-	<cstring>
-	<string>
-	<iostream>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\sprite.h
-	<SDL.h>
-	<SDL_image.h>
-	<string>
-
-1560997449 source:c:\users\ezequiel\git\barmith\clash of unla\terreno.cpp
+1561841282 source:c:\users\ezequiel\git\barmith\clash of unla\terreno.cpp
 	"Terreno.h"
 	"Bandido.h"
 	"Mina.h"
 	"Moneda.h"
 	"Vagon.h"
 	"Lista.h"
+	"Estacion.h"
+	<stdio.h>
+	<string.h>
 	<SDL_image.h>
 
-1561002847 source:c:\users\ezequiel\git\barmith\clash of unla\vagon.cpp
+1561923868 source:c:\users\ezequiel\git\barmith\clash of unla\vagon.cpp
 	"Vagon.h"
 	"Item.h"
+	"Pila.h"
 	<string.h>
 	<stdlib.h>
 	<SDL.h>
 	<SDL_image.h>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\lista.h
-
-1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\lista.cpp
-	"Lista.h"
-
-1561177196 c:\users\matias\documents\github\ayed\clash of unla\lista.h
-
-1561449678 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
-	<string.h>
-	<iostream>
-	<fstream>
-	<sstream>
-	<SDL.h>
-	"Game.h"
-	"Celda.h"
-	"Terreno.h"
-	"Bandido.h"
-	"Lista.h"
-	"Vagon.h"
-	<ctime>
-	<stdlib.h>
-
-1561449037 c:\users\matias\documents\github\ayed\clash of unla\game.h
-	<SDL.h>
-	"Celda.h"
-	"Terreno.h"
-	"Lista.h"
-	"Comanda.h"
-	"Parametros.h"
-	"Estacion.h"
-
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\lista.cpp
-	"Lista.h"
-
-1561177196 source:c:\users\matias\documents\github\ayed\clash of unla\comanda.cpp
-	"Comanda.h"
-	<stdlib.h>
-	<stdio.h>
-	<string.h>
-
-1561215425 c:\users\matias\documents\github\ayed\clash of unla\comanda.h
-	<fstream>
-
-1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\comanda.cpp
-	"Comanda.h"
-	<stdlib.h>
-	<stdio.h>
-	<string.h>
-
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\comanda.h
-	<stdlib.h>
-	<stdio.h>
-	<string.h>
-	<fstream>
-	<sstream>
-	<iostream>
-
-1372903696 c:\users\matias\documents\github\ayed\clash of unla\cola.h
-
-1372903696 source:c:\users\matias\documents\github\ayed\clash of unla\cola.cpp
-	"Cola.h"
-
-1561221628 source:c:\users\matias\documents\github\ayed\clash of unla\estacion.cpp
-	"Estacion.h"
-	<SDL.h>
-	<SDL_image.h>
-
-1561221572 c:\users\matias\documents\github\ayed\clash of unla\estacion.h
-	<SDL.h>
-	<SDL_image.h>
-
-1561445250 source:c:\users\matias\documents\github\ayed\clash of unla\caja.cpp
-	"Caja.h"
-
-1561445269 c:\users\matias\documents\github\ayed\clash of unla\caja.h
-	<string>
 

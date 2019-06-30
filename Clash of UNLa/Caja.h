@@ -15,7 +15,7 @@ pre:Caja no debe haber sido creada
 post: inicializa parametros de Caja en 0
 */
 
-void crearCaja(Caja & caja);
+void crearCaja(Caja & caja,int cantidadItem,int capacidadActual,int capacidadMaxima,string codItem);
 /*----------------------------------------------------------------------------*/
 
 /*

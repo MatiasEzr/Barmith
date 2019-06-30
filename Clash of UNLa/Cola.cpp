@@ -1,72 +1,109 @@
 #include "Cola.h"
 
-void crearCola(Cola &cola){
-     cola.primero=NULL;
-     cola.ultimo=NULL;
-     }
 
-void destruirCola(Cola &cola){
-     while(!colaVacia(cola)){
-                       desencolar(cola);
-                       }           
-     }
+/******************************************************************************/
+/* Funciones auxiliares */
+/*------------------------------*/
 
-PtrNodoCola  encolar(Cola &cola,PtrDato dato){
-     
-if(cola.primero==NULL){
-    cola.primero=crearNodoCola(dato);
-    cola.ultimo=cola.primero;
-    return cola.ultimo;
-    }
-else{
-    cola.ultimo->sgte=crearNodoCola(dato);
-    cola.ultimo=cola.ultimo->sgte;
-    return cola.ultimo;
-    }
+PtrNodoCola crearNodoCola(PtrDato ptrDato) {
+
+  /* reserva memoria para el nodo y luego completa sus datos */
+  PtrNodoCola ptrAux = new NodoCola;
+
+  ptrAux->ptrDato = ptrDato;
+  ptrAux->sgte = NULL;
+
+  return ptrAux;
 }
 
-PtrDato desencolar(Cola &cola){
-        PtrDato devolver;
-if (colaVacia(cola))
-    {return NULL;}
-else
-  {devolver = (cola.primero)->ptrDato;}
-  PtrNodoCola nodoAux;
-  nodoAux = cola.primero->sgte;
-  delete (cola.primero);
-  cola.primero = nodoAux;
-  if (cola.primero == NULL)
-    {cola.ultimo = NULL;}
-  return devolver;
-     }
-        
+/*----------------------------------------------------------------------------*/
+
+void eliminarNodoCola(Cola &cola) {
+
+  PtrNodoCola ptrExPrimero;
+
+  /* verifica que la cola no esté vacia y que nodo no sea fin*/
+  if (! colaVacia(cola)) {
+
+      ptrExPrimero = cola.primero;
+      cola.primero = colaFrente(cola)->sgte;
+
+    // Si el dato es un TDA, acá habría que llamar al destructor.
+
+    delete ptrExPrimero;
+  }
+}
+
+
+/******************************************************************************/
+/* Implementación de Primitivas */
+/*------------------------------*/
+
+void crearCola(Cola &cola) {
+  cola.primero = finCola();
+  cola.ultimo = finCola();
+}
+
+/*----------------------------------------------------------------------------*/
+
+
+PtrNodoCola finCola(){
+   return NULL;
+}
+
+/*----------------------------------------------------------------------------*/
 
 bool colaVacia(Cola &cola){
-     bool devuelve=false;
-     if(cola.ultimo==NULL){
-                          devuelve=true;
-                          }
-     return devuelve;                     
+  return (cola.primero == finCola());
+}
+
+/*----------------------------------------------------------------------------*/
+
+PtrNodoCola colaFrente(Cola &cola){
+    return cola.primero;
+}
+
+/*----------------------------------------------------------------------------*/
+
+PtrNodoCola colaFin(Cola &cola){
+    return cola.ultimo;
+}
+
+PtrNodoCola encolar(Cola &cola, PtrDato ptrDato){
+
+  /* crea el nodo */
+  PtrNodoCola ptrNuevoNodo = crearNodoCola(ptrDato);
+
+  /* lo incorpora al final de la cola */
+
+  if (colaVacia(cola)){
+     cola.primero = ptrNuevoNodo;
+     cola.ultimo = ptrNuevoNodo;
+  }
+  else{
+     cola.ultimo->sgte = ptrNuevoNodo;
+     cola.ultimo = ptrNuevoNodo;
+  }
+
+  return ptrNuevoNodo;
+}
+
+/*----------------------------------------------------------------------------*/
+
+PtrDato desencolar(Cola &cola){
+
+    PtrDato dato;
+    dato = colaFrente(cola)->ptrDato;
+    if ((! colaVacia(cola))){
+        eliminarNodoCola(cola);
+    }
+    return dato;
+}
+
+/*----------------------------------------------------------------------------*/
+
+void eliminarCola(Cola &cola){
+    while((! colaVacia(cola))){
+         eliminarNodoCola(cola);
      }
-
-PtrNodoCola first(Cola &cola){
-        PtrNodoCola busca;
-        PtrNodoCola aux;
-        if(!colaVacia(cola)){
-                            busca=cola.ultimo->sgte;
-                            aux=cola.ultimo;
-                            while(busca!=NULL){
-                            aux=busca;                    
-                            busca=busca->sgte;
-                            }
-        }
-        return aux;                    
-        }
-
-PtrNodoCola crearNodoCola(PtrDato dato){
-            PtrNodoCola aux;
-            aux=new NodoCola;
-            aux->ptrDato=dato;
-            aux->sgte=NULL;
-            return aux;
-            }
+}

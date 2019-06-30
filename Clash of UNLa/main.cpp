@@ -6,6 +6,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Game.h"
 #include "Vagon.h"
 #include "Bandido.h"
@@ -140,6 +141,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
         renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
         IMG_Init(IMG_INIT_PNG);
+        TTF_Init();
 
         SDL_Event event;
         const unsigned char *keys;
@@ -158,26 +160,25 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
         Estacion estacion;
         Estacion *ptrEstacion=&estacion;
-        crearEstacion(estacion,renderer,4,7,anchoCelda,altoCelda,altoSprite);
+        crearEstacion(estacion,renderer,8,7,anchoCelda,altoCelda,altoSprite);
         ubicarEstacion(game,ptrEstacion);
 
         Lista locomotora;
         crearLista(locomotora,NULL);
         Vagon vagon1, vagon2, vagon3, vagon4, vagon5;
-        Item item;
 
-        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,1,item);//
+        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,0,"");//
         ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
         setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));
 
 
-        crearVagon(vagon2,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,2,item);
+        crearVagon(vagon2,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,10,"oro");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon2));
-        crearVagon(vagon3,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,3,item);
+        crearVagon(vagon3,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,30,"bronce");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon3));
-        crearVagon(vagon4,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,4,item);
+        crearVagon(vagon4,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,44,"plata");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon4));
-        crearVagon(vagon5,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,5,item);
+        crearVagon(vagon5,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,22,"roca");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon5));
 
 
@@ -213,7 +214,8 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
                 //luego redireccionamos a todos los vagons desde el primero
                 cambiarDireccion(game, locomotora);
-                evaluarColisionConMina(game,locomotora);
+                evaluarColision(game,locomotora);
+                actualizarMinas(game);
             }
             if(!getGameOver(game)){
                 if(getIntervalo(game)==2){
@@ -222,6 +224,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 SDL_RenderClear(renderer);
                 dibujarTerreno(game,renderer);
                 dibujarEntidades(game,renderer);
+                dibujarPuntuacion(game,renderer,locomotora);
                 SDL_RenderPresent(renderer);
                 SDL_Delay(milisegundos);
 
@@ -231,9 +234,10 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         cout<<"Destruimos las instancias"<<endl;
         eliminarLista(locomotora);
         destruirGame(game);
+        TTF_Quit();
+        IMG_Quit();
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
-        IMG_Quit();
         SDL_Quit();
         cout<<"Fin del juego"<<endl;
     }

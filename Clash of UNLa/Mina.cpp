@@ -1,4 +1,6 @@
-#include "Mina.h";
+#include "Mina.h"
+#include "Vagon.h"
+#include "Caja.h"
 #include <SDL.h>
 #include <SDL_image.h>
 /*----------------------------------------------------------------------------*/
@@ -6,7 +8,7 @@
 /*----------------------------------------------------------------------------*/
 
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
-               int altoSprite, int ip, int secuencia[5], int codItem){
+               int altoSprite, int ip, int secuencia[5], string codItem){
     mina.c=c;//coordenada logica x
     mina.f=f;//coordenada logica y
     mina.ip=ip;//intervalo de produccion
@@ -14,13 +16,16 @@ void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, i
     for(int i=0;i<5;i++){
         mina.secuencia[i] = secuencia[i];
     }
-    mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
+    mina.intervaloActual = 0;
 
+    mina.imagen=IMG_LoadTexture(renderer,"img/mina.png");
 
     mina.rectImag.y=(mina.f*altoCelda);//coordenada de dibujo y
     mina.rectImag.x=(mina.c*anchoCelda);//coordenada de dibujo x
     mina.rectImag.w=anchoCelda;//ancho
     mina.rectImag.h=altoSprite;//alto
+
+    crearCola(mina.cajas);
 }
 /*----------------------------------------------------------------------------*/
 int getFila(Mina *mina){
@@ -57,11 +62,27 @@ void setSecuencia(Mina &mina, int secuencia[5]){
     }
 }
 /*----------------------------------------------------------------------------*/
-int getCodItem(Mina *mina){
+int getSecuenciaActual(Mina &mina){
+    return mina.secuenciaActual;
+}
+/*----------------------------------------------------------------------------*/
+void setSecuenciaActual(Mina &mina, int secuencia){
+    mina.secuenciaActual = secuencia;
+}
+/*----------------------------------------------------------------------------*/
+int getIntervarloActual(Mina &mina){
+    return mina.intervaloActual;
+}
+/*----------------------------------------------------------------------------*/
+void setIntervaloActual(Mina &mina, int intervalo){
+    mina.intervaloActual = intervalo;
+}
+/*----------------------------------------------------------------------------*/
+string getCodItem(Mina *mina){
     return mina->codItem;
 }
 /*----------------------------------------------------------------------------*/
-void setCodItem(Mina &mina, int codItem){
+void setCodItem(Mina &mina, string codItem){
     mina.codItem = codItem;
 }
 /*----------------------------------------------------------------------------*/
@@ -71,5 +92,29 @@ void dibujarMina(Mina *mina,SDL_Renderer* renderer){
 /*----------------------------------------------------------------------------*/
 void destruirMina(Mina *mina){
     SDL_DestroyTexture(mina->imagen);
+    eliminarCola(mina->cajas);
 }
+/*----------------------------------------------------------------------------*/
+void recolectarCajas(Mina &mina, Lista &locomotora){
+    PtrNodoLista ptrVagon = primero(locomotora);
 
+    while(ptrVagon!=finLista()){
+        Vagon *vagon = (Vagon*)ptrVagon->ptrDato;
+        if(getCodItem(*vagon)==getCodItem(&mina)){
+            PtrNodoCola ptrCaja = colaFrente(mina.cajas);
+            while(ptrCaja!=finCola()){
+                Caja * caja = (Caja*) ptrCaja->ptrDato;
+                if((getCapacidad(*vagon)-getCantidadItem(*vagon))>=getCapacidadMaxima(*caja)){
+                    Caja * cajaLista = new Caja;
+                    *cajaLista = *(Caja*)desencolar(mina.cajas);
+                    agregar(*getCajas(*vagon), cajaLista);
+                    setCantidadItem(*vagon,getCapacidadMaxima(*cajaLista)+getCantidadItem(*vagon));
+                    ptrCaja = colaFrente(mina.cajas);
+                }
+                else{ ptrCaja = finCola();}
+            }
+        }
+        ptrVagon = siguiente(locomotora, ptrVagon);
+    }
+}
+/*----------------------------------------------------------------------------*/
