@@ -387,15 +387,15 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
         else if(getCodItem(*comanda)=="carbon"){carbonMax = getCantidad(*comanda);}
         ptrComanda = siguiente(game.comanda,ptrComanda);
     }
-
-    string puntuacionStr = "Oro: "+to_string(oro) + "/" + to_string(oroMax) +
-                        "  Plata: "+to_string(plata) + "/" + to_string(plataMax) +
-                        "  Bronce: "+to_string(bronce) + "/" + to_string(bronceMax) +
-                        "  Platino: "+to_string(platino) + "/" + to_string(platinoMax) +
-                        "  Roca: "+to_string(roca) + "/" + to_string(rocaMax) +
-                        "  Carbon: "+to_string(carbon)+ "/" + to_string(carbonMax);
-    char const *puntuacion = puntuacionStr.c_str();
-
+    stringstream ss;
+    ss << "Oro: " << oro << "/" << oroMax <<
+            "  Plata: "<< plata << "/" << plataMax <<
+            "  Bronce: " << bronce << "/" << bronceMax <<
+            "  Platino: " << platino << "/" << platinoMax <<
+            "  Roca: " << roca << "/" << rocaMax <<
+            "  Carbon: " << carbon << "/" << carbonMax;
+    string temp = ss.str();
+    char const * puntuacion = temp.c_str();
     TTF_Font* arial = TTF_OpenFont("arial.ttf", 16);
 
     SDL_Color blanco = {255, 255, 255};
