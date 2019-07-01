@@ -14,7 +14,7 @@
 #include "Caja.h"
 #include "Mina.h"
 #include <SDL_ttf.h>
-
+#include <string>
 
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
