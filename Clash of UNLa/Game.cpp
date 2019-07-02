@@ -16,6 +16,8 @@
 #include <SDL_ttf.h>
 #include <string>
 
+
+
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
@@ -23,11 +25,11 @@
 void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int altoSprite){
     game.gameover=false;
     game.intervalo=0;
-
+    game.contadorSegundo=0;
+    game.contadorMonedas=0;
     game.anchoCelda=anchoCelda;
     game.altoCelda=altoCelda;
     game.altoSprite=altoSprite;
-
     game.fila=fila;
     game.columna=columna;
 
@@ -39,6 +41,7 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int 
     crearLista(game.minas,NULL);
     crearLista(game.comanda,NULL);
     crearParametros(game.parametros);
+
 }
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game){
@@ -55,6 +58,22 @@ int getIntervalo(Game &game){
 /*----------------------------------------------------------------------------*/
 void setIntervalo(Game &game, int intervalo){
     game.intervalo=intervalo;
+}
+/*----------------------------------------------------------------------------*/
+int getContadorSegundo(Game &game){
+    return game.contadorSegundo;
+}
+/*----------------------------------------------------------------------------*/
+void setContadorSegundo(Game &game, int contadorSegundo){
+    game.contadorSegundo=contadorSegundo;
+}
+/*----------------------------------------------------------------------------*/
+int getContadorMonedas(Game &game){
+    return game.contadorMonedas;
+}
+/*----------------------------------------------------------------------------*/
+void setContadorMonedas(Game &game, int contadorMonedas){
+    game.contadorMonedas=contadorMonedas;
 }
 /*----------------------------------------------------------------------------*/
 
@@ -193,15 +212,15 @@ void setParametros(Game &game, string clave, string valor){
         game.parametros.claveposXE = valor;
     else if (clave == "posYE")
         game.parametros.claveposYE = valor;
-    else if (clave == "im" || clave == "iM" || clave == "Im" || clave == "IM")
+    else if (clave == "im" ||  clave == "IM")
         game.parametros.claveIM = valor;
-    else if (clave == "vm" || clave == "vM" || clave == "Vm" || clave == "VM")
+    else if (clave == "vm" || clave == "VM")
         game.parametros.claveVM = valor;
-    else if (clave == "ib" || clave == "iB" || clave == "Ib" || clave == "IB")
+    else if (clave == "ib" || clave == "IB")
         game.parametros.claveIB = valor;
-    else if (clave == "vb" || clave == "vB" || clave == "Vb" || clave == "VB")
+    else if (clave == "vb" || clave == "VB")
         game.parametros.claveVB =valor;
-    else if (clave == "ip" || clave == "iP" || clave == "Ip" || clave == "IP")
+    else if (clave == "ip" || clave == "IP")
         game.parametros.claveIP =valor;
 
     }
@@ -228,16 +247,7 @@ void dibujarEntidades(Game game,SDL_Renderer *renderer){
 
 }
 /*----------------------------------------------------------------------------*/
-void destruirGame(Game &game){
-    for(int f=0;f<game.fila;f++){
-        for(int c=0;c<game.columna;c++){
-            destruirTerreno(game.terreno[f][c]);
-        }
-    }
-    eliminarLista(game.minas);
-    //delete &game;
-}
-/*----------------------------------------------------------------------------*/
+
 bool getGameOver(Game &game){
     return game.gameover;
 }
@@ -275,15 +285,15 @@ char* getDireccion(Game &game){
     return game.direccion;
 }
 /*----------------------------------------------------------------------------*/
-int getColumnaLimite(Game &game){
+int getColumna(Game &game){
     return game.columna;
 }
 /*----------------------------------------------------------------------------*/
-int getFilaLimite(Game &game){
+int getFila(Game &game){
     return game.fila;
 }
 /*----------------------------------------------------------------------------*/
-void evaluarColision(Game &game,Lista &locomotora){
+void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer *renderer){
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
     Vagon *vagon = (Vagon*)primero(locomotora)->ptrDato;
@@ -311,10 +321,14 @@ void evaluarColision(Game &game,Lista &locomotora){
             nodo = siguiente(locomotora, nodo);
         }
     }
-    else if(game.terreno[fila][columna].ptrMina==NULL &&
-            game.terreno[fila][columna].ptrEstacion==NULL &&
-            vagon->detenido){
 
+    else if(game.terreno[fila][columna].ptrMoneda!=NULL && !(vagon->detenido)){
+      reemplazarMoneda(game.terreno[fila][columna].ptrMoneda,renderer);
+      game.terreno[fila][columna].ptrMoneda=NULL;
+      game.contadorMonedas=game.contadorMonedas+1;
+
+    }
+     if(game.terreno[fila][columna].ptrMina==NULL && game.terreno[fila][columna].ptrEstacion==NULL && vagon->detenido){
         while(nodo!=finLista()){
             vagon = (Vagon*)nodo->ptrDato;
             vagon->detenido = false;
@@ -347,6 +361,7 @@ void actualizarMinas(Game &game){
         ptrMina = siguiente(game.minas,ptrMina);
     }
 }
+/*----------------------------------------------------------------------------*/
 
 void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
     int oro=0; int plata=0; int bronce=0; int platino=0; int carbon=0; int roca=0;
@@ -393,7 +408,8 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
             "  Bronce: " << bronce << "/" << bronceMax <<
             "  Platino: " << platino << "/" << platinoMax <<
             "  Roca: " << roca << "/" << rocaMax <<
-            "  Carbon: " << carbon << "/" << carbonMax;
+            "  Carbon: " << carbon << "/" << carbonMax<<
+             "  Monedas:"<<game.contadorMonedas;
     string temp = ss.str();
     char const * puntuacion = temp.c_str();
     TTF_Font* arial = TTF_OpenFont("arial.ttf", 16);
@@ -414,4 +430,50 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
     TTF_CloseFont(arial);
     SDL_DestroyTexture(Message);
     SDL_FreeSurface(surfaceMessage);
+}
+/*----------------------------------------------------------------------------*/
+void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM){
+    Moneda *moneda= new Moneda;
+    int intervaloFinal=game.contadorSegundo+VM;
+    bool is=false;
+    srand(time(NULL));
+    int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
+    int columna=rand()%20;
+    while(is!=true){
+         int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
+         int columna=rand()%20;
+        if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
+           game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
+            crearMoneda(*moneda,renderer,fila,columna,game.anchoCelda,game.altoCelda,game.altoSprite,VM,intervaloFinal);
+            ubicarMoneda(game,moneda);
+            adicionarFinal(monedas,moneda);
+            is=true;
+        }
+    }
+
+
+}
+/*------------------------------------------------------*/
+void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer){
+PtrNodoLista ptrMoneda= primero(monedas);
+while(ptrMoneda!=finLista()){
+    Moneda *moneda= (Moneda*) ptrMoneda->ptrDato;
+            if(getContadorSegundo(game)==moneda->intervaloFinal){
+                reemplazarMoneda(moneda,renderer); //Reemplazar por suelo original
+                game.terreno[moneda->fila][moneda->columna].ptrMoneda=NULL;
+                eliminarNodo(monedas,ptrMoneda);
+
+            }
+       ptrMoneda=siguiente(monedas,ptrMoneda);
+}
+
+}
+
+void destruirGame(Game &game,SDL_Renderer* renderer){
+    for(int f=0;f<game.fila;f++){
+        for(int c=0;c<game.columna;c++){
+            destruirTerreno(game.terreno[f][c]);
+        }
+    }
+    eliminarLista(game.minas);
 }

@@ -6,7 +6,8 @@
 typedef struct{
     int fila;
     int columna;
-    int intervaloVida;
+    int monedaVida;
+    int intervaloFinal;
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
 
@@ -20,7 +21,7 @@ typedef struct{
 
   moneda : estructura de datos a ser creado.
 */
-void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,int intervaloVida);
+void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,int intervaloVida,int intervaloFinal);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la moneda  debe haber sido creada.
@@ -51,7 +52,7 @@ int getColumna(Moneda *moneda);
 
 */
 
-int getIntervaloVida(Moneda moneda);
+int getIntervaloVida(Moneda &moneda);
 /*----------------------------------------------------------------------------*/
 
 /*
@@ -63,7 +64,32 @@ int getIntervaloVida(Moneda moneda);
 
 */
 
-bool setIntervaloVida(Moneda &moneda, int intervaloVida);
+bool setIntervaloVida(Moneda &moneda, int monedaVida);
+/*----------------------------------------------------------------------------*/
+
+
+/*
+  pre : la moneda tiene que estar creada.
+  post: Se obtiene el intervaloVida
+
+  moneda : estructura de datos a ser usada.
+
+
+*/
+
+int getIntervaloFinal(Moneda &moneda);
+/*----------------------------------------------------------------------------*/
+
+/*
+  pre : la moneda tiene que estar creada.
+  post: Se setea el intervaloVida
+
+  moneda : estructura de datos a ser usada.
+  return:intervaloVida
+
+*/
+
+bool setIntervaloFinal(Moneda &moneda, int intervaloFinal);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la moneda debe haber sido creada.
@@ -85,5 +111,8 @@ void dibujarMoneda(Moneda *moneda,SDL_Renderer* renderer);
 */
 
 void destruirMoneda(Moneda *moneda);
+
+
+void reemplazarMoneda(Moneda *moneda,SDL_Renderer *renderer);
 
 #endif

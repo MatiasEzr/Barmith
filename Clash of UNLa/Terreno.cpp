@@ -36,6 +36,9 @@ void crearTerreno(Terreno &terreno,int fila,int columna, int ancho, int alto, SD
 void dibujarTerreno(Terreno &terreno,SDL_Renderer* renderer){
     SDL_RenderCopy(renderer,terreno.imagen,NULL,&(terreno.rectImag));
 }
+void setPtrMina(Terreno &terreno,Mina *mina){
+    terreno.ptrMina=mina;
+}
 /*----------------------------------------------------------------------------*/
 void dibujarEntidad(Terreno &terreno,SDL_Renderer* renderer, int intervalo){
     if(terreno.ptrBandido!=NULL){

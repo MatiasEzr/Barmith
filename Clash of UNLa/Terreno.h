@@ -31,7 +31,7 @@ typedef struct{
 
   terreno : estructura de datos a ser creado.
 */
-void crearTerreno(Terreno &mapa,int fila,int columna, int ancho, int alto, SDL_Renderer* renderer,char rand[]);
+void crearTerreno(Terreno &terreno,int fila,int columna, int ancho, int alto, SDL_Renderer* renderer,char rand[]);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el terreno debe haber sido creado.
@@ -41,7 +41,7 @@ void crearTerreno(Terreno &mapa,int fila,int columna, int ancho, int alto, SDL_R
 
 */
 
-void dibujarTerreno(Terreno &mapa, SDL_Renderer* renderer);
+void dibujarTerreno(Terreno &terreno, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el terreno debe haber sido creado.
@@ -51,7 +51,7 @@ void dibujarTerreno(Terreno &mapa, SDL_Renderer* renderer);
 
 */
 
-void dibujarEntidad(Terreno &mapa, SDL_Renderer* renderer, int intervalo);
+void dibujarEntidad(Terreno &terreno, SDL_Renderer* renderer, int intervalo);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el terreno debe haber sido creado.
@@ -60,5 +60,7 @@ void dibujarEntidad(Terreno &mapa, SDL_Renderer* renderer, int intervalo);
   terreno: estructura de datos a ser usado.
 
 */
-void destruirTerreno(Terreno &mapa);
+
+void setPtrMina(Terreno &terreno,Mina *mina);
+void destruirTerreno(Terreno &terreno);
 #endif

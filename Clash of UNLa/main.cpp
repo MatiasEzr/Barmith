@@ -2,7 +2,7 @@
 #include <string.h>
 #include <conio.h>
 #include <stdlib.h>
-
+#include <time.h>
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -18,8 +18,10 @@
 
 using namespace std;
 
-#define milisegundos 30
+#define milisegundos 100 //30
 
+
+int numeroStringRand(string numero);
 void correrGame(Game &game,int anchoVentana,int altoVentana);
 void leerArchivos(Game &game,SDL_Renderer *renderer);
 void imprimirMinas(Game &game);
@@ -33,12 +35,9 @@ void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
 bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
 
-        /*datos que leo desde un archivo************/
-
         int anchoCelda = 50;
         int altoCelda = 40;
         int altoSprite = 50;
-        /********************************************/
 
         int anchoVentana = 800;
         int altoVentana = 600;
@@ -163,23 +162,30 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         crearEstacion(estacion,renderer,8,7,anchoCelda,altoCelda,altoSprite);
         ubicarEstacion(game,ptrEstacion);
 
+
+
+
         Lista locomotora;
         crearLista(locomotora,NULL);
-        Vagon vagon1, vagon2, vagon3, vagon4, vagon5;
+        Vagon vagon1, vagon2, vagon3, vagon4, vagon5,vagon6,vagon7;
 
-        crearVagon(vagon1,"c1", 0, 4,"der",anchoCelda, altoCelda, altoSprite,0,"");//
+        crearVagon(vagon1,"c1", 0, 7,"der",anchoCelda, altoCelda, altoSprite,0,"");//
         ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
         setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));
 
 
-        crearVagon(vagon2,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,10,"oro");
+        crearVagon(vagon2,"c2", 0, 6,"der",anchoCelda, altoCelda, altoSprite,10,"oro");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon2));
-        crearVagon(vagon3,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,30,"bronce");
+        crearVagon(vagon3,"c2", 0, 5,"der",anchoCelda, altoCelda, altoSprite,30,"bronce");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon3));
-        crearVagon(vagon4,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,44,"plata");
+        crearVagon(vagon4,"c2", 0, 4,"der",anchoCelda, altoCelda, altoSprite,20,"plata");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon4));
-        crearVagon(vagon5,"c2", 0, 0,"der",anchoCelda, altoCelda, altoSprite,22,"roca");
+        crearVagon(vagon5,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,22,"roca");
         ubicarVagon(game,adicionarFinal(locomotora,&vagon5));
+        crearVagon(vagon6,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,22,"platino");
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon6));
+         crearVagon(vagon7,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,22,"carbon");
+        ubicarVagon(game,adicionarFinal(locomotora,&vagon7));
 
 
         Bandido bandido;
@@ -187,35 +193,45 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,"Oro",3);
         ubicarBandido(game,ptrBandido);
 
-        Moneda moneda;
-        Moneda *ptrMoneda = &moneda;
-        crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite,5);
-        ubicarMoneda(game,ptrMoneda);
+        Lista monedas;
+        crearLista(monedas,NULL);
+        //Moneda *ptrMoneda = &moneda;
+        //crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite,5);
+        //ubicarMoneda(game,ptrMoneda);
 
 
         dibujarTerreno(game,renderer);
         dibujarEntidades(game,renderer);
         SDL_RenderPresent(renderer);
-        SDL_Delay(500);
-
-
+        SDL_Delay(1000);
+        int IM=numeroStringRand(game.parametros.claveIM);//Numero random para IM de entrada
+        cout<<IM;
         while(!getGameOver(game)){
             controlarEventos(game,event,keys);
 
             if(getIntervalo(game)==10){
                 setIntervalo(game,0);
+                setContadorSegundo(game,getContadorSegundo(game)+1);//Cada vez que pasan los 10 intervalos, suma un segundo
+                cout<<"SegundoActual:"<<getContadorSegundo(game)<<endl; //borrar
                 Vagon * vagon = (Vagon*)primero(locomotora)->ptrDato;
                 if(!(vagon->detenido)){
-                    cambiarColumna(game,primero(locomotora));//fila del tablero
-                    cambiarFila(game,primero(locomotora));//capa del mapa
+                    cambiarColumna(game,primero(locomotora));
+                    cambiarFila(game,primero(locomotora));
                 }
-                //hasta aca todos los carritos se encuentran en su punto casilla de tablero
-                //podemos evaluar la adquisición de monedas, de minas o ataques de bandidos
 
-                //luego redireccionamos a todos los vagons desde el primero
                 cambiarDireccion(game, locomotora);
-                evaluarColision(game,locomotora);
+                evaluarColision(game,locomotora,monedas,renderer);
                 actualizarMinas(game);
+                actualizarMonedas(game,monedas,renderer);
+
+                if(getContadorSegundo(game)==IM){
+                    int VM=numeroStringRand(game.parametros.claveVM);
+                    generarMonedas(game,monedas,renderer,VM);
+                    IM=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIM);
+                    cout<<"IM:"<<IM<<endl; //Prueba //borrar
+                    cout<<"VM:"<<VM<<endl;
+                }
+
             }
             if(!getGameOver(game)){
                 if(getIntervalo(game)==2){
@@ -226,14 +242,18 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 dibujarEntidades(game,renderer);
                 dibujarPuntuacion(game,renderer,locomotora);
                 SDL_RenderPresent(renderer);
+
                 SDL_Delay(milisegundos);
 
-                setIntervalo(game,getIntervalo(game)+1);
+            setIntervalo(game,getIntervalo(game)+1);
             }
+
+
         }
         cout<<"Destruimos las instancias"<<endl;
         eliminarLista(locomotora);
-        destruirGame(game);
+        eliminarLista(monedas);
+        destruirGame(game,renderer);
         TTF_Quit();
         IMG_Quit();
         SDL_DestroyRenderer(renderer);
@@ -258,7 +278,7 @@ bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
     int c=getColumna(*vagon)+desplazamientoHorizontal;
     int f=getFila(*vagon)+desplazamientoVertical;
 
-    if((c>=0 && c<getColumnaLimite(game)) && (f>=0 && f<getFilaLimite(game))){
+    if((c>=0 && c<getColumna(game)) && (f>=0 && f<getFila(game))){
 
         Terreno terrenoAux =getTerreno(game)[f][c];
         if(terrenoAux.ptrNodoVagon==NULL){
@@ -353,18 +373,20 @@ void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
                     setDireccion(game,"aba");
                 }
                 if(keys[SDL_SCANCODE_SPACE]){
-                    //
+
                 }
                 break;
-                /*
-            case SDL_MOUSEBUTTONDOWN:
-                if(SDL_GetMouseState(NULL,NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)){
-                    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "CLICK","Con el boton izquierdo del mouse.",NULL);
-                }
-                break;
-                */
+
         }
     }
+}
+
+int numeroStringRand(string numero){
+    srand(time(NULL));
+    int i=0;
+    int j = atoi(numero.c_str());
+    i=1+rand()%j;
+    return i;
 }
 
 

@@ -15,7 +15,8 @@
 typedef struct{
     bool gameover;
     int intervalo;
-
+    int contadorSegundo;
+    int contadorMonedas;
     int anchoCelda;
     int altoCelda;
     int altoSprite;
@@ -47,6 +48,11 @@ int getIntervalo(Game &game);
 /*----------------------------------------------------------------------------*/
 void setIntervalo(Game &game, int intervalo);
 /*----------------------------------------------------------------------------*/
+int getContadorSegundo(Game &game);
+
+/*----------------------------------------------------------------------------*/
+void setContadorSegundo(Game &game,int contadorSegundo);
+/*----------------------------------------------------------------------------*/
 void setTerreno(Game &game, SDL_Renderer * renderer);
 /*----------------------------------------------------------------------------*/
 Terreno** getTerreno(Game &game);
@@ -67,6 +73,7 @@ void setParametros(Game &game, string clave, string valor);
 /*----------------------------------------------------------------------------*/
 void leerParametros(Game &game);
 /*----------------------------------------------------------------------------*/
+
 /*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
@@ -78,7 +85,7 @@ bool getGameOver(Game &game);
 /*----------------------------------------------------------------------------*/
 void setGameOver(Game &game, bool flag);
 /*----------------------------------------------------------------------------*/
-void destruirGame(Game &game);
+void destruirGame(Game &game,SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void ubicarVagon(Game &game,PtrNodoLista ptrNodo);
 /*----------------------------------------------------------------------------*/
@@ -94,13 +101,20 @@ void setDireccion(Game &game,char direccion[]);
 /*----------------------------------------------------------------------------*/
 char* getDireccion(Game &game);
 /*----------------------------------------------------------------------------*/
-int getColumnaLimite(Game &game);
+int getColumna(Game &game);
 /*----------------------------------------------------------------------------*/
-int getFilaLimite(Game &game);
+int getFila(Game &game);
 /*----------------------------------------------------------------------------*/
-void evaluarColision(Game &game,Lista &locomotora);
+void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void actualizarMinas(Game &game);
+/*----------------------------------------------------------------------------*/
+int contadorMonedas(Game &game);
+void setContadorMonedas(Game &game, int contadorMonedas);
+/*----------------------------------------------------------------------------*/
+void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM);
+/*----------------------------------------------------------------------------*/
+void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora);
 /*----------------------------------------------------------------------------*/
