@@ -100,11 +100,14 @@ void recolectarCajas(Mina &mina, Lista &locomotora){
 
     while(ptrVagon!=finLista()){
         Vagon *vagon = (Vagon*)ptrVagon->ptrDato;
-        if(getCodItem(*vagon)==getCodItem(&mina)){
+        if(getCodItem(*vagon)==getCodItem(&mina) || getCodItem(*vagon)=="nada"){
             PtrNodoCola ptrCaja = colaFrente(mina.cajas);
             while(ptrCaja!=finCola()){
                 Caja * caja = (Caja*) ptrCaja->ptrDato;
                 if((getCapacidad(*vagon)-getCantidadItem(*vagon))>=getCapacidadMaxima(*caja)){
+                    if(getCodItem(*vagon)=="nada"){
+                        setCodItem(*vagon, getCodItem(&mina));
+                    }
                     Caja * cajaLista = new Caja;
                     *cajaLista = *(Caja*)desencolar(mina.cajas);
                     agregar(*getCajas(*vagon), cajaLista);

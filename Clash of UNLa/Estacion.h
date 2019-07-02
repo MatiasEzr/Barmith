@@ -94,4 +94,11 @@ void dibujarEstacion(Estacion *estacion,SDL_Renderer* renderer);
 */
 int venderVagon(Estacion &estacion, int cantidadMonedas);
 
+
+/*
+    pre: Estacion creada
+    post: Se libera la memoria de la estacion
+*/
+void destruirEstacion(Estacion &estacion);
+
 #endif

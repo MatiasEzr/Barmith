@@ -44,6 +44,6 @@ int venderVagon(Estacion &estacion, int cantidadMonedas){
     return CAPACIDAD_VAGON * cantidadMonedas;
 }
 /*----------------------------------------------------------------------------*/
-void destruirEstacion(Estacion *estacion){
-    SDL_DestroyTexture(estacion->imagen);
+void destruirEstacion(Estacion &estacion){
+    SDL_DestroyTexture(estacion.imagen);
 }

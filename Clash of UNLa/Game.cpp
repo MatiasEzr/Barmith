@@ -315,6 +315,7 @@ void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer *r
         }
     }
     else if(game.terreno[fila][columna].ptrEstacion!=NULL && !(vagon->detenido)){
+        agregarVagon(game, locomotora, *(game.terreno[fila][columna].ptrEstacion));
         while(nodo!=finLista()){
             vagon = (Vagon*)nodo->ptrDato;
             vagon->detenido = true;
@@ -468,7 +469,7 @@ while(ptrMoneda!=finLista()){
 }
 
 }
-
+/*------------------------------------------------------*/
 void destruirGame(Game &game,SDL_Renderer* renderer){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
@@ -476,4 +477,121 @@ void destruirGame(Game &game,SDL_Renderer* renderer){
         }
     }
     eliminarLista(game.minas);
+}
+/*------------------------------------------------------*/
+void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion){
+    if(getContadorMonedas(game)!=0){
+        Vagon * vagon = (Vagon*)ultimo(locomotora)->ptrDato;
+        int posX, posY;
+        char * direccion = new char;
+
+        nuevaPosicionVagon(game, vagon, posX, posY, direccion);
+        if(strcmp(direccion,"nada")!=0){
+            Vagon * nuevoVagon = new Vagon;
+            crearVagon(*nuevoVagon,"c2", posX, posY,direccion,getAnchoCelda(*vagon), getAltoCelda(*vagon), getAltoSprite(*vagon), 5*getContadorMonedas(game),"nada");
+            ubicarVagon(game,adicionarFinal(locomotora,nuevoVagon));
+            setContadorMonedas(game, 0);
+        }
+    }
+}
+/*------------------------------------------------------*/
+void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char * direccion){
+    bool arribaNull = false; bool abajoNull = false; bool derechaNull = false; bool izquierdaNull = false;
+    int fila = getFila(*ultimo);
+    int columna = getColumna(*ultimo);
+
+    if(game.terreno[fila-1][columna].ptrMina == NULL &&
+        game.terreno[fila-1][columna].ptrEstacion ==NULL &&
+        game.terreno[fila-1][columna].ptrNodoVagon == NULL &&
+        fila!=0) arribaNull = true;
+
+    if(game.terreno[fila+1][columna].ptrMina == NULL &&
+        game.terreno[fila+1][columna].ptrEstacion ==NULL &&
+        game.terreno[fila+1][columna].ptrNodoVagon == NULL &&
+        fila!=getFila(game)) abajoNull = true;
+
+    if(game.terreno[fila][columna-1].ptrMina == NULL &&
+        game.terreno[fila][columna-1].ptrEstacion ==NULL &&
+        game.terreno[fila][columna-1].ptrNodoVagon == NULL &&
+        columna!=0) izquierdaNull = true;
+
+    if(game.terreno[fila][columna+1].ptrMina == NULL &&
+        game.terreno[fila][columna+1].ptrEstacion ==NULL &&
+        game.terreno[fila][columna+1].ptrNodoVagon == NULL &&
+        columna!=getColumna(game)) derechaNull = true;
+
+    strcpy(direccion,"nada");
+
+
+    if(strcmp(getDireccion(*ultimo),"arr")==0){
+        if(abajoNull){
+            strcpy(direccion,"arr");
+            posX = fila+1;
+            posY = columna;
+        }
+        else if(derechaNull){
+            strcpy(direccion,"der");
+            posX = fila;
+            posY = columna+1;
+        }
+        else if (izquierdaNull){
+            strcpy(direccion,"izq");
+            posX = fila;
+            posY = columna-1;
+        }
+    }
+
+    else if(strcmp(getDireccion(*ultimo),"aba")==0){
+        if(arribaNull){
+            strcpy(direccion,"aba");
+            posX = fila-1;
+            posY = columna;
+        }
+        else if(derechaNull){
+            strcpy(direccion,"der");
+            posX = fila;
+            posY = columna+1;
+        }
+        else if (izquierdaNull){
+            strcpy(direccion,"izq");
+            posX = fila;
+            posY = columna-1;
+        }
+    }
+
+    else if(strcmp(getDireccion(*ultimo),"der")==0){
+        if(izquierdaNull){
+            strcpy(direccion,"der");
+            posX = fila;
+            posY = columna-1;
+        }
+        else if(arribaNull){
+            strcpy(direccion,"arr");
+            posX = fila-1;
+            posY = columna;
+        }
+        else if (abajoNull){
+            strcpy(direccion,"aba");
+            posX = fila+1;
+            posY = columna;
+        }
+    }
+
+    else if(strcmp(getDireccion(*ultimo),"izq")==0){
+        if(derechaNull){
+            strcpy(direccion,"izq");
+            posX = fila;
+            posY = columna+1;
+        }
+        else if(arribaNull){
+            strcpy(direccion,"arr");
+            posX = fila-1;
+            posY = columna;
+        }
+        else if (abajoNull){
+            strcpy(direccion,"aba");
+            posX = fila+1;
+            posY = columna;
+        }
+    }
 }

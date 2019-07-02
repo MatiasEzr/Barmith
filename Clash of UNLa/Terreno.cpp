@@ -1,5 +1,5 @@
 #include "Terreno.h"
-#include "Bandido.h";
+#include "Bandido.h"
 #include "Mina.h"
 #include "Moneda.h"
 #include "Vagon.h"
@@ -71,6 +71,10 @@ void destruirTerreno(Terreno &terreno){
     if(terreno.ptrMoneda!=NULL){
         destruirMoneda(terreno.ptrMoneda);
         delete terreno.ptrMoneda;
+    }
+    if(terreno.ptrEstacion!=NULL){
+        destruirEstacion(*(terreno.ptrEstacion));
+        delete terreno.ptrEstacion;
     }
     //delete &terreno;
 }

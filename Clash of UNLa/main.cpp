@@ -174,20 +174,6 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));
 
 
-        crearVagon(vagon2,"c2", 0, 6,"der",anchoCelda, altoCelda, altoSprite,10,"oro");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon2));
-        crearVagon(vagon3,"c2", 0, 5,"der",anchoCelda, altoCelda, altoSprite,30,"bronce");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon3));
-        crearVagon(vagon4,"c2", 0, 4,"der",anchoCelda, altoCelda, altoSprite,20,"plata");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon4));
-        crearVagon(vagon5,"c2", 0, 3,"der",anchoCelda, altoCelda, altoSprite,22,"roca");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon5));
-        crearVagon(vagon6,"c2", 0, 2,"der",anchoCelda, altoCelda, altoSprite,22,"platino");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon6));
-         crearVagon(vagon7,"c2", 0, 1,"der",anchoCelda, altoCelda, altoSprite,22,"carbon");
-        ubicarVagon(game,adicionarFinal(locomotora,&vagon7));
-
-
         Bandido bandido;
         Bandido *ptrBandido = &bandido;
         crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,"Oro",3);

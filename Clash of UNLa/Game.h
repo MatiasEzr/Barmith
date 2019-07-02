@@ -8,6 +8,7 @@
 #include "Comanda.h"
 #include "Parametros.h"
 #include "Estacion.h"
+#include "Vagon.h"
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -117,5 +118,9 @@ void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM);
 void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora);
+/*----------------------------------------------------------------------------*/
+void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char * direccion);
+/*----------------------------------------------------------------------------*/
+void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion);
 /*----------------------------------------------------------------------------*/
 #endif
