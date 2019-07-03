@@ -6,6 +6,16 @@
 #include "Moneda.h"
 #include "Lista.h"
 #include "Estacion.h"
+
+/**
+    AXIOMAS:
+    Representa la zona disponible para que el tren se mueva
+*/
+
+/**
+    Definición del tipo de dato.
+*/
+
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
@@ -60,7 +70,13 @@ void dibujarEntidad(Terreno &terreno, SDL_Renderer* renderer, int intervalo);
   terreno: estructura de datos a ser usado.
 
 */
+void destruirTerreno(Terreno &terreno);
+
+/*
+  pre : lista Creada con crearLista().
+  post: devuelve el siguiente al último nodo de la lista,
+
+*/
 
 void setPtrMina(Terreno &terreno,Mina *mina);
-void destruirTerreno(Terreno &terreno);
 #endif

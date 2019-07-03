@@ -3,6 +3,17 @@
 
 #include <SDL.h>
 
+/**
+    AXIOMAS:
+    F y C no pueden estar fuera de rango.
+    invervaloFinal [0..IM]
+    monedaVida [0..IV]
+*/
+
+/**
+    Definición del tipo de dato.
+*/
+
 typedef struct{
     int fila;
     int columna;
@@ -17,7 +28,7 @@ typedef struct{
 /*----------------------------------------------------------------------------*/
 /*
   pre : la moneda no debe haber sido creada.
-  post: la moneda queda creada y preparado para ser usado.
+  post: la moneda queda creada y preparada para ser usada.
 
   moneda : estructura de datos a ser creado.
 */

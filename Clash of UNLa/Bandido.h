@@ -6,6 +6,18 @@
 
 using namespace std;
 
+/**
+    AXIOMAS:
+    Fila y Columna no pueden estar fuera de rango.
+    vidaBandido > 0 [0..VB]
+    intervaloFinal > 0 [0..IB]
+*/
+
+
+/**
+    Definición del tipo de dato.
+*/
+
 
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS

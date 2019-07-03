@@ -223,8 +223,8 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                     generarMonedas(game,monedas,renderer,VM);
                     IM=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIM); ///Le sumo los segundos actuales al IM para saber el segundo final
                                                                                           ///En la cual aparece la moneda
-                }*/
-
+                }
+*/
                   ///GeneracionDeBandido. Segundo=IntervaloBandido+Segundo
 /*
                 if(getContadorSegundo(game)==IB){

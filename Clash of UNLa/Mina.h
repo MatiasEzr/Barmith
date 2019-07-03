@@ -1,14 +1,23 @@
 #ifndef __MINA_H__
 #define __MINA_H__
 
-
-
 #include <string>
 #include <SDL.h>
 #include "Cola.h"
 #include "Lista.h"
 
 using namespace std;
+
+/**
+    AXIOMAS:
+    Los items pueden ser oro, plata, bronce, platino, roca y carbon.
+    F y C no pueden estar fuera de rango.
+*/
+
+/**
+    Definición del tipo de dato.
+*/
+
 
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS

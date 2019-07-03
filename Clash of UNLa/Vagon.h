@@ -5,6 +5,18 @@
 #include "Pila.h"
 #include <string>
 
+/**
+    AXIOMAS:
+    El vagon inicia en la posicion dada por fila y columna
+    El vagon inicia con una capacidad definida por 5kg*cantMonedas
+    El vagon solo puede almacenar items de su mismo tipo dado por codItem
+*/
+
+
+/**
+    Definición del tipo de dato.
+*/
+
 /*----------------------------------------------------------------------------*/
 //                                ESTRUCTURAS
 /*----------------------------------------------------------------------------*/
