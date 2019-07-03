@@ -34,7 +34,7 @@ void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
 bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
 
-        int anchoCelda = 40;
+        int anchoCelda = 50;
         int altoCelda = 40;
         int altoSprite = 50;
 
@@ -213,20 +213,19 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 //Revisa si las minas ya tienen que producir un item
                 actualizarMinas(game);
                 ///Revisa si se acabo el tiempoDeVida de las monedas y/o bandidos
-                //actualizarMonedas(game,monedas,renderer);
-                //actualizarBandidos(game,monedas,renderer);
-
+                actualizarMonedas(game,monedas,renderer);
+                actualizarBandidos(game,monedas,renderer);
               ///  GeneracionDeMonedas. Segundo=IntervaloMoneda+Segundo
-/*
+
                if(getContadorSegundo(game)==IM){
                     int VM=numeroStringRand(game.parametros.claveVM);
                     generarMonedas(game,monedas,renderer,VM);
                     IM=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIM); ///Le sumo los segundos actuales al IM para saber el segundo final
                                                                                           ///En la cual aparece la moneda
                 }
-*/
+
                   ///GeneracionDeBandido. Segundo=IntervaloBandido+Segundo
-/*
+
                 if(getContadorSegundo(game)==IB){
                     int VB=numeroStringRand(game.parametros.claveVB);
                     generarBandidos(game,monedas,renderer,VB);
@@ -234,7 +233,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                     cout<<"IB:"<<IB<<endl; //Prueba //borrar
                     cout<<"VB:"<<VB<<endl;
                 }
-*/
+
             }
             if(!getGameOver(game)){
                 if(getIntervalo(game)==2){

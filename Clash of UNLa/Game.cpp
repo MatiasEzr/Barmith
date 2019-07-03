@@ -345,9 +345,9 @@ void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,Lista &bandidos
       game.terreno[fila][columna].ptrMoneda=NULL;
       game.contadorMonedas=game.contadorMonedas+1;
 
-      PtrNodoLista ptrMoneda = localizarDato(monedas,game.terreno[fila][columna].ptrMoneda);
-      eliminarNodo(monedas,ptrMoneda);
-      reordenar(monedas);
+     // PtrNodoLista ptrMoneda = localizarDato(monedas,game.terreno[fila][columna].ptrMoneda);
+      //eliminarNodo(monedas,ptrMoneda);
+      //reordenar(monedas);
 
     }
      if(game.terreno[fila][columna].ptrMina==NULL && game.terreno[fila][columna].ptrEstacion==NULL && vagon->detenido){
@@ -462,7 +462,7 @@ void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM){
     srand(time(NULL));
     while(is!=true){
          int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
-         int columna=rand()%20;
+         int columna=rand()%16;
         if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
            game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
             crearMoneda(*moneda,renderer,fila,columna,game.anchoCelda,game.altoCelda,game.altoSprite,VM,intervaloFinal);
@@ -483,8 +483,8 @@ while(ptrMoneda!=finLista()){
             if(getContadorSegundo(game)==moneda->intervaloFinal){
                 reemplazarMoneda(moneda,renderer); //Reemplazar por suelo original
                 game.terreno[moneda->fila][moneda->columna].ptrMoneda=NULL;
-                eliminarNodo(monedas,ptrMoneda);
-                reordenar(monedas);
+                //eliminarNodo(monedas,ptrMoneda);
+               // reordenar(monedas);
 
             }
        ptrMoneda=siguiente(monedas,ptrMoneda);
@@ -503,7 +503,7 @@ void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB){
 
     while(is!=true){
          int fila =rand()%15; //Definir los drops para que no colisiones con los sprites
-         int columna=rand()%20;
+         int columna=rand()%16;
          //Me fijo que la fila y columna dada de forma random no este ya ocupada, si esta ocupada genero otra fila y columna
         if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
            game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
@@ -547,8 +547,8 @@ while(ptrBandido!=finLista()){
             if(getContadorSegundo(game)==bandido->intervaloFinal){
                 reemplazarBandido(bandido,renderer); //Reemplazar por suelo original
                 game.terreno[bandido->fila][bandido->columna].ptrBandido=NULL;
-                eliminarNodo(bandidos,ptrBandido);
-                reordenar(bandidos);
+                //eliminarNodo(bandidos,ptrBandido);
+                //reordenar(bandidos);
             }
        ptrBandido=siguiente(bandidos,ptrBandido);
 }
