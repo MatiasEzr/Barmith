@@ -1,10 +1,10 @@
 S=10
-P=20
+P=5
 A=30
-posXE=40
-posYE=50
+posXE=11
+posYE=17
 IM=7
-VM=40
-IB=80
-VB=90
+VM=30
+IB=10
+VB=30
 IP=25

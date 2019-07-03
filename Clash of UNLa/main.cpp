@@ -18,10 +18,9 @@
 
 using namespace std;
 
-#define milisegundos 100 //30
+#define milisegundos 30 //30
 
 
-int numeroStringRand(string numero);
 void correrGame(Game &game,int anchoVentana,int altoVentana);
 void leerArchivos(Game &game,SDL_Renderer *renderer);
 void imprimirMinas(Game &game);
@@ -35,15 +34,15 @@ void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
 bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
 
-        int anchoCelda = 50;
+        int anchoCelda = 40;
         int altoCelda = 40;
         int altoSprite = 50;
 
         int anchoVentana = 800;
         int altoVentana = 600;
 
-        int filas = altoVentana/altoCelda;
-        int columnas = anchoVentana/anchoCelda;
+        int filas = altoVentana/altoCelda; //15
+        int columnas = anchoVentana/anchoCelda; //20
 
 
     Game game;
@@ -157,9 +156,13 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         leerMinas(game, renderer); //Archivo
         imprimirMinas(game);
 
+
+        ///Estacion OK
+        int posXE=atoi(game.parametros.claveposXE.c_str()); //Posicion de la estación
+        int posYE=atoi(game.parametros.claveposYE.c_str());
         Estacion estacion;
         Estacion *ptrEstacion=&estacion;
-        crearEstacion(estacion,renderer,8,7,anchoCelda,altoCelda,altoSprite);
+        crearEstacion(estacion,renderer,posXE,posYE,anchoCelda,altoCelda,altoSprite);
         ubicarEstacion(game,ptrEstacion);
 
 
@@ -167,38 +170,38 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
         Lista locomotora;
         crearLista(locomotora,NULL);
-        Vagon vagon1, vagon2, vagon3, vagon4, vagon5,vagon6,vagon7;
+        Vagon vagon;
 
-        crearVagon(vagon1,"c1", 0, 7,"der",anchoCelda, altoCelda, altoSprite,0,"");//
-        ubicarVagon(game,adicionarPrincipio(locomotora,&vagon1));
+        crearVagon(vagon,"c1", 0, 7,"der",anchoCelda, altoCelda, altoSprite,0,"");//
+        ubicarVagon(game,adicionarPrincipio(locomotora,&vagon));
         setDireccion(game,getDireccion(*(Vagon*)primero(locomotora)->ptrDato));
 
 
-        Bandido bandido;
-        Bandido *ptrBandido = &bandido;
-        crearBandido(bandido,renderer,4,9,anchoCelda, altoCelda, altoSprite,"Oro",3);
-        ubicarBandido(game,ptrBandido);
+        Lista bandidos;
+        crearLista(bandidos,NULL);
 
         Lista monedas;
         crearLista(monedas,NULL);
-        //Moneda *ptrMoneda = &moneda;
-        //crearMoneda(moneda,renderer,4,6,anchoCelda, altoCelda, altoSprite,5);
-        //ubicarMoneda(game,ptrMoneda);
+
 
 
         dibujarTerreno(game,renderer);
         dibujarEntidades(game,renderer);
         SDL_RenderPresent(renderer);
         SDL_Delay(1000);
-        int IM=numeroStringRand(game.parametros.claveIM);//Numero random para IM de entrada
+        int IM=numeroStringRand(game.parametros.claveIM);//Numero random para IntervaloMoneda
+        int IB=numeroStringRand(game.parametros.claveIB);//Numero random para IntervaloBandido
+        cout<<IB;
         cout<<IM;
         while(!getGameOver(game)){
             controlarEventos(game,event,keys);
-
             if(getIntervalo(game)==10){
                 setIntervalo(game,0);
                 setContadorSegundo(game,getContadorSegundo(game)+1);//Cada vez que pasan los 10 intervalos, suma un segundo
                 cout<<"SegundoActual:"<<getContadorSegundo(game)<<endl; //borrar
+                cout<<"*******longitud de la lista monedas:*****"<<longitud(monedas)<<endl;
+                cout<<"*******longitud de la lista bandido:*****"<<longitud(bandidos)<<endl;
+
                 Vagon * vagon = (Vagon*)primero(locomotora)->ptrDato;
                 if(!(vagon->detenido)){
                     cambiarColumna(game,primero(locomotora));
@@ -206,18 +209,32 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 }
 
                 cambiarDireccion(game, locomotora);
-                evaluarColision(game,locomotora,monedas,renderer);
+                evaluarColision(game,locomotora,monedas,bandidos,renderer);
+                //Revisa si las minas ya tienen que producir un item
                 actualizarMinas(game);
-                actualizarMonedas(game,monedas,renderer);
+                ///Revisa si se acabo el tiempoDeVida de las monedas y/o bandidos
+                //actualizarMonedas(game,monedas,renderer);
+                //actualizarBandidos(game,monedas,renderer);
 
-                if(getContadorSegundo(game)==IM){
+              ///  GeneracionDeMonedas. Segundo=IntervaloMoneda+Segundo
+/*
+               if(getContadorSegundo(game)==IM){
                     int VM=numeroStringRand(game.parametros.claveVM);
                     generarMonedas(game,monedas,renderer,VM);
-                    IM=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIM);
-                    cout<<"IM:"<<IM<<endl; //Prueba //borrar
-                    cout<<"VM:"<<VM<<endl;
-                }
+                    IM=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIM); ///Le sumo los segundos actuales al IM para saber el segundo final
+                                                                                          ///En la cual aparece la moneda
+                }*/
 
+                  ///GeneracionDeBandido. Segundo=IntervaloBandido+Segundo
+/*
+                if(getContadorSegundo(game)==IB){
+                    int VB=numeroStringRand(game.parametros.claveVB);
+                    generarBandidos(game,monedas,renderer,VB);
+                    IB=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIB);
+                    cout<<"IB:"<<IB<<endl; //Prueba //borrar
+                    cout<<"VB:"<<VB<<endl;
+                }
+*/
             }
             if(!getGameOver(game)){
                 if(getIntervalo(game)==2){
@@ -239,6 +256,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
         cout<<"Destruimos las instancias"<<endl;
         eliminarLista(locomotora);
         eliminarLista(monedas);
+        eliminarLista(bandidos);
         destruirGame(game,renderer);
         TTF_Quit();
         IMG_Quit();
@@ -367,12 +385,5 @@ void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
     }
 }
 
-int numeroStringRand(string numero){
-    srand(time(NULL));
-    int i=0;
-    int j = atoi(numero.c_str());
-    i=1+rand()%j;
-    return i;
-}
 
 

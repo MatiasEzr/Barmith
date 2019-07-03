@@ -15,6 +15,8 @@ typedef struct{
     int columna;
     int cantidadItem;
     string codItem;
+    int vidaBandido;
+    int intervaloFinal;//Cuando desaparece
 	SDL_Texture *imagen;
     SDL_Rect rectImag;
 }Bandido;
@@ -27,7 +29,7 @@ typedef struct{
 
   bandido : estructura de datos a ser creado.
 */
-void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem, int cantidadItem);
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem, int cantidadItem,int vidaBandido,int intervaloFinal);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.
@@ -88,5 +90,9 @@ void dibujarBandido(Bandido *bandido,SDL_Renderer* renderer);
 
 void destruirBandido(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
+
+void reemplazarBandido(Bandido *bandido,SDL_Renderer *renderer);
+
+
 
 #endif

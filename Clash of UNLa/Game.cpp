@@ -9,6 +9,7 @@
 #include "Bandido.h"
 #include "Lista.h"
 #include "Vagon.h"
+#include "Moneda.h"
 #include <ctime>
 #include <stdlib.h>
 #include "Caja.h"
@@ -273,7 +274,7 @@ void ubicarMoneda(Game &game,Moneda *moneda){
 }
 /*----------------------------------------------------------------------------*/
 void ubicarEstacion(Game &game,Estacion *estacion){
-        game.terreno[getFila(estacion)][getColumna(estacion)].ptrEstacion=estacion;
+     game.terreno[getFila(estacion)][getColumna(estacion)].ptrEstacion=estacion;
 
 }
 /*----------------------------------------------------------------------------*/
@@ -293,7 +294,7 @@ int getFila(Game &game){
     return game.fila;
 }
 /*----------------------------------------------------------------------------*/
-void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer *renderer){
+void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,Lista &bandidos,SDL_Renderer *renderer){
     int desplazamientoHorizontal=0;
     int desplazamientoVertical=0;
     Vagon *vagon = (Vagon*)primero(locomotora)->ptrDato;
@@ -314,7 +315,7 @@ void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer *r
             nodo = siguiente(locomotora, nodo);
         }
     }
-    else if(game.terreno[fila][columna].ptrEstacion!=NULL && !(vagon->detenido)){
+    else  if(game.terreno[fila][columna].ptrEstacion!=NULL && !(vagon->detenido)){
         agregarVagon(game, locomotora, *(game.terreno[fila][columna].ptrEstacion));
         while(nodo!=finLista()){
             vagon = (Vagon*)nodo->ptrDato;
@@ -322,11 +323,31 @@ void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer *r
             nodo = siguiente(locomotora, nodo);
         }
     }
+    else if(game.terreno[fila][columna].ptrBandido!=NULL && !(vagon->detenido)){
+        //Logica de pedidoItem del bandido
+
+
+
+        reemplazarBandido(game.terreno[fila][columna].ptrBandido,renderer);
+        game.terreno[fila][columna].ptrBandido=NULL;
+
+        //PtrNodoLista ptrBandido = localizarDato(bandidos,game.terreno[fila][columna].ptrBandido);
+        //eliminarNodo(bandidos,ptrBandido);
+        //reordenar(bandidos);
+
+        }
+
+
+
 
     else if(game.terreno[fila][columna].ptrMoneda!=NULL && !(vagon->detenido)){
       reemplazarMoneda(game.terreno[fila][columna].ptrMoneda,renderer);
       game.terreno[fila][columna].ptrMoneda=NULL;
       game.contadorMonedas=game.contadorMonedas+1;
+
+      PtrNodoLista ptrMoneda = localizarDato(monedas,game.terreno[fila][columna].ptrMoneda);
+      eliminarNodo(monedas,ptrMoneda);
+      reordenar(monedas);
 
     }
      if(game.terreno[fila][columna].ptrMina==NULL && game.terreno[fila][columna].ptrEstacion==NULL && vagon->detenido){
@@ -433,13 +454,12 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
     SDL_FreeSurface(surfaceMessage);
 }
 /*----------------------------------------------------------------------------*/
+
 void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM){
     Moneda *moneda= new Moneda;
     int intervaloFinal=game.contadorSegundo+VM;
     bool is=false;
     srand(time(NULL));
-    int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
-    int columna=rand()%20;
     while(is!=true){
          int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
          int columna=rand()%20;
@@ -455,6 +475,7 @@ void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM){
 
 }
 /*------------------------------------------------------*/
+
 void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer){
 PtrNodoLista ptrMoneda= primero(monedas);
 while(ptrMoneda!=finLista()){
@@ -463,9 +484,73 @@ while(ptrMoneda!=finLista()){
                 reemplazarMoneda(moneda,renderer); //Reemplazar por suelo original
                 game.terreno[moneda->fila][moneda->columna].ptrMoneda=NULL;
                 eliminarNodo(monedas,ptrMoneda);
+                reordenar(monedas);
 
             }
        ptrMoneda=siguiente(monedas,ptrMoneda);
+}
+
+}
+/*----------------------------------------------------------------------------*/
+void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB){
+    Bandido *bandido= new Bandido;
+    int intervaloFinal=game.contadorSegundo+VB;
+    string codItem;
+    bool is=false;
+    srand(time(NULL));
+
+
+
+    while(is!=true){
+         int fila =rand()%15; //Definir los drops para que no colisiones con los sprites
+         int columna=rand()%20;
+         //Me fijo que la fila y columna dada de forma random no este ya ocupada, si esta ocupada genero otra fila y columna
+        if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
+           game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
+            int P= numeroStringRand(game.parametros.claveP); //cantidad del item, pudiendo ser un número entero entre 1 y el máximo permitido (P).
+            int opcion=numeroStringRand("6"); //numero random entre 1 y 6 para elegir un codItem
+        switch (opcion) {
+        case 1:
+            codItem="oro";
+            break;
+        case 2:
+            codItem="plata";
+            break;
+        case 3:
+            codItem="bronce";
+            break;
+        case 4:
+            codItem="platino";
+            break;
+        case 5:
+           codItem="roca";
+            break;
+         case 6:
+            codItem="carbon";
+            break;
+        }
+        cout<<"bandido;"<<P<<"codItem:"<<codItem;
+            crearBandido(*bandido,renderer,fila,columna,game.anchoCelda,game.altoCelda,game.altoSprite,codItem,P,VB,intervaloFinal);
+            ubicarBandido(game,bandido);
+            adicionarFinal(bandidos,bandido);
+            is=true;
+        }
+    }
+
+
+}
+/*------------------------------------------------------*/
+void actualizarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer){
+PtrNodoLista ptrBandido= primero(bandidos);
+while(ptrBandido!=finLista()){
+    Bandido *bandido= (Bandido*) ptrBandido->ptrDato;
+            if(getContadorSegundo(game)==bandido->intervaloFinal){
+                reemplazarBandido(bandido,renderer); //Reemplazar por suelo original
+                game.terreno[bandido->fila][bandido->columna].ptrBandido=NULL;
+                eliminarNodo(bandidos,ptrBandido);
+                reordenar(bandidos);
+            }
+       ptrBandido=siguiente(bandidos,ptrBandido);
 }
 
 }
@@ -595,3 +680,12 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
         }
     }
 }
+
+int numeroStringRand(string numero){
+    srand(time(NULL));
+    int i=0;
+    int j = atoi(numero.c_str());
+    i=1+rand()%j;
+    return i;
+}
+

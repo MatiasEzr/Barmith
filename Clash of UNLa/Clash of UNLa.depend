@@ -177,12 +177,12 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
+1562134031 source:c:\users\matias\documents\github\ayed\clash of unla\bandido.cpp
 	"Bandido.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1561993644 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
+1562130662 c:\users\matias\documents\github\ayed\clash of unla\bandido.h
 	<string>
 	<SDL.h>
 
@@ -206,12 +206,12 @@
 1561947951 c:\users\matias\documents\github\ayed\clash of unla\comanda.h
 	<fstream>
 
-1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\estacion.cpp
+1562140255 source:c:\users\matias\documents\github\ayed\clash of unla\estacion.cpp
 	"Estacion.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1561947951 c:\users\matias\documents\github\ayed\clash of unla\estacion.h
+1562140255 c:\users\matias\documents\github\ayed\clash of unla\estacion.h
 	<SDL.h>
 	<SDL_image.h>
 
@@ -222,7 +222,7 @@
 
 1561947951 c:\users\matias\documents\github\ayed\clash of unla\lista.h
 
-1562057343 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+1562141396 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
@@ -240,7 +240,7 @@
 	"Lista.h"
 	"Parametros.h"
 
-1562056202 c:\users\matias\documents\github\ayed\clash of unla\game.h
+1562140447 c:\users\matias\documents\github\ayed\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"
@@ -248,6 +248,7 @@
 	"Comanda.h"
 	"Parametros.h"
 	"Estacion.h"
+	"Vagon.h"
 
 1561947951 c:\users\matias\documents\github\ayed\clash of unla\celda.h
 	<SDL.h>
@@ -286,7 +287,7 @@
 
 1561947951 c:\users\matias\documents\github\ayed\clash of unla\pila.h
 
-1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
+1562099256 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
 	"Mina.h"
 	"Vagon.h"
 	"Caja.h"
@@ -314,7 +315,7 @@
 1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\pila.cpp
 	"Pila.h"
 
-1562054692 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
+1562140255 source:c:\users\matias\documents\github\ayed\clash of unla\terreno.cpp
 	"Terreno.h"
 	"Bandido.h"
 	"Mina.h"
@@ -335,7 +336,67 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1562057314 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
+1562141229 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
+	<string.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<SDL.h>
+	"Game.h"
+	"Celda.h"
+	"Terreno.h"
+	"Bandido.h"
+	"Lista.h"
+	"Vagon.h"
+	"Moneda.h"
+	<ctime>
+	<stdlib.h>
+	"Caja.h"
+	"Mina.h"
+	<SDL_ttf.h>
+	<string>
+
+1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\ventana.cpp
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\bandido.cpp
+	"Bandido.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1561993644 c:\users\matias\documents\github\clash of unla\bandido.h
+	<string>
+	<SDL.h>
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\caja.cpp
+	"Caja.h"
+
+1561993644 c:\users\matias\documents\github\clash of unla\caja.h
+	<string>
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\cola.cpp
+	"Cola.h"
+
+1561947951 c:\users\matias\documents\github\clash of unla\cola.h
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1561947951 c:\users\matias\documents\github\clash of unla\comanda.h
+	<fstream>
+
+1562099256 source:c:\users\matias\documents\github\clash of unla\estacion.cpp
+	"Estacion.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1562099256 c:\users\matias\documents\github\clash of unla\estacion.h
+	<SDL.h>
+	<SDL_image.h>
+
+1562099256 source:c:\users\matias\documents\github\clash of unla\game.cpp
 	<string.h>
 	<iostream>
 	<fstream>
@@ -354,5 +415,122 @@
 	<SDL_ttf.h>
 	<string>
 
-1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\ventana.cpp
+1562099256 c:\users\matias\documents\github\clash of unla\game.h
+	<SDL.h>
+	"Celda.h"
+	"Terreno.h"
+	"Lista.h"
+	"Comanda.h"
+	"Parametros.h"
+	"Estacion.h"
+	"Vagon.h"
+
+1561947951 c:\users\matias\documents\github\clash of unla\celda.h
+	<SDL.h>
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+
+1561993644 c:\users\matias\documents\github\clash of unla\mina.h
+	<string>
+	<SDL.h>
+	"Cola.h"
+	"Lista.h"
+
+1561947951 c:\users\matias\documents\github\clash of unla\lista.h
+
+1562052162 c:\users\matias\documents\github\clash of unla\moneda.h
+	<SDL.h>
+
+1562054707 c:\users\matias\documents\github\clash of unla\terreno.h
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+	"Estacion.h"
+
+1561947951 c:\users\matias\documents\github\clash of unla\parametros.h
+	<string>
+
+1561992959 c:\users\matias\documents\github\clash of unla\vagon.h
+	"Item.h"
+	<SDL.h>
+	"Pila.h"
+	<string>
+
+1561947951 c:\users\matias\documents\github\clash of unla\item.h
+	<string>
+
+1561947951 c:\users\matias\documents\github\clash of unla\pila.h
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\lista.cpp
+	"Lista.h"
+
+1562099256 source:c:\users\matias\documents\github\clash of unla\main.cpp
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"Game.h"
+	"Vagon.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Item.h"
+	"Lista.h"
+	"Parametros.h"
+
+1562099256 source:c:\users\matias\documents\github\clash of unla\mina.cpp
+	"Mina.h"
+	"Vagon.h"
+	"Caja.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1562052418 source:c:\users\matias\documents\github\clash of unla\moneda.cpp
+	"Moneda.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<fstream>
+	<sstream>
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\pila.cpp
+	"Pila.h"
+
+1562099256 source:c:\users\matias\documents\github\clash of unla\terreno.cpp
+	"Terreno.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Vagon.h"
+	"Lista.h"
+	"Estacion.h"
+	<stdio.h>
+	<string.h>
+	<SDL_image.h>
+
+1561947951 source:c:\users\matias\documents\github\clash of unla\vagon.cpp
+	"Vagon.h"
+	"Item.h"
+	"Pila.h"
+	<string.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
 

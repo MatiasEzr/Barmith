@@ -106,14 +106,18 @@ int getColumna(Game &game);
 /*----------------------------------------------------------------------------*/
 int getFila(Game &game);
 /*----------------------------------------------------------------------------*/
-void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,SDL_Renderer* renderer);
+void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,Lista &bandidos,SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void actualizarMinas(Game &game);
 /*----------------------------------------------------------------------------*/
 int contadorMonedas(Game &game);
 void setContadorMonedas(Game &game, int contadorMonedas);
 /*----------------------------------------------------------------------------*/
+void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB);
+/*----------------------------------------------------------------------------*/
 void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM);
+/*----------------------------------------------------------------------------*/
+void actualizarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
@@ -123,4 +127,5 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
 /*----------------------------------------------------------------------------*/
 void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion);
 /*----------------------------------------------------------------------------*/
+int numeroStringRand(string numero);
 #endif
