@@ -34,9 +34,9 @@ void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
 bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 int main(int argc, char** argv) {
 
-        int anchoCelda = 50;
+        int anchoCelda = 40;
         int altoCelda = 40;
-        int altoSprite = 50;
+        int altoSprite = 40;
 
         int anchoVentana = 800;
         int altoVentana = 600;
@@ -209,12 +209,11 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 }
 
                 cambiarDireccion(game, locomotora);
-                evaluarColision(game,locomotora,monedas,bandidos,renderer);
                 //Revisa si las minas ya tienen que producir un item
                 actualizarMinas(game);
                 ///Revisa si se acabo el tiempoDeVida de las monedas y/o bandidos
                 actualizarMonedas(game,monedas,renderer);
-                actualizarBandidos(game,monedas,renderer);
+                actualizarBandidos(game,bandidos,renderer);
               ///  GeneracionDeMonedas. Segundo=IntervaloMoneda+Segundo
 
                if(getContadorSegundo(game)==IM){
@@ -228,16 +227,18 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
                 if(getContadorSegundo(game)==IB){
                     int VB=numeroStringRand(game.parametros.claveVB);
-                    generarBandidos(game,monedas,renderer,VB);
+                    generarBandidos(game,bandidos,renderer,VB);
                     IB=getContadorSegundo(game)+numeroStringRand(game.parametros.claveIB);
                     cout<<"IB:"<<IB<<endl; //Prueba //borrar
                     cout<<"VB:"<<VB<<endl;
                 }
+                evaluarColision(game,locomotora,monedas,bandidos,renderer);
 
             }
             if(!getGameOver(game)){
                 if(getIntervalo(game)==2){
                     setGameOver(game,evaluarColisiones(game,primero(locomotora)));
+                    encuentroConBandido(game,locomotora,bandidos);
                 }
                 SDL_RenderClear(renderer);
                 dibujarTerreno(game,renderer);
@@ -252,6 +253,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
 
         }
+        SDL_Delay(2000);
         cout<<"Destruimos las instancias"<<endl;
         eliminarLista(locomotora);
         eliminarLista(monedas);

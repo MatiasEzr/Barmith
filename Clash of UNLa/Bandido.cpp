@@ -1,4 +1,6 @@
 #include "Bandido.h";
+#include "Vagon.h";
+#include "Caja.h";
 #include <SDL.h>
 #include <SDL_image.h>
 /*----------------------------------------------------------------------------*/
@@ -36,6 +38,10 @@ int getCantidadItem(Bandido *bandido){
     return bandido->cantidadItem;
 }
 /*----------------------------------------------------------------------------*/
+void setCantidadItem(Bandido &bandido, int cantidadItem){
+    bandido.cantidadItem = cantidadItem;
+}
+/*----------------------------------------------------------------------------*/
 
 void setFila(Bandido *bandido,int fila){
     bandido->fila=fila;
@@ -67,7 +73,6 @@ void reemplazarBandido(Bandido *bandido,SDL_Renderer *renderer){
     bandido->imagen=IMG_LoadTexture(renderer,"img/suelo_02.png");
 }
 /*----------------------------------------------------------------------------*/
-
 void destruirBandido(Bandido *bandido){
     SDL_DestroyTexture(bandido->imagen);
 }

@@ -128,4 +128,9 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
 void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion);
 /*----------------------------------------------------------------------------*/
 int numeroStringRand(string numero);
+/*----------------------------------------------------------------------------*/
+void encuentroConBandido(Game &game, Lista &locomotora, Lista &bandidos);
+/*----------------------------------------------------------------------------*/
+void pedirItem(Game &game,Lista &locomotora, Bandido &bandido);
+/*----------------------------------------------------------------------------*/
 #endif

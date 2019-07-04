@@ -323,31 +323,21 @@ void evaluarColision(Game &game,Lista &locomotora,Lista &monedas,Lista &bandidos
             nodo = siguiente(locomotora, nodo);
         }
     }
-    else if(game.terreno[fila][columna].ptrBandido!=NULL && !(vagon->detenido)){
-        //Logica de pedidoItem del bandido
-
-
-
-        reemplazarBandido(game.terreno[fila][columna].ptrBandido,renderer);
-        game.terreno[fila][columna].ptrBandido=NULL;
-
-        //PtrNodoLista ptrBandido = localizarDato(bandidos,game.terreno[fila][columna].ptrBandido);
-        //eliminarNodo(bandidos,ptrBandido);
-        //reordenar(bandidos);
-
-        }
-
-
-
-
     else if(game.terreno[fila][columna].ptrMoneda!=NULL && !(vagon->detenido)){
       reemplazarMoneda(game.terreno[fila][columna].ptrMoneda,renderer);
+
+      PtrNodoLista ptrNodo = primero(monedas);
+      PtrNodoLista ptrEliminar;
+      while(ptrNodo!=finLista()){
+        if((Moneda*)ptrNodo->ptrDato == game.terreno[fila][columna].ptrMoneda){
+            ptrEliminar = ptrNodo;
+        }
+        ptrNodo = siguiente(monedas, ptrNodo);
+      }
+      eliminarNodo(monedas,ptrEliminar);
+      destruirMoneda(game.terreno[fila][columna].ptrMoneda);
       game.terreno[fila][columna].ptrMoneda=NULL;
       game.contadorMonedas=game.contadorMonedas+1;
-
-     // PtrNodoLista ptrMoneda = localizarDato(monedas,game.terreno[fila][columna].ptrMoneda);
-      //eliminarNodo(monedas,ptrMoneda);
-      //reordenar(monedas);
 
     }
      if(game.terreno[fila][columna].ptrMina==NULL && game.terreno[fila][columna].ptrEstacion==NULL && vagon->detenido){
@@ -482,9 +472,9 @@ while(ptrMoneda!=finLista()){
     Moneda *moneda= (Moneda*) ptrMoneda->ptrDato;
             if(getContadorSegundo(game)==moneda->intervaloFinal){
                 reemplazarMoneda(moneda,renderer); //Reemplazar por suelo original
+                destruirMoneda(moneda);
                 game.terreno[moneda->fila][moneda->columna].ptrMoneda=NULL;
-                //eliminarNodo(monedas,ptrMoneda);
-               // reordenar(monedas);
+                eliminarNodo(monedas,ptrMoneda);
 
             }
        ptrMoneda=siguiente(monedas,ptrMoneda);
@@ -502,8 +492,8 @@ void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB){
 
 
     while(is!=true){
-         int fila =rand()%15; //Definir los drops para que no colisiones con los sprites
-         int columna=rand()%16;
+         int fila =rand()%getFila(game); //Definir los drops para que no colisiones con los sprites
+         int columna=rand()%getColumna(game);
          //Me fijo que la fila y columna dada de forma random no este ya ocupada, si esta ocupada genero otra fila y columna
         if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
            game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
@@ -546,9 +536,9 @@ while(ptrBandido!=finLista()){
     Bandido *bandido= (Bandido*) ptrBandido->ptrDato;
             if(getContadorSegundo(game)==bandido->intervaloFinal){
                 reemplazarBandido(bandido,renderer); //Reemplazar por suelo original
+                destruirBandido(bandido);
                 game.terreno[bandido->fila][bandido->columna].ptrBandido=NULL;
-                //eliminarNodo(bandidos,ptrBandido);
-                //reordenar(bandidos);
+                eliminarNodo(bandidos,ptrBandido);
             }
        ptrBandido=siguiente(bandidos,ptrBandido);
 }
@@ -593,7 +583,7 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
     if(game.terreno[fila+1][columna].ptrMina == NULL &&
         game.terreno[fila+1][columna].ptrEstacion ==NULL &&
         game.terreno[fila+1][columna].ptrNodoVagon == NULL &&
-        fila!=getFila(game)) abajoNull = true;
+        fila!=getFila(game)-1) abajoNull = true;
 
     if(game.terreno[fila][columna-1].ptrMina == NULL &&
         game.terreno[fila][columna-1].ptrEstacion ==NULL &&
@@ -603,7 +593,7 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
     if(game.terreno[fila][columna+1].ptrMina == NULL &&
         game.terreno[fila][columna+1].ptrEstacion ==NULL &&
         game.terreno[fila][columna+1].ptrNodoVagon == NULL &&
-        columna!=getColumna(game)) derechaNull = true;
+        columna!=getColumna(game)-1) derechaNull = true;
 
     strcpy(direccion,"nada");
 
@@ -615,12 +605,12 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
             posY = columna;
         }
         else if(derechaNull){
-            strcpy(direccion,"der");
+            strcpy(direccion,"izq");
             posX = fila;
             posY = columna+1;
         }
         else if (izquierdaNull){
-            strcpy(direccion,"izq");
+            strcpy(direccion,"der");
             posX = fila;
             posY = columna-1;
         }
@@ -633,12 +623,12 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
             posY = columna;
         }
         else if(derechaNull){
-            strcpy(direccion,"der");
+            strcpy(direccion,"izq");
             posX = fila;
             posY = columna+1;
         }
         else if (izquierdaNull){
-            strcpy(direccion,"izq");
+            strcpy(direccion,"der");
             posX = fila;
             posY = columna-1;
         }
@@ -651,12 +641,12 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
             posY = columna-1;
         }
         else if(arribaNull){
-            strcpy(direccion,"arr");
+            strcpy(direccion,"aba");
             posX = fila-1;
             posY = columna;
         }
         else if (abajoNull){
-            strcpy(direccion,"aba");
+            strcpy(direccion,"arr");
             posX = fila+1;
             posY = columna;
         }
@@ -669,12 +659,12 @@ void nuevaPosicionVagon(Game &game, Vagon * ultimo, int &posX, int &posY, char *
             posY = columna+1;
         }
         else if(arribaNull){
-            strcpy(direccion,"arr");
+            strcpy(direccion,"aba");
             posX = fila-1;
             posY = columna;
         }
         else if (abajoNull){
-            strcpy(direccion,"aba");
+            strcpy(direccion,"arr");
             posX = fila+1;
             posY = columna;
         }
@@ -687,5 +677,91 @@ int numeroStringRand(string numero){
     int j = atoi(numero.c_str());
     i=1+rand()%j;
     return i;
+}
+
+void encuentroConBandido(Game &game, Lista &locomotora, Lista &bandidos){
+    PtrNodoLista ptrNodoVagon= primero(locomotora);
+
+    while(ptrNodoVagon!=finLista()){
+        Vagon * vagon = (Vagon*)ptrNodoVagon->ptrDato;
+        int area = atoi(getClaveA(game.parametros).c_str());
+        int minI = 0;
+        int minJ = 0;
+        int maxI = getFila(game)-1;
+        int maxJ = getColumna(game)-1;
+
+        if((getFila(*vagon)-area)>0){
+            minI = getFila(*vagon) - area;
+        }
+        if((getColumna(*vagon)-area)>0){
+            minJ = getColumna(*vagon) - area;
+        }
+
+        if((getFila(*vagon)+area)<getFila(game)-1){
+            maxI = getFila(*vagon)+ area;
+        }
+        if((getColumna(*vagon)+area)<getColumna(game)-1){
+            maxJ = getColumna(*vagon) + area;
+        }
+
+        for(int i = minI;i<=maxI;i++){
+            for(int j = minJ;j<=maxJ;j++){
+                if(game.terreno[i][j].ptrBandido!=NULL){
+                    pedirItem(game,locomotora,*(game.terreno[i][j].ptrBandido));
+                    if(!listaVacia(locomotora)){
+                        PtrNodoLista ptrBandido = primero(bandidos);
+                        PtrNodoLista ptrEliminar;
+                        while(ptrBandido!=finLista()){
+                            if((Bandido*)ptrBandido->ptrDato == game.terreno[i][j].ptrBandido){
+                                ptrEliminar = ptrBandido;
+                            }
+                            ptrBandido = siguiente(bandidos, ptrBandido);
+                        }
+                        eliminarNodo(bandidos,ptrEliminar);
+
+                        destruirBandido(game.terreno[i][j].ptrBandido);
+                        game.terreno[i][j].ptrBandido=NULL;
+                    }
+                }
+            }
+        }
+        ptrNodoVagon = siguiente(locomotora,ptrNodoVagon);
+    }
+}
+
+void pedirItem(Game &game,Lista &locomotora, Bandido &bandido){
+    PtrNodoLista ptrNodoVagon = primero(locomotora);
+
+    while(ptrNodoVagon!=finLista() && getCantidadItem(&bandido)>0){
+        Vagon * vagon = (Vagon*)ptrNodoVagon->ptrDato;
+        if(getCodItem(*vagon)==getCodItem(&bandido)){
+            Pila * cajas = getCajas(*vagon);
+
+            while(getCantidadItem(&bandido)!=0 && !pilaVacia(*cajas)){
+                Caja * caja = (Caja*)cima(*cajas)->ptrDato;
+                if((getCapacidadActual(*caja)-getCantidadItem(&bandido))<=0){
+                    setCantidadItem(bandido, getCantidadItem(&bandido)-getCapacidadActual(*caja));
+                    eliminarCaja(*caja);
+                    sacar(*cajas);
+                }
+                else{
+                    setCapacidadActual(*caja, getCapacidadActual(*caja)-getCantidadItem(&bandido));
+                    setCantidadItem(*vagon, getCantidadItem(*vagon)-getCantidadItem(&bandido));
+                    setCantidadItem(bandido, 0);
+                }
+            }
+        }
+
+        ptrNodoVagon = siguiente(locomotora,ptrNodoVagon);
+    }
+
+    if(getCantidadItem(&bandido)!=0){
+        Vagon * vagon = (Vagon*)ultimo(locomotora)->ptrDato;
+        game.terreno[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon = NULL;
+        eliminarNodoUltimo(locomotora);
+        if(listaVacia(locomotora)){
+            setGameOver(game,true);
+        }
+    }
 }
 

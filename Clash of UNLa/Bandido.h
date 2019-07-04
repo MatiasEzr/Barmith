@@ -1,7 +1,7 @@
 #ifndef BANDIDO_H__
 #define BANDIDO_H__
 #include <string>
-
+#include "Lista.h"
 #include <SDL.h>
 
 using namespace std;
@@ -72,6 +72,13 @@ int getCantidadItem(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.
+  post: se setea la cantidadstring que pide el bandido
+
+*/
+void setCantidadItem(Bandido &bandido, int cantidadItem);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el bandido  debe haber sido creado.
   post: se obtiene el string que pide el bandido
 
   return : string
@@ -102,9 +109,6 @@ void dibujarBandido(Bandido *bandido,SDL_Renderer* renderer);
 
 void destruirBandido(Bandido *bandido);
 /*----------------------------------------------------------------------------*/
-
 void reemplazarBandido(Bandido *bandido,SDL_Renderer *renderer);
-
-
-
+/*----------------------------------------------------------------------------*/
 #endif
