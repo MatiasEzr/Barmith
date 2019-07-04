@@ -10,8 +10,14 @@ using namespace std;
 
 /**
     AXIOMAS:
-    Los items pueden ser oro, plata, bronce, platino, roca y carbon.
     F y C no pueden estar fuera de rango.
+    codItem: ["oro", "plata", "bronce", "platino", "roca", "carbon"]
+    f >= 0
+    c >= 0
+    ip > 0
+    secuencia[] > 0
+    secuenciaActual > 0
+    intervaloActual > 0
 */
 
 /**

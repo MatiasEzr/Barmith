@@ -5,9 +5,11 @@
 
 /**
     AXIOMAS:
-    F y C no pueden estar fuera de rango.
-    invervaloFinal [0..IM]
-    monedaVida [0..IV]
+    fila y columna no pueden estar fuera de rango.
+    fila > 0
+    columna > 0
+    invervaloFinal > 0 [0..IM]
+    monedaVida > 0 [0..VM]
 */
 
 /**
@@ -115,7 +117,7 @@ bool setIntervaloFinal(Moneda &moneda, int intervaloFinal);
 void dibujarMoneda(Moneda *moneda,SDL_Renderer* renderer);
 /*----------------------------------------------------------------------------*/
 /*
-  pre : la moneda no debe haber sido creado.
+  pre : la moneda debe haber sido creado.
   post: se destruye la moneda.
   moneda: estructura de datos a ser usado.
 
@@ -123,6 +125,13 @@ void dibujarMoneda(Moneda *moneda,SDL_Renderer* renderer);
 
 void destruirMoneda(Moneda *moneda);
 
+/*----------------------------------------------------------------------------*/
+/*
+  pre : la moneda debe haber sido creado.
+  post: se reemplaza (setea) los datos de moneda.
+  moneda: estructura de datos a ser usado.
+
+*/
 
 void reemplazarMoneda(Moneda *moneda,SDL_Renderer *renderer);
 

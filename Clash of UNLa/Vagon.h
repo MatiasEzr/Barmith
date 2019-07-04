@@ -10,6 +10,17 @@
     El vagon inicia en la posicion dada por fila y columna
     El vagon inicia con una capacidad definida por 5kg*cantMonedas
     El vagon solo puede almacenar items de su mismo tipo dado por codItem
+    miniatura: ["c1","c2"]
+    fila >= 0
+    columna >= 0
+    direccion: ["izq","der","arr","aba"]
+    anchoCelda > 0
+    altoCelda > 0
+    altoSprite > 0
+    cantMonedas > 0
+    capacidad = 5 * cantMonedas
+    cantidadItems >= 0
+
 */
 
 
@@ -40,22 +51,74 @@ typedef struct{
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se setea la altura del sprite del vagon.
+
+  Vagon: estructura de datos a ser creado.
+  altoSprite: dato que se asignara.
+*/
 void setAltoSprite(Vagon &vagon,int altoSprite);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se obtiene el alto del sprite del vagon.
+
+  Vagon: estructura de datos a ser creado.
+*/
 int getAltoSprite(Vagon &vagon);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se obtiene el ancho de la celda del vagon.
+
+  Vagon: estructura de datos a ser creado.
+*/
 int getAnchoCelda(Vagon &vagon);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se setea el ancho de la celda del vagon.
+
+  Vagon: estructura de datos a ser creado.
+  anchoCelda: dato que se asignara.
+*/
 void setAnchoCelda(Vagon &vagon,int anchoCelda);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se obtiene el alto de la celda del vagon.
+
+  Vagon: estructura de datos a ser creado.
+*/
 int getAltoCelda(Vagon &vagon);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se obtiene el alto de la celda del vagon.
+
+  Vagon: estructura de datos a ser creado.
+  altoCelda: dato que se asignara.
+*/
 void setAltoCelda(Vagon &vagon,int altoCelda);
 /*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se obtiene la ubicacion de la miniatura del vagon.
+
+  Vagon: estructura de datos a ser creado.
+*/
 char* getMiniatura(Vagon &vagon);
+/*----------------------------------------------------------------------------*/
+/*
+  pre : el vagon debe haber sido creado.
+  post: se setea la ubicacion de la miniatura del vagon.
+
+  Vagon: estructura de datos a ser creado.
+  miniatura: dato a asignar.
+*/
 void setMiniatura(Vagon &vagon,char miniatura[]);
-
-
+/*----------------------------------------------------------------------------*/
 /*
   pre : el vagon no debe haber sido creado.
   post: el vagon queda creado y preparado para ser usado.
@@ -79,7 +142,7 @@ int getFila(Vagon &vagon);
   post: se setea la fila donde se encuentra el vagon.
 
   vagon: estructura de datos a ser usada.
-  desplazamiento:
+  desplazamiento: dato a asignar.
 */
 void setFila(Vagon &vagon,int desplazamiento);
 /*----------------------------------------------------------------------------*/
@@ -96,7 +159,7 @@ int getColumna(Vagon &vagon);
   post: se setea la columna donde se encuentra el vagon.
 
   vagon: estructura de datos a ser usada.
-  desplazamiento:
+  desplazamiento: dato a asignar.
 */
 void setColumna(Vagon &vagon,int desplazamiento);
 /*----------------------------------------------------------------------------*/
