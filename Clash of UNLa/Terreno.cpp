@@ -27,18 +27,16 @@ void crearTerreno(Terreno &terreno,int fila,int columna, int ancho, int alto, SD
     strcat(imagen,".png");
     terreno.imagen=IMG_LoadTexture(renderer,imagen);
 
-    terreno.rectImag.y=(terreno.fila*alto);//coordenada de dibujo y
-    terreno.rectImag.x=(terreno.columna*ancho);//coordenada de dibujo x
-    terreno.rectImag.w=ancho;//ancho
-    terreno.rectImag.h=alto;//alto
+    terreno.rectImag.y=(terreno.fila*alto);
+    terreno.rectImag.x=(terreno.columna*ancho);
+    terreno.rectImag.w=ancho;
+    terreno.rectImag.h=alto;
 }
 /*----------------------------------------------------------------------------*/
 void dibujarTerreno(Terreno &terreno,SDL_Renderer* renderer){
     SDL_RenderCopy(renderer,terreno.imagen,NULL,&(terreno.rectImag));
 }
-void setPtrMina(Terreno &terreno,Mina *mina){
-    terreno.ptrMina=mina;
-}
+
 /*----------------------------------------------------------------------------*/
 void dibujarEntidad(Terreno &terreno,SDL_Renderer* renderer, int intervalo){
     if(terreno.ptrBandido!=NULL){
@@ -59,7 +57,6 @@ void dibujarEntidad(Terreno &terreno,SDL_Renderer* renderer, int intervalo){
 /*----------------------------------------------------------------------------*/
 void destruirTerreno(Terreno &terreno){
     SDL_DestroyTexture(terreno.imagen);
-    //la locomotora se destruye en otro lugar, pero aquí hay otros tda:
     if(terreno.ptrBandido!=NULL){
         destruirBandido(terreno.ptrBandido);
         delete terreno.ptrBandido;
@@ -76,7 +73,7 @@ void destruirTerreno(Terreno &terreno){
         destruirEstacion(*(terreno.ptrEstacion));
         delete terreno.ptrEstacion;
     }
-    //delete &terreno;
+
 }
 /*----------------------------------------------------------------------------*/
 

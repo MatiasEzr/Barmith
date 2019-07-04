@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem,int cantidadItem,int vidaBandido,int intervaloFinal){
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda,string codItem,int cantidadItem,int vidaBandido,int intervaloFinal){
     bandido.fila=fila;
     bandido.columna=columna;
 
@@ -15,7 +15,7 @@ void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna,
     bandido.rectImag.y=(bandido.fila*altoCelda);
     bandido.rectImag.x=(bandido.columna*anchoCelda);
     bandido.rectImag.w=anchoCelda;
-    bandido.rectImag.h=altoSprite;
+    bandido.rectImag.h=altoCelda;
     bandido.codItem=codItem;
     bandido.cantidadItem=cantidadItem;
     bandido.intervaloFinal=intervaloFinal;

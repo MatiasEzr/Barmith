@@ -80,5 +80,4 @@ void destruirTerreno(Terreno &terreno);
 
 */
 
-void setPtrMina(Terreno &terreno,Mina *mina);
 #endif

@@ -20,26 +20,20 @@ typedef struct{
     int contadorMonedas;
     int anchoCelda;
     int altoCelda;
-    int altoSprite;
-
     int fila;
     int columna;
 
     Terreno** terreno;
-
     char direccion[4];
-
     Lista minas;
-
     Lista comanda;
-
     Parametros parametros;
 }Game;
 
 /*----------------------------------------------------------------------------*/
 //                                PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda, int altoSprite);
+void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda);
 /*----------------------------------------------------------------------------*/
 int getAnchoCelda(Game &game);
 /*----------------------------------------------------------------------------*/
@@ -133,4 +127,12 @@ void encuentroConBandido(Game &game, Lista &locomotora, Lista &bandidos);
 /*----------------------------------------------------------------------------*/
 void pedirItem(Game &game,Lista &locomotora, Bandido &bandido);
 /*----------------------------------------------------------------------------*/
+
+
+void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys);
+void cambiarDireccion(Game &game,Lista &locomotora);
+
+void cambiarFila(Game &game,PtrNodoLista ptrNodo);
+void cambiarColumna(Game &game,PtrNodoLista ptrNodo);
+bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo);
 #endif

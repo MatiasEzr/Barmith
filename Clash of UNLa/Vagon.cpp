@@ -6,14 +6,13 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,string item){
+void crearVagon(Vagon &vagon,char miniatura[],int fila,int columna, char direccion[], int anchoCelda, int altoCelda,int capacidad,string item){
     strcpy(vagon.miniatura,miniatura);
     vagon.fila= fila;//coordenada logica y
     vagon.columna=columna;//coordenada logica x
     strcpy(vagon.direccion,direccion);
     vagon.anchoCelda=anchoCelda;
     vagon.altoCelda= altoCelda;
-    vagon.altoSprite=altoSprite;
     vagon.detenido=false;
     crearPila(vagon.cajas);
     vagon.capacidad = capacidad;
@@ -107,14 +106,14 @@ void dibujarVagon(Vagon &vagon,SDL_Renderer* renderer,int intervalo){
     if(!(vagon.detenido)){
         vagon.rectImag.y= vagon.fila*vagon.altoCelda +(desplazamientoVertical*(vagon.altoCelda/10)*intervalo);//coordenada de dibujo y
         vagon.rectImag.x= vagon.columna*vagon.anchoCelda +(desplazamientoHorizontal*(vagon.anchoCelda/10)*intervalo);//coordenada de dibujo x
-        vagon.rectImag.w=vagon.anchoCelda;//70
-        vagon.rectImag.h=vagon.altoSprite;//70
+        vagon.rectImag.w=vagon.anchoCelda;
+        vagon.rectImag.h=vagon.altoCelda;
     }
     else{
         vagon.rectImag.y= vagon.fila*vagon.altoCelda;//coordenada de dibujo y
         vagon.rectImag.x= vagon.columna*vagon.anchoCelda;//coordenada de dibujo x
-        vagon.rectImag.w=vagon.anchoCelda;//70
-        vagon.rectImag.h=vagon.altoSprite;//70
+        vagon.rectImag.w=vagon.anchoCelda;
+        vagon.rectImag.h=vagon.altoCelda;
     }
 
     SDL_RenderCopy(renderer,vagon.imagen,NULL,&(vagon.rectImag));

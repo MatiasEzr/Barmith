@@ -58,7 +58,7 @@ typedef struct{
   Vagon: estructura de datos a ser creado.
   altoSprite: dato que se asignara.
 */
-void setAltoSprite(Vagon &vagon,int altoSprite);
+void setAltoSprite(Vagon &vagon);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el vagon debe haber sido creado.
@@ -125,7 +125,7 @@ void setMiniatura(Vagon &vagon,char miniatura[]);
 
   Vagon: estructura de datos a ser creado.
 */
-void crearVagon(Vagon &vagon,char miniatura[], int fila,int columna, char direccion[], int anchoCelda, int altoCelda, int altoSprite,int capacidad,string item);
+void crearVagon(Vagon &vagon,char miniatura[], int fila,int columna, char direccion[], int anchoCelda, int altoCelda,int capacidad,string item);
 
 /*----------------------------------------------------------------------------*/
 /*

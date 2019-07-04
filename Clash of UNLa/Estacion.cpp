@@ -5,8 +5,7 @@
 /*----------------------------------------------------------------------------*/
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
-void crearEstacion(Estacion &estacion,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
-               int altoSprite){
+void crearEstacion(Estacion &estacion,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda){
     estacion.c=c;//coordenada logica x
     estacion.f=f;//coordenada logica y
     estacion.imagen=IMG_LoadTexture(renderer,"img/estacion.png");
@@ -14,7 +13,7 @@ void crearEstacion(Estacion &estacion,SDL_Renderer* renderer, int f,int c, int a
     estacion.rectImag.y=(estacion.f*altoCelda);//coordenada de dibujo y
     estacion.rectImag.x=(estacion.c*anchoCelda);//coordenada de dibujo x
     estacion.rectImag.w=anchoCelda;//ancho
-    estacion.rectImag.h=altoSprite;//alto
+    estacion.rectImag.h=altoCelda;//alto
 }
 
 /*----------------------------------------------------------------------------*/

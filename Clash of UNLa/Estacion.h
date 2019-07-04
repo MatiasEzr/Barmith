@@ -37,7 +37,7 @@ typedef struct Estacion{
     estacion:Estructura de datos a utilizar
 */
 void crearEstacion(Estacion &estacion,SDL_Renderer* renderer, int f,int c, int anchoCelda,
-                int altoCelda, int altoSprite);
+                int altoCelda);
 /*----------------------------------------------------------------------------*/
 /*
     pre : la estacion debe haber sido creada.

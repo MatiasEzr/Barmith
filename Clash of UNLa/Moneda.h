@@ -34,7 +34,7 @@ typedef struct{
 
   moneda : estructura de datos a ser creado.
 */
-void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,int intervaloVida,int intervaloFinal);
+void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda,int intervaloVida,int intervaloFinal);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la moneda  debe haber sido creada.

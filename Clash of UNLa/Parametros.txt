@@ -1,6 +1,6 @@
 S=10
 P=5
-A=2
+A=1
 posXE=11
 posYE=15
 IM=7

@@ -7,8 +7,7 @@
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 
-void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda,
-               int altoSprite, int ip, int secuencia[5], string codItem){
+void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, int altoCelda, int ip, int secuencia[5], string codItem){
     mina.c=c;//coordenada logica x
     mina.f=f;//coordenada logica y
     mina.ip=ip;//intervalo de produccion
@@ -23,7 +22,7 @@ void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda, i
     mina.rectImag.y=(mina.f*altoCelda);//coordenada de dibujo y
     mina.rectImag.x=(mina.c*anchoCelda);//coordenada de dibujo x
     mina.rectImag.w=anchoCelda;//ancho
-    mina.rectImag.h=altoSprite;//alto
+    mina.rectImag.h=altoCelda;//alto
 
     crearCola(mina.cajas);
 }

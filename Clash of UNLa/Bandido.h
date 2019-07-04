@@ -41,7 +41,7 @@ typedef struct{
 
   bandido : estructura de datos a ser creado.
 */
-void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,string codItem, int cantidadItem,int vidaBandido,int intervaloFinal);
+void crearBandido(Bandido &bandido,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda,string codItem, int cantidadItem,int vidaBandido,int intervaloFinal);
 /*----------------------------------------------------------------------------*/
 /*
   pre : el bandido  debe haber sido creado.

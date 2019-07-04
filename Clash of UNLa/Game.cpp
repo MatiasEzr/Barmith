@@ -23,21 +23,23 @@
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 
-void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda,int altoSprite){
+void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda){
     game.gameover=false;
     game.intervalo=0;
     game.contadorSegundo=0;
     game.contadorMonedas=0;
     game.anchoCelda=anchoCelda;
     game.altoCelda=altoCelda;
-    game.altoSprite=altoSprite;
     game.fila=fila;
     game.columna=columna;
 
     game.terreno= new Terreno*[game.fila];
     for (int f = 0; f < game.fila; f++){
-        game.terreno[f] = new Terreno[game.columna];
+        for(int c=0;c<game.columna;c++){
+           game.terreno[f] = new Terreno[c];
+        }
     }
+
     strcpy(game.direccion,"direccion");
     crearLista(game.minas,NULL);
     crearLista(game.comanda,NULL);
@@ -83,9 +85,9 @@ void setTerreno(Game &game, SDL_Renderer * renderer){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
             Terreno terreno;
-            char aux [2];//cadena que guarda valores entre 0 y 4
-            itoa((rand()%6),aux,10);//valor aleatorio entre 0 y 4, pasados a string en base 10
-            crearTerreno(terreno,f,c,getAnchoCelda(game),getAltoCelda(game),renderer,aux);
+            char miniatura [2];
+            itoa((rand()%6),miniatura,10);
+            crearTerreno(terreno,f,c,getAnchoCelda(game),getAltoCelda(game),renderer,miniatura);
             game.terreno[f][c]=terreno;
         }
     }
@@ -135,7 +137,7 @@ void leerMinas(Game &game, SDL_Renderer * renderer){
               seq5=atoi(strseq5.c_str());
 
               int secuencia[5] = {seq1,seq2,seq3,seq4,seq5};
-              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), game.altoSprite, ip, secuencia,strcoditem);
+              crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), ip, secuencia,strcoditem);
               ubicarMina(game, mina);
 
               adicionarFinal(game.minas,mina);
@@ -451,11 +453,12 @@ void generarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer,int VM){
     bool is=false;
     srand(time(NULL));
     while(is!=true){
-         int fila = rand()%15; //Definir los drops para que no colisiones con los sprites
-         int columna=rand()%16;
+         int fila = rand()%getFila(game); //Definir los drops para que no colisiones con los sprites
+         int columna=rand()%getColumna(game);
+
         if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
            game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
-            crearMoneda(*moneda,renderer,fila,columna,game.anchoCelda,game.altoCelda,game.altoSprite,VM,intervaloFinal);
+            crearMoneda(*moneda,renderer,fila,columna,game.anchoCelda,game.altoCelda,VM,intervaloFinal);
             ubicarMoneda(game,moneda);
             adicionarFinal(monedas,moneda);
             is=true;
@@ -490,10 +493,10 @@ void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB){
     srand(time(NULL));
 
 
-
     while(is!=true){
          int fila =rand()%getFila(game); //Definir los drops para que no colisiones con los sprites
          int columna=rand()%getColumna(game);
+
          //Me fijo que la fila y columna dada de forma random no este ya ocupada, si esta ocupada genero otra fila y columna
         if(game.terreno[fila][columna].ptrEstacion==NULL && game.terreno[fila][columna].ptrMoneda==NULL &&
            game.terreno[fila][columna].ptrMina==NULL  && game.terreno[fila][columna].ptrBandido==NULL && game.terreno[fila][columna].ptrNodoVagon==NULL){
@@ -519,8 +522,7 @@ void generarBandidos(Game &game,Lista &bandidos, SDL_Renderer* renderer,int VB){
             codItem="carbon";
             break;
         }
-        cout<<"bandido;"<<P<<"codItem:"<<codItem;
-            crearBandido(*bandido,renderer,fila,columna,game.anchoCelda,game.altoCelda,game.altoSprite,codItem,P,VB,intervaloFinal);
+            crearBandido(*bandido,renderer,fila,columna,game.anchoCelda,game.altoCelda,codItem,P,VB,intervaloFinal);
             ubicarBandido(game,bandido);
             adicionarFinal(bandidos,bandido);
             is=true;
@@ -563,7 +565,7 @@ void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion){
         nuevaPosicionVagon(game, vagon, posX, posY, direccion);
         if(strcmp(direccion,"nada")!=0){
             Vagon * nuevoVagon = new Vagon;
-            crearVagon(*nuevoVagon,"c2", posX, posY,direccion,getAnchoCelda(*vagon), getAltoCelda(*vagon), getAltoSprite(*vagon), 5*getContadorMonedas(game),"nada");
+            crearVagon(*nuevoVagon,"c2", posX, posY,direccion,getAnchoCelda(*vagon), getAltoCelda(*vagon), 5*getContadorMonedas(game),"nada");
             ubicarVagon(game,adicionarFinal(locomotora,nuevoVagon));
             setContadorMonedas(game, 0);
         }
@@ -708,6 +710,7 @@ void encuentroConBandido(Game &game, Lista &locomotora, Lista &bandidos){
             for(int j = minJ;j<=maxJ;j++){
                 if(game.terreno[i][j].ptrBandido!=NULL){
                     pedirItem(game,locomotora,*(game.terreno[i][j].ptrBandido));
+                    cout<<"bandido pideItem";
                     if(!listaVacia(locomotora)){
                         PtrNodoLista ptrBandido = primero(bandidos);
                         PtrNodoLista ptrEliminar;
@@ -764,4 +767,123 @@ void pedirItem(Game &game,Lista &locomotora, Bandido &bandido){
         }
     }
 }
+
+bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
+    bool colision=true;
+    int desplazamientoHorizontal=0;
+    int desplazamientoVertical=0;
+    Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+    if(strcmp(getDireccion(*vagon),"aba")==0)desplazamientoVertical=1;
+    if(strcmp(getDireccion(*vagon),"arr")==0)desplazamientoVertical=-1;
+    if(strcmp(getDireccion(*vagon),"der")==0)desplazamientoHorizontal=1;
+    if(strcmp(getDireccion(*vagon),"izq")==0)desplazamientoHorizontal=-1;
+
+    int c=getColumna(*vagon)+desplazamientoHorizontal;
+    int f=getFila(*vagon)+desplazamientoVertical;
+
+    if((c>=0 && c<getColumna(game)) && (f>=0 && f<getFila(game))){
+
+        Terreno terrenoAux =getTerreno(game)[f][c];
+        if(terrenoAux.ptrNodoVagon==NULL){
+
+            colision=false;
+        }else{
+            cout<<"Chocamos con otro vagon en "<<f<<"/"<<c<<endl;
+        }
+    }else{
+        cout<<"Nos salimos del cuadrante en "<<f<<"/"<<c<<endl;
+    }
+    return colision;
+}
+
+void cambiarColumna(Game &game,PtrNodoLista ptrNodo){
+    if(ptrNodo!=NULL){
+        int desplazamiento=0;
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        if(strcmp(getDireccion(*vagon),"der")==0)desplazamiento=1;
+        if(strcmp(getDireccion(*vagon),"izq")==0)desplazamiento=-1;
+        if(desplazamiento!=0){
+            Terreno **terrenoAux=getTerreno(game);
+            terrenoAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
+            terrenoAux[getFila(*vagon)][getColumna(*vagon)+desplazamiento].ptrNodoVagon=ptrNodo;
+            setColumna(*vagon,desplazamiento);
+        }
+        cambiarColumna(game,ptrNodo->sgte);
+    }
+}
+
+void cambiarFila(Game &game, PtrNodoLista ptrNodo){
+    if(ptrNodo!=NULL){
+        int desplazamiento=0;
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        if(strcmp(getDireccion(*vagon),"aba")==0)desplazamiento=1;
+        if(strcmp(getDireccion(*vagon),"arr")==0)desplazamiento=-1;
+        if(desplazamiento!=0){
+            Terreno **terrenoAux=getTerreno(game);
+            if(ptrNodo->sgte==finLista()){
+                terrenoAux[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon=NULL;
+            }
+            terrenoAux[getFila(*vagon)+desplazamiento][getColumna(*vagon)].ptrNodoVagon=ptrNodo;
+            setFila(*vagon,desplazamiento);
+        }
+        cambiarFila(game,ptrNodo->sgte);
+    }
+}
+
+
+
+void cambiarDireccion(Game &game, Lista &locomotora){
+    PtrNodoLista ptrNodo = primero(locomotora);
+    char direccion[4];
+    strcpy(direccion, getDireccion(game));
+    while(ptrNodo!=finLista()){
+        Vagon *vagon = (Vagon*)ptrNodo->ptrDato;
+        char dirAnterior[4];
+        strcpy(dirAnterior, getDireccion(*vagon));
+        if(
+            ((strcmp(dirAnterior,"izq")==0 && strcmp(direccion,"der")!=0) ||
+            (strcmp(dirAnterior,"der")==0 && strcmp(direccion,"izq")!=0) ||
+            (strcmp(dirAnterior,"arr")==0 && strcmp(direccion,"aba")!=0) ||
+            (strcmp(dirAnterior,"aba")==0 && strcmp(direccion,"arr")!=0)) &&
+            !(vagon->detenido && vagon!=(Vagon*)primero(locomotora)->ptrDato)
+        ){
+            setDireccion(*vagon,direccion);//cargo la nueva dirección
+        }
+        strcpy(direccion,dirAnterior);
+        ptrNodo = siguiente(locomotora, ptrNodo);
+    }
+}
+void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
+    if(SDL_PollEvent(&event)){
+        switch(event.type){
+            case SDL_QUIT:
+                setGameOver(game, true);
+            break;
+            case SDL_KEYDOWN:
+                if(keys[SDL_SCANCODE_ESCAPE]){
+                    setGameOver(game, true);
+                }
+                if(keys[SDL_SCANCODE_LEFT]){
+                    setDireccion(game,"izq");
+                }
+                if(keys[SDL_SCANCODE_RIGHT]){
+                    setDireccion(game,"der");
+                }
+                if(keys[SDL_SCANCODE_UP]){
+                    setDireccion(game,"arr");
+                }
+                if(keys[SDL_SCANCODE_DOWN]){
+                    setDireccion(game,"aba");
+                }
+                if(keys[SDL_SCANCODE_SPACE]){
+
+                }
+                break;
+
+        }
+    }
+}
+
+
+
 

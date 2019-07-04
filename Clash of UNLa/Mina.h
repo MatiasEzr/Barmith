@@ -52,7 +52,7 @@ typedef struct{
   Mina : estructura de datos a ser creado.
 */
 void crearMina(Mina &mina,SDL_Renderer* renderer, int f,int c, int anchoCelda,
-                int altoCelda, int altoSprite, int ip, int secuencia[5],string codItem);
+                int altoCelda, int ip, int secuencia[5],string codItem);
 /*----------------------------------------------------------------------------*/
 /*
   pre : la mina debe haber sido creada.

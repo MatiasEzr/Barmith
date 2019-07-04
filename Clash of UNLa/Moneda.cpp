@@ -16,16 +16,16 @@ using namespace std;
 //                           IMPLEMENTACION DE PRIMITIVAS
 /*----------------------------------------------------------------------------*/
 
-void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda, int altoSprite,int monedaVida,int intervaloFinal){
+void crearMoneda(Moneda &moneda,SDL_Renderer* renderer, int fila,int columna, int anchoCelda, int altoCelda,int monedaVida,int intervaloFinal){
     moneda.fila=fila;//coordenada logica y
     moneda.columna=columna;//coordenada logica x
 
     moneda.imagen=IMG_LoadTexture(renderer,"img/moneda.png");
 
-    moneda.rectImag.y=(moneda.fila*altoCelda);//coordenada de dibujo y
-    moneda.rectImag.x=(moneda.columna*anchoCelda);//coordenada de dibujo x
-    moneda.rectImag.w=anchoCelda;//ancho
-    moneda.rectImag.h=altoSprite;//alto
+    moneda.rectImag.y=(moneda.fila*altoCelda);
+    moneda.rectImag.x=(moneda.columna*anchoCelda);
+    moneda.rectImag.w=anchoCelda;
+    moneda.rectImag.h=altoCelda;
     moneda.monedaVida=monedaVida;
     moneda.intervaloFinal=intervaloFinal;
 
