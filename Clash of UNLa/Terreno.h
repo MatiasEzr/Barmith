@@ -10,6 +10,8 @@
 /**
     AXIOMAS:
     Representa la zona disponible para que el tren se mueva
+    fila >= 0
+    columna >= 0
 */
 
 /**
@@ -71,7 +73,7 @@ void dibujarEntidad(Terreno &terreno, SDL_Renderer* renderer, int intervalo);
 
 */
 void destruirTerreno(Terreno &terreno);
-
+/*----------------------------------------------------------------------------*/
 /*
   pre : lista Creada con crearLista().
   post: devuelve el siguiente al último nodo de la lista,
