@@ -169,6 +169,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
 
         int IM=numeroStringRand(game.parametros.claveIM);//Numero random para IntervaloMoneda
         int IB=numeroStringRand(game.parametros.claveIB);//Numero random para IntervaloBandido
+        int contadorFps = 0;//Contador de frames por intervalo
         while(!getGameOver(game)){
             controlarEventos(game,event,keys);
             if(getIntervalo(game)==10){
@@ -219,12 +220,13 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 dibujarPuntuacion(game,renderer,locomotora);
                 SDL_RenderPresent(renderer);
 
-            SDL_Delay(milisegundos);
+                SDL_Delay(milisegundos);
 
-            setIntervalo(game,getIntervalo(game)+1);
+                if(contadorFps % ((100/milisegundos)*atoi(getClaveS(game.parametros).c_str())) == 0){
+                    setIntervalo(game,getIntervalo(game)+1);
+                }
             }
-
-
+            contadorFps++;
         }
         SDL_Delay(1500);
         cout<<"Destruimos las instancias"<<endl;

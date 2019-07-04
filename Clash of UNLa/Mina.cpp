@@ -96,6 +96,7 @@ void destruirMina(Mina *mina){
 /*----------------------------------------------------------------------------*/
 void recolectarCajas(Mina &mina, Lista &locomotora){
     PtrNodoLista ptrVagon = primero(locomotora);
+    bool produccionEntregada = false;
 
     while(ptrVagon!=finLista()){
         Vagon *vagon = (Vagon*)ptrVagon->ptrDato;
@@ -104,6 +105,7 @@ void recolectarCajas(Mina &mina, Lista &locomotora){
             while(ptrCaja!=finCola()){
                 Caja * caja = (Caja*) ptrCaja->ptrDato;
                 if((getCapacidad(*vagon)-getCantidadItem(*vagon))>=getCapacidadMaxima(*caja)){
+                    produccionEntregada = true;
                     if(getCodItem(*vagon)=="nada"){
                         setCodItem(*vagon, getCodItem(&mina));
                     }
@@ -117,6 +119,11 @@ void recolectarCajas(Mina &mina, Lista &locomotora){
             }
         }
         ptrVagon = siguiente(locomotora, ptrVagon);
+    }
+    if(!produccionEntregada){
+        while(!colaVacia(mina.cajas)){
+            desencolar(mina.cajas);
+        }
     }
 }
 /*----------------------------------------------------------------------------*/

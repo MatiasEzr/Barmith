@@ -136,6 +136,10 @@ void leerMinas(Game &game, SDL_Renderer * renderer){
               getline(cadena2,strseq5,';');
               seq5=atoi(strseq5.c_str());
 
+              if(ip>atoi(getClaveIP(game.parametros).c_str())){ //el intervalo de la mina no puede ser mayor al de parametros
+                ip = atoi(getClaveIP(game.parametros).c_str());
+              }
+
               int secuencia[5] = {seq1,seq2,seq3,seq4,seq5};
               crearMina(*mina, renderer, posY, posX, getAnchoCelda(game), getAltoCelda(game), ip, secuencia,strcoditem);
               ubicarMina(game, mina);
@@ -883,7 +887,6 @@ void controlarEventos(Game &game,SDL_Event &event,const unsigned char *keys){
         }
     }
 }
-
 
 
 

@@ -1,19 +1,19 @@
 # depslib dependency file v1.0
-1562208194 source:c:\users\ezequiel\git\barmith\clash of unla\bandido.cpp
+1562263386 source:c:\users\ezequiel\git\barmith\clash of unla\bandido.cpp
 	"Bandido.h"
 	"Vagon.h"
 	"Caja.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1562208235 c:\users\ezequiel\git\barmith\clash of unla\bandido.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\bandido.h
 	<string>
 	"Lista.h"
 	<SDL.h>
 
 1560996426 c:\users\ezequiel\git\barmith\clash of unla\lista.h
 
-1562202351 c:\users\ezequiel\git\barmith\clash of unla\vagon.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\vagon.h
 	"Item.h"
 	<SDL.h>
 	"Pila.h"
@@ -44,19 +44,19 @@
 1562202351 c:\users\ezequiel\git\barmith\clash of unla\comanda.h
 	<fstream>
 
-1562095853 source:c:\users\ezequiel\git\barmith\clash of unla\estacion.cpp
+1562263386 source:c:\users\ezequiel\git\barmith\clash of unla\estacion.cpp
 	"Estacion.h"
 	<SDL.h>
 	<SDL_image.h>
 
-1562202351 c:\users\ezequiel\git\barmith\clash of unla\estacion.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\estacion.h
 	<SDL.h>
 	<SDL_image.h>
 
 1560996426 source:c:\users\ezequiel\git\barmith\clash of unla\lista.cpp
 	"Lista.h"
 
-1562215723 source:c:\users\ezequiel\git\barmith\clash of unla\main.cpp
+1562283649 source:c:\users\ezequiel\git\barmith\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
@@ -74,7 +74,7 @@
 	"Lista.h"
 	"Parametros.h"
 
-1562208010 c:\users\ezequiel\git\barmith\clash of unla\game.h
+1562223542 c:\users\ezequiel\git\barmith\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"
@@ -91,23 +91,23 @@
 	"Moneda.h"
 	"Lista.h"
 
-1562202351 c:\users\ezequiel\git\barmith\clash of unla\mina.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\mina.h
 	<string>
 	<SDL.h>
 	"Cola.h"
 	"Lista.h"
 
-1562202351 c:\users\ezequiel\git\barmith\clash of unla\moneda.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\moneda.h
 	<SDL.h>
 
-1562202351 c:\users\ezequiel\git\barmith\clash of unla\terreno.h
+1562263386 c:\users\ezequiel\git\barmith\clash of unla\terreno.h
 	"Bandido.h"
 	"Mina.h"
 	"Moneda.h"
 	"Lista.h"
 	"Estacion.h"
 
-1560996426 c:\users\ezequiel\git\barmith\clash of unla\parametros.h
+1562216130 c:\users\ezequiel\git\barmith\clash of unla\parametros.h
 	<string>
 
 1562092203 source:c:\users\ezequiel\git\barmith\clash of unla\mina.cpp
@@ -117,7 +117,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1562090140 source:c:\users\ezequiel\git\barmith\clash of unla\moneda.cpp
+1562263386 source:c:\users\ezequiel\git\barmith\clash of unla\moneda.cpp
 	"Moneda.h"
 	<SDL.h>
 	<SDL_image.h>
@@ -138,7 +138,7 @@
 1338781930 source:c:\users\ezequiel\git\barmith\clash of unla\pila.cpp
 	"Pila.h"
 
-1562095706 source:c:\users\ezequiel\git\barmith\clash of unla\terreno.cpp
+1562263386 source:c:\users\ezequiel\git\barmith\clash of unla\terreno.cpp
 	"Terreno.h"
 	"Bandido.h"
 	"Mina.h"
@@ -150,7 +150,7 @@
 	<string.h>
 	<SDL_image.h>
 
-1561923868 source:c:\users\ezequiel\git\barmith\clash of unla\vagon.cpp
+1562263386 source:c:\users\ezequiel\git\barmith\clash of unla\vagon.cpp
 	"Vagon.h"
 	"Item.h"
 	"Pila.h"
@@ -159,7 +159,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1562215111 source:c:\users\ezequiel\git\barmith\clash of unla\game.cpp
+1562283556 source:c:\users\ezequiel\git\barmith\clash of unla\game.cpp
 	<string.h>
 	<iostream>
 	<fstream>
