@@ -782,7 +782,9 @@ void pedirItem(Game &game,Lista &locomotora, Bandido &bandido){
         game.terreno[getFila(*vagon)][getColumna(*vagon)].ptrNodoVagon = NULL;
         eliminarNodoUltimo(locomotora);
         if(listaVacia(locomotora)){
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "El bandido destruyo la locomotora", NULL);
             setGameOver(game,true);
+
         }
     }
 }
