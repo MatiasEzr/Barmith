@@ -1,5 +1,5 @@
-#ifndef __MAPA_H__
-#define __MAPA_H__
+#ifndef __TERRENO_H__
+#define __TERRENO_H__
 
 #include "Bandido.h"
 #include "Mina.h"

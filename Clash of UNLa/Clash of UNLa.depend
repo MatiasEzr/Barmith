@@ -359,3 +359,183 @@
 	<SDL.h>
 	<SDL_image.h>
 
+1562264345 source:c:\users\mauro\documents\github\ayed\clash of unla\bandido.cpp
+	"Bandido.h"
+	"Vagon.h"
+	"Caja.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\bandido.h
+	<string>
+	"Lista.h"
+	<SDL.h>
+
+1559774909 c:\users\mauro\documents\github\ayed\clash of unla\lista.h
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\vagon.h
+	"Item.h"
+	<SDL.h>
+	"Pila.h"
+	<string>
+
+1559774909 c:\users\mauro\documents\github\ayed\clash of unla\item.h
+	<string>
+
+1561947684 c:\users\mauro\documents\github\ayed\clash of unla\pila.h
+
+1562184301 c:\users\mauro\documents\github\ayed\clash of unla\caja.h
+	<string>
+
+1561829520 source:c:\users\mauro\documents\github\ayed\clash of unla\caja.cpp
+	"Caja.h"
+
+1561947684 source:c:\users\mauro\documents\github\ayed\clash of unla\cola.cpp
+	"Cola.h"
+
+1561947684 c:\users\mauro\documents\github\ayed\clash of unla\cola.h
+
+1561083871 source:c:\users\mauro\documents\github\ayed\clash of unla\comanda.cpp
+	"Comanda.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1562183275 c:\users\mauro\documents\github\ayed\clash of unla\comanda.h
+	<fstream>
+
+1562264345 source:c:\users\mauro\documents\github\ayed\clash of unla\estacion.cpp
+	"Estacion.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\estacion.h
+	<SDL.h>
+	<SDL_image.h>
+
+1562346549 source:c:\users\mauro\documents\github\ayed\clash of unla\game.cpp
+	<string.h>
+	<iostream>
+	<fstream>
+	<sstream>
+	<SDL.h>
+	"Game.h"
+	"Celda.h"
+	"Terreno.h"
+	"Bandido.h"
+	"Lista.h"
+	"Vagon.h"
+	"Moneda.h"
+	<ctime>
+	<stdlib.h>
+	"Caja.h"
+	"Mina.h"
+	<SDL_ttf.h>
+	<string>
+
+1562341687 c:\users\mauro\documents\github\ayed\clash of unla\game.h
+	<SDL.h>
+	"Celda.h"
+	"Terreno.h"
+	"Lista.h"
+	"Comanda.h"
+	"Parametros.h"
+	"Estacion.h"
+	"Vagon.h"
+
+1561829520 c:\users\mauro\documents\github\ayed\clash of unla\celda.h
+	<SDL.h>
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\mina.h
+	<string>
+	<SDL.h>
+	"Cola.h"
+	"Lista.h"
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\moneda.h
+	<SDL.h>
+
+1562347247 c:\users\mauro\documents\github\ayed\clash of unla\terreno.h
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Lista.h"
+	"Estacion.h"
+
+1562264345 c:\users\mauro\documents\github\ayed\clash of unla\parametros.h
+	<string>
+
+1559774909 source:c:\users\mauro\documents\github\ayed\clash of unla\lista.cpp
+	"Lista.h"
+
+1562341687 source:c:\users\mauro\documents\github\ayed\clash of unla\main.cpp
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"Game.h"
+	"Vagon.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Item.h"
+	"Lista.h"
+	"Parametros.h"
+
+1562338434 source:c:\users\mauro\documents\github\ayed\clash of unla\mina.cpp
+	"Mina.h"
+	"Vagon.h"
+	"Caja.h"
+	<SDL.h>
+	<SDL_image.h>
+
+1562264345 source:c:\users\mauro\documents\github\ayed\clash of unla\moneda.cpp
+	"Moneda.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	<fstream>
+	<sstream>
+
+1561829520 source:c:\users\mauro\documents\github\ayed\clash of unla\parametros.cpp
+	"Parametros.h"
+	<iostream>
+	<string>
+
+1561947684 source:c:\users\mauro\documents\github\ayed\clash of unla\pila.cpp
+	"Pila.h"
+
+1562264345 source:c:\users\mauro\documents\github\ayed\clash of unla\terreno.cpp
+	"Terreno.h"
+	"Bandido.h"
+	"Mina.h"
+	"Moneda.h"
+	"Vagon.h"
+	"Lista.h"
+	"Estacion.h"
+	<stdio.h>
+	<string.h>
+	<SDL_image.h>
+
+1562264345 source:c:\users\mauro\documents\github\ayed\clash of unla\vagon.cpp
+	"Vagon.h"
+	"Item.h"
+	"Pila.h"
+	<string.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+
