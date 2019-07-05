@@ -813,7 +813,6 @@ bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
             setGameOver(game,true);
         }
     }else{
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "Nos salimos del terreno", NULL);
         setGameOver(game,true);
 
     }
