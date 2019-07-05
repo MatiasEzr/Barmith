@@ -233,7 +233,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1562229908 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
+1562341436 source:c:\users\matias\documents\github\ayed\clash of unla\game.cpp
 	<string.h>
 	<iostream>
 	<fstream>
@@ -253,7 +253,7 @@
 	<SDL_ttf.h>
 	<string>
 
-1562227620 c:\users\matias\documents\github\ayed\clash of unla\game.h
+1562341050 c:\users\matias\documents\github\ayed\clash of unla\game.h
 	<SDL.h>
 	"Celda.h"
 	"Terreno.h"
@@ -292,7 +292,7 @@
 1561947951 source:c:\users\matias\documents\github\ayed\clash of unla\lista.cpp
 	"Lista.h"
 
-1562228950 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
+1562341457 source:c:\users\matias\documents\github\ayed\clash of unla\main.cpp
 	<iostream>
 	<string.h>
 	<conio.h>
@@ -310,7 +310,7 @@
 	"Lista.h"
 	"Parametros.h"
 
-1562224063 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
+1562285828 source:c:\users\matias\documents\github\ayed\clash of unla\mina.cpp
 	"Mina.h"
 	"Vagon.h"
 	"Caja.h"

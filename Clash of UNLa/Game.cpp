@@ -33,7 +33,7 @@ void crearGame(Game &game,int fila,int columna,int anchoCelda,int altoCelda){
     game.fila=fila;
     game.columna=columna;
 
-    game.terreno= new Terreno*[game.fila];
+    game.terreno= new Terreno*[game.columna];
     for (int f = 0; f < game.fila; f++){
         for(int c=0;c<game.columna;c++){
            game.terreno[f] = new Terreno[c];
@@ -381,7 +381,7 @@ void actualizarMinas(Game &game){
 }
 /*----------------------------------------------------------------------------*/
 
-void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
+void dibujarPuntuacion(Game &game, SDL_Renderer * renderer,SDL_Window * window, Lista &locomotora,Lista &monedas,Lista &bandidos){
     int oro=0; int plata=0; int bronce=0; int platino=0; int carbon=0; int roca=0;
     int oroMax,plataMax,bronceMax,platinoMax,carbonMax,rocaMax;
     PtrNodoLista ptrVagon = primero(locomotora);
@@ -428,8 +428,15 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora){
             "  Roca: " << roca << "/" << rocaMax <<
             "  Carbon: " << carbon << "/" << carbonMax<<
              "  Monedas:"<<game.contadorMonedas;
+
     string temp = ss.str();
     char const * puntuacion = temp.c_str();
+
+    if(oro==oroMax && plata==plataMax && bronce==bronceMax && platino==platinoMax && roca==rocaMax && carbon==carbonMax){
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Fin del juego", "Ha completado todos los objetivos", NULL);
+        destruirGame(game,renderer,window,locomotora,monedas,bandidos);
+
+    }
     TTF_Font* arial = TTF_OpenFont("arial.ttf", 16);
 
     SDL_Color blanco = {255, 255, 255};
@@ -551,13 +558,21 @@ while(ptrBandido!=finLista()){
 
 }
 /*------------------------------------------------------*/
-void destruirGame(Game &game,SDL_Renderer* renderer){
+void destruirGame(Game &game,SDL_Renderer* renderer,SDL_Window *window,Lista &locomotora,Lista &bandidos, Lista &monedas){
     for(int f=0;f<game.fila;f++){
         for(int c=0;c<game.columna;c++){
             destruirTerreno(game.terreno[f][c]);
         }
     }
+    eliminarLista(locomotora);
     eliminarLista(game.minas);
+    eliminarLista(bandidos);
+    eliminarLista(monedas);
+    TTF_Quit();
+    IMG_Quit();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
 /*------------------------------------------------------*/
 void agregarVagon(Game &game, Lista &locomotora, Estacion &estacion){
@@ -791,11 +806,14 @@ bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
         if(terrenoAux.ptrNodoVagon==NULL){
 
             colision=false;
-        }else{
-            cout<<"Chocamos con otro vagon en "<<f<<"/"<<c<<endl;
+        }else {
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "Chocamos con un vagon", NULL);
+            //destruirGame
         }
     }else{
-        cout<<"Nos salimos del cuadrante en "<<f<<"/"<<c<<endl;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "Nos salimos del terreno", NULL);
+        //destruirGame
+
     }
     return colision;
 }

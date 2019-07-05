@@ -79,19 +79,19 @@ void imprimirComanda(Game &game){
             cout << "= Lector de Comanda =" << endl;
             cout << "======================" << endl;
              PtrNodoLista nodo=primero(game.comanda);
-             while(nodo !=finLista()){
-                //El nodo apunta al dato, y casteo el dato a Comanda
-                Comanda* comanda =(Comanda*) nodo->ptrDato;
-                cout<<"codItem:"<<comanda->codItem<<";cantidad:"<<comanda->cantidad<<endl;
-                 nodo = siguiente(game.comanda, nodo);
-                }
-             }
-         // Agrego un par de líneas a la consola
-            cout << endl;
-            cout << endl;
-            cout << endl;
+                 while(nodo !=finLista()){
+                    //El nodo apunta al dato, y casteo el dato a Comanda
+                    Comanda* comanda =(Comanda*) nodo->ptrDato;
+                    cout<<"codItem:"<<comanda->codItem<<";cantidad:"<<comanda->cantidad<<endl;
+                     nodo = siguiente(game.comanda, nodo);
+                    }
+                 }
+             // Agrego un par de líneas a la consola
+                cout << endl;
+                cout << endl;
+                cout << endl;
 
-        }
+            }
 
 
  void imprimirParametros(Game &game){
@@ -113,6 +113,7 @@ void imprimirComanda(Game &game){
 
 void correrGame(Game &game,int anchoVentana,int altoVentana){
 if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
+
         int anchoCelda=game.anchoCelda;
         int altoCelda=game.altoCelda;
         SDL_Window *window;
@@ -175,10 +176,6 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
             if(getIntervalo(game)==10){
                 setIntervalo(game,0);
                 setContadorSegundo(game,getContadorSegundo(game)+1);//Cada vez que pasan los 10 intervalos, suma un segundo
-                cout<<"SegundoActual:"<<getContadorSegundo(game)<<endl; //borrar
-                cout<<"*******cantidad de monedas:*****"<<longitud(monedas)<<endl;
-                cout<<"*******cantidad de bandidos:*****"<<longitud(bandidos)<<endl;
-
                 Vagon * vagon = (Vagon*)primero(locomotora)->ptrDato;
                 if(!(vagon->detenido)){
                     cambiarColumna(game,primero(locomotora));
@@ -217,7 +214,7 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
                 SDL_RenderClear(renderer);
                 dibujarTerreno(game,renderer);
                 dibujarEntidades(game,renderer);
-                dibujarPuntuacion(game,renderer,locomotora);
+                dibujarPuntuacion(game,renderer,window,locomotora,monedas,bandidos);
                 SDL_RenderPresent(renderer);
 
                 SDL_Delay(milisegundos);
@@ -228,18 +225,9 @@ if(SDL_Init(SDL_INIT_EVERYTHING)>=0){
             }
             contadorFps++;
         }
-        SDL_Delay(1500);
+        SDL_Delay(500);
         cout<<"Destruimos las instancias"<<endl;
-        eliminarLista(locomotora);
-        eliminarLista(monedas);
-        eliminarLista(bandidos);
-        destruirGame(game,renderer);
-        TTF_Quit();
-        IMG_Quit();
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-        cout<<"Fin del juego"<<endl;
+        destruirGame(game,renderer,window,locomotora,monedas,bandidos);
     }
 }
 

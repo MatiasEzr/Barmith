@@ -182,7 +182,6 @@ void setParametros(Game &game, string clave, string valor);
 void leerParametros(Game &game);
 /*----------------------------------------------------------------------------*/
 
-/*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -227,7 +226,7 @@ void setGameOver(Game &game, bool flag);
   Game : estructura de datos a ser creado.
   render
 */
-void destruirGame(Game &game,SDL_Renderer* renderer);
+void destruirGame(Game &game,SDL_Renderer* renderer,SDL_Window *window,Lista &locomotora,Lista &bandidos, Lista &monedas);
 /*----------------------------------------------------------------------------*/
 /*
   pre : game debe haber sido creado.
@@ -372,7 +371,7 @@ void actualizarMonedas(Game &game,Lista &monedas, SDL_Renderer* renderer);
 
   Game : estructura de datos a ser creado.
 */
-void dibujarPuntuacion(Game &game, SDL_Renderer * renderer, Lista &locomotora);
+void dibujarPuntuacion(Game &game, SDL_Renderer * renderer,SDL_Window * window, Lista &locomotora,Lista &monedas,Lista &bandidos);
 /*----------------------------------------------------------------------------*/
 /*
   pre : game debe haber sido creado.
