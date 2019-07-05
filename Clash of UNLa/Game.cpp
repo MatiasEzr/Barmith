@@ -434,7 +434,7 @@ void dibujarPuntuacion(Game &game, SDL_Renderer * renderer,SDL_Window * window, 
 
     if(oro==oroMax && plata==plataMax && bronce==bronceMax && platino==platinoMax && roca==rocaMax && carbon==carbonMax){
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Fin del juego", "Ha completado todos los objetivos", NULL);
-        destruirGame(game,renderer,window,locomotora,monedas,bandidos);
+        setGameOver(game,true);
 
     }
     TTF_Font* arial = TTF_OpenFont("arial.ttf", 16);
@@ -808,11 +808,11 @@ bool evaluarColisiones(Game &game,PtrNodoLista ptrNodo){
             colision=false;
         }else {
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "Chocamos con un vagon", NULL);
-            //destruirGame
+            setGameOver(game,true);
         }
     }else{
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Perdiste", "Nos salimos del terreno", NULL);
-        //destruirGame
+        setGameOver(game,true);
 
     }
     return colision;
